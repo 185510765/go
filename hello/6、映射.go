@@ -26,6 +26,18 @@ func main() {
 	fmt.Println(myMap)
 
 	// 映射结构体
-	type MyStruct struct {
+	type Student struct {
+		Name    string
+		Sex     int
+		Score   int
+		Friends map[string]*Student
 	}
+	student := &Student{
+		Name:    "王五",
+		Sex:     1,
+		Score:   89,
+		Friends: make(map[string]*Student),
+	}
+	// student.Friends["krillin"] =
+	fmt.Println(student)
 }
