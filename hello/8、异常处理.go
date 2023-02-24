@@ -25,6 +25,10 @@ func main() {
 		fmt.Println(n)
 	}
 
+	err1 := errors.New("emit macho dwarf: elf header corrupted")
+	if err1 != nil {
+		fmt.Println("错误类型")
+	}
 }
 
 // 我们可以通过导入 errors 包然后使用它的 New 函数创建我们自己的错误：

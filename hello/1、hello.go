@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"time"
 )
 
 // 结构体
@@ -61,9 +62,29 @@ func main() {
 	}
 	fmt.Println(goku3)
 
-	// 组合
+	// 赋值技巧 分组赋值*********************************************
+	const (
+		i = 100
+		f = 3.1415
+		s = "GO_"
+	)
 
-	// time.Sleep(3 * time.Second)
+	var (
+	// i1     int
+	// pi     float32
+	// prefix string
+	)
+
+	for i := 0; i < 20; i++ {
+		if i == 3 {
+			// break
+			// continue
+		}
+
+		fmt.Println(i)
+		time.Sleep(time.Second * 1)
+	}
+
 }
 
 // 函数 ******************************************************************

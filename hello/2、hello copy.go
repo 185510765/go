@@ -1,23 +1,21 @@
-// package main
+package main
 
-// import (
-// 	"log"
-// 	"net/http"
+import (
+	"log"
+	"net/http"
+)
 
-// 	"github.com/gin-gonic/gin"
-// )
+func main() {
 
-// func main() {
+	router := gin.Default()
 
-// 	router := gin.Default()
+	router.GET("/hello", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "Hello World!",
+		})
+	})
 
-// 	router.GET("/hello", func(c *gin.Context) {
-// 		c.JSON(http.StatusOK, gin.H{
-// 			"message": "Hello World!",
-// 		})
-// 	})
-
-// 	if err := router.Run(":3000"); err != nil {
-// 		log.Fatal("Server Run Failed.: ", err)
-// 	}
-// }
+	if err := router.Run(":3000"); err != nil {
+		log.Fatal("Server Run Failed.: ", err)
+	}
+}
