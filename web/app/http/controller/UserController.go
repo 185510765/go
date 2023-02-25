@@ -38,6 +38,12 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 		username := r.Form.Get("username")
 		password := r.Form.Get("password")
+		code, msg := loginValidate(username, password)
+		fmt.Println(code)
+		fmt.Println(msg)
+		// if code != 200 {
+		// 	return msg
+		// }
 
 		// // 打印信息 ******************************************
 		// fmt.Println(r.Form["username"])
@@ -65,4 +71,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 }
 
 // 登录验证
-func loginValidate() {}
+func loginValidate(username string, password string) (string, int) {
+	return "test", 100
+}
