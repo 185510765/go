@@ -1,0 +1,36 @@
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /ping                     --> main.pong (3 handlers)
+[GIN-debug] POST   /v1/login                 --> main.loginEndpoint (3 handlers)
+[GIN-debug] POST   /v1/submit                --> main.submitEndpoint (3 handlers)
+[GIN-debug] POST   /v1/read                  --> main.readEndpoint (3 handlers)
+[GIN-debug] POST   /v2/login                 --> main.loginEndpoint (3 handlers)
+[GIN-debug] POST   /v2/submit                --> main.submitEndpoint (3 handlers)
+[GIN-debug] POST   /v2/read                  --> main.readEndpoint (3 handlers)
+[GIN-debug] GET    /goods/:id/               --> main.goodsDetail (3 handlers)
+[GIN-debug] GET    /goods/:id/:action        --> main.goodsDetailX (3 handlers)
+[GIN-debug] GET    /goods/:id/:action/add    --> main.goodsDetailY (3 handlers)
+[GIN-debug] GET    /welcome                  --> main.welcome (3 handlers)
+[GIN-debug] POST   /formPost                 --> main.formPost (3 handlers)
+[GIN-debug] POST   /login                    --> main.login (3 handlers)
+[GIN-debug] POST   /register                 --> main.register (3 handlers)
+[GIN-debug] Loaded HTML Templates (4): 
+	- 
+	- index.html
+	- article/index.html
+	- category/index.html
+
+[GIN-debug] GET    /article/index            --> main.index (3 handlers)
+[GIN-debug] GET    /static/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] HEAD   /static/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on 127.0.0.1:8080
+[GIN] 2023/03/07 - 14:14:41 | 200 |      1.2326ms |       127.0.0.1 | POST     "/register"
+[GIN] 2023/03/07 - 14:14:46 | 200 |            0s |       127.0.0.1 | POST     "/register"
+[GIN] 2023/03/07 - 14:18:21 | 200 |            0s |       127.0.0.1 | POST     "/register"
+[GIN] 2023/03/07 - 14:18:23 | 200 |            0s |       127.0.0.1 | POST     "/register"

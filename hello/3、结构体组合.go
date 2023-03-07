@@ -21,6 +21,7 @@ func main() {
 		Power:  1000,
 	}
 	use.introduce()
+	use.Sintroduce()
 
 	use1 := &Saiyan1{&Person{"myTest"}, 2000}
 	myIntroduce(use1)
@@ -29,6 +30,10 @@ func main() {
 
 func (p *Person) introduce() {
 	fmt.Println(p.Name)
+}
+
+func (s *Saiyan1) Sintroduce() {
+	fmt.Println(s.Power)
 }
 
 func myIntroduce(s *Saiyan1) {

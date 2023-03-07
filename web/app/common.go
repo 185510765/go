@@ -11,7 +11,68 @@ import (
 	"strings"
 	"time"
 	"unicode/utf8"
+	// "github.com/labstack/echo"
 )
+
+// 返回json数据给前端 *************************************************************
+
+var Res *Result
+
+type Result struct {
+	Code int         `json:"code"`
+	Msg  string      `json:"msg"`
+	Data interface{} `json:"data"`
+}
+
+func (r *Result) Output(code int, msg string, data ...interface{}) *Result {
+	return &Result{
+		Code: code,
+		Msg:  msg,
+		Data: data[0],
+	}
+}
+
+func (r *Result) Success(data ...interface{}) *Result {
+	return &Result{
+		Code: 200,
+		Msg:  "success",
+		Data: data[0],
+	}
+}
+
+func (r *Result) Error(msg string) *Result {
+	return &Result{
+		Code: 500,
+		Msg:  msg,
+		Data: make([]int, 0),
+	}
+}
+
+// func ToJson(c echo.Context, res *Result) error {
+// 	return c.JSON(http.StatusOK, res)
+// }
+
+var ResP *Page
+
+type Page struct {
+	Total int64       `json:"total"`
+	List  interface{} `json:"list"`
+}
+
+func (p *Page) ResponsePagination(count int64, list interface{}) *Page {
+	return &Page{
+		Total: count,
+		List:  list,
+	}
+}
+
+// *******************************************************************************
+
+func CheckErr(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
 
 // 获取本周一时间戳
 func GetFirstDateOfWeekTS() (ts int64) {

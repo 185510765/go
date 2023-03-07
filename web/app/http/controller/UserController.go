@@ -1,10 +1,14 @@
 package controller
 
 import (
+	"database/sql"
 	"fmt"
 	"html/template"
 	"log"
 	"net/http"
+	common "web/app"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func Init() {}
@@ -39,11 +43,9 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		username := r.Form.Get("username")
 		password := r.Form.Get("password")
 		code, msg := loginValidate(username, password)
-		fmt.Println(code)
-		fmt.Println(msg)
-		// if code != 200 {
-		// 	return msg
-		// }
+		if code != 200 {
+			fmt.Println(msg)
+		}
 
 		// // 打印信息 ******************************************
 		// fmt.Println(r.Form["username"])
@@ -71,6 +73,28 @@ func Login(w http.ResponseWriter, r *http.Request) {
 }
 
 // 登录验证
-func loginValidate(username string, password string) (string, int) {
-	return "test", 100
+func loginValidate(username string, password string) (int, string) {
+	if common.StrLen(username) < 5 {
+		return 500, "用户名不能小于5位数"
+	}
+	if common.StrLen(password) < 6 {
+		return 500, "密码不能小于6位数"
+	}
+
+	db, err := sql.Open("mysql", "root:@/test?charset=utf8")
+	common.CheckErr(err)
+	stmt, err := db.Prepare("SELECT * FROM user WHERE username = ?")
+	rows, err := stmt.Exec("张三")
+	common.CheckErr(err)
+	for rows.Next() {
+		var uid int
+		var username string
+		var department string
+		var created string
+		err = rows.Scan(&uid, &username, &department, &created)
+		checkErr(err)
+		fmt.Println(uid, username, department, created)
+	}
+
+	return 200, "success"
 }
