@@ -2,7 +2,7 @@
   <div>
     <div class="gva-table-box">
       <div class="gva-btn-list">
-        <el-button type="primary" icon="plus" @click="goAutoCode(null)">新增</el-button>
+        <el-button size="mini" type="primary" icon="plus" @click="goAutoCode(null)">{{ $t('general.add') }}</el-button>
       </div>
       <el-table :data="tableData">
         <el-table-column
@@ -10,39 +10,38 @@
           width="55"
         />
         <el-table-column align="left" label="id" width="60" prop="ID" />
-        <el-table-column align="left" label="日期" width="180">
+        <el-table-column align="left" :label="$t('general.date')" width="180">
           <template #default="scope">{{ formatDate(scope.row.CreatedAt) }}</template>
         </el-table-column>
-        <el-table-column align="left" label="结构体名" min-width="150" prop="structName" />
-        <el-table-column align="left" label="结构体描述" min-width="150" prop="structCNName" />
-        <el-table-column align="left" label="表名称" min-width="150" prop="tableName" />
-        <el-table-column align="left" label="回滚标记" min-width="150" prop="flag">
+        <el-table-column align="left" :label="$t('autoCode.structName')" min-width="150" prop="structName" />
+        <el-table-column align="left" :label="$t('autoCode.structChineseName')" min-width="150" prop="structCNName" />
+        <el-table-column align="left" :label="$t('autoCode.tableName')" min-width="150" prop="tableName" />
+        <el-table-column align="left" :label="$t('autoCodeAdmin.rollBackMark')" min-width="150" prop="flag">
           <template #default="scope">
             <el-tag
               v-if="scope.row.flag"
               type="danger"
-
+              size="mini"
               effect="dark"
             >
-              已回滚
+              {{ $t('autoCodeAdmin.rolledBack') }}
             </el-tag>
             <el-tag
               v-else
-
+              size="mini"
               type="success"
               effect="dark"
             >
-              未回滚
+              {{ $t('autoCodeAdmin.notRolledBack') }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column align="left" label="操作" min-width="240">
+        <el-table-column align="left" :lable="$t('general.operations')" min-width="180">
           <template #default="scope">
             <div>
-              <el-button type="primary" link :disabled="scope.row.flag === 1" @click="rollbackFunc(scope.row,true)">回滚(删表)</el-button>
-              <el-button type="primary" link :disabled="scope.row.flag === 1" @click="rollbackFunc(scope.row,false)">回滚(不删表)</el-button>
-              <el-button type="primary" link @click="goAutoCode(scope.row)">复用</el-button>
-              <el-button type="primary" link @click="deleteRow(scope.row)">删除</el-button>
+              <el-button size="mini" type="text" :disabled="scope.row.flag === 1" @click="rollback(scope.row)">{{ $t('autoCodeAdmin.rollBack') }}</el-button>
+              <el-button size="mini" type="text" @click="goAutoCode(scope.row)">{{ $t('autoCodeAdmin.reuse') }}</el-button>
+              <el-button size="mini" type="text" @click="deleteRow(scope.row)">{{ $t('general.delete') }}</el-button>
             </div>
           </template>
         </el-table-column>
@@ -63,113 +62,59 @@
 </template>
 
 <script>
-export default {
-  name: 'AutoCodeAdmin',
-}
-</script>
-
-<script setup>
+// 获取列表内容封装在mixins内部  getTableData方法 初始化已封装完成 条件搜索时候 请把条件安好后台定制的结构体字段 放到 this.searchInfo 中即可实现条件搜索
 import { getSysHistory, rollback, delSysHistory } from '@/api/autoCode.js'
-import { useRouter } from 'vue-router'
-import { ElMessage, ElMessageBox } from 'element-plus'
-import { ref } from 'vue'
-import { formatDate } from '@/utils/format'
-const router = useRouter()
+import infoList from '@/mixins/infoList'
 
-const page = ref(1)
-const total = ref(0)
-const pageSize = ref(10)
-const tableData = ref([])
-
-// 分页
-const handleSizeChange = (val) => {
-  pageSize.value = val
-  getTableData()
-}
-
-const handleCurrentChange = (val) => {
-  page.value = val
-  getTableData()
-}
-
-// 查询
-const getTableData = async() => {
-  const table = await getSysHistory({
-    page: page.value,
-    pageSize: pageSize.value
-  })
-  if (table.code === 0) {
-    tableData.value = table.data.list
-    total.value = table.data.total
-    page.value = table.data.page
-    pageSize.value = table.data.pageSize
-  }
-}
-
-getTableData()
-
-const deleteRow = async(row) => {
-  ElMessageBox.confirm('此操作将删除本历史, 是否继续?', '提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
-    type: 'warning'
-  }).then(async() => {
-    const res = await delSysHistory({ id: Number(row.ID) })
-    if (res.code === 0) {
-      ElMessage.success('删除成功')
-      getTableData()
+export default {
+  name: 'Api',
+  mixins: [infoList],
+  data() {
+    return {
+      listApi: getSysHistory
     }
-  })
-}
-const rollbackFunc = async(row, flag) => {
-  if (flag) {
-    ElMessageBox.confirm(`此操作将删除自动创建的文件和api（会删除表！！！）, 是否继续?`, '提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
-      type: 'warning'
-    }).then(async() => {
-      ElMessageBox.confirm(`此操作将删除自动创建的文件和api（会删除表！！！）, 请继续确认！！！`, '会删除表', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+  },
+  created() {
+    this.getTableData()
+  },
+  methods: {
+    async deleteRow(row) {
+      this.$confirm(this.$t('autoCodeAdmin.deleteHistoryConfirm'), this.$t('general.hint'), {
+        confirmButtonText: this.$t('general.confirm'),
+        cancelButtonText: this.$t('general.cancel'),
         type: 'warning'
       }).then(async() => {
-        ElMessageBox.confirm(`此操作将删除自动创建的文件和api（会删除表！！！）, 请继续确认！！！`, '会删除表', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(async() => {
-          const res = await rollback({ id: Number(row.ID), deleteTable: flag })
-          if (res.code === 0) {
-            ElMessage.success('回滚成功')
-            getTableData()
-          }
-        })
+        const res = await delSysHistory({ id: Number(row.ID) })
+        if (res.code === 0) {
+          this.$message.success(this.$t('general.deleteSuccess'))
+          this.getTableData()
+        }
       })
-    })
-  } else {
-    ElMessageBox.confirm(`此操作将删除自动创建的文件和api, 是否继续?`, '提示', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
-      type: 'warning'
-    }).then(async() => {
-      const res = await rollback({ id: Number(row.ID), deleteTable: flag })
-      if (res.code === 0) {
-        ElMessage.success('回滚成功')
-        getTableData()
+    },
+    async rollback(row) {
+      this.$confirm(this.$t('autoCodeAdmin.rollbackConfirm'), this.$t('general.hint'), {
+        confirmButtonText: this.$t('general.confirm'),
+        cancelButtonText: this.$t('general.cancel'),
+        type: 'warning'
+      }).then(async() => {
+        const res = await rollback({ id: Number(row.ID) })
+        if (res.code === 0) {
+          this.$message.success(this.$t('autoCodeAdmin.rollbackSuccess'))
+          this.getTableData()
+        }
+      })
+    },
+    goAutoCode(row) {
+      if (row) {
+        this.$router.push({ name: 'autoCodeEdit', params: {
+          id: row.ID
+        }})
+      } else {
+        this.$router.push({ name: 'autoCode' })
       }
-    })
+    }
   }
 }
-const goAutoCode = (row) => {
-  if (row) {
-    router.push({ name: 'autoCodeEdit', params: {
-      id: row.ID
-    }})
-  } else {
-    router.push({ name: 'autoCode' })
-  }
-}
-
 </script>
 
 <style scoped lang="scss">

@@ -1,10 +1,9 @@
 package utils
 
 import (
-	"errors"
+	"io/ioutil"
 	"os"
 	"strconv"
-	"strings"
 )
 
 // 前端传来文件片与当前片为什么文件的第几片
@@ -23,14 +22,14 @@ const (
 //@param: content []byte, fileName string, contentNumber int, contentTotal int, fileMd5 string
 //@return: error, string
 
-func BreakPointContinue(content []byte, fileName string, contentNumber int, contentTotal int, fileMd5 string) (string, error) {
+func BreakPointContinue(content []byte, fileName string, contentNumber int, contentTotal int, fileMd5 string) (error, string) {
 	path := breakpointDir + fileMd5 + "/"
 	err := os.MkdirAll(path, os.ModePerm)
 	if err != nil {
-		return path, err
+		return err, path
 	}
-	pathC, err := makeFileContent(content, fileName, path, contentNumber)
-	return pathC, err
+	err, pathc := makeFileContent(content, fileName, path, contentNumber)
+	return err, pathc
 }
 
 //@author: [piexlmax](https://github.com/piexlmax)
@@ -52,24 +51,21 @@ func CheckMd5(content []byte, chunkMd5 string) (CanUpload bool) {
 //@function: makeFileContent
 //@description: 创建切片内容
 //@param: content []byte, fileName string, FileDir string, contentNumber int
-//@return: string, error
+//@return: error, string
 
-func makeFileContent(content []byte, fileName string, FileDir string, contentNumber int) (string, error) {
-	if strings.Index(fileName, "..") > -1 || strings.Index(FileDir, "..") > -1 {
-		return "", errors.New("文件名或路径不合法")
-	}
+func makeFileContent(content []byte, fileName string, FileDir string, contentNumber int) (error, string) {
 	path := FileDir + fileName + "_" + strconv.Itoa(contentNumber)
 	f, err := os.Create(path)
 	if err != nil {
-		return path, err
+		return err, path
 	} else {
 		_, err = f.Write(content)
 		if err != nil {
-			return path, err
+			return err, path
 		}
 	}
 	defer f.Close()
-	return path, nil
+	return nil, path
 }
 
 //@author: [piexlmax](https://github.com/piexlmax)
@@ -78,26 +74,26 @@ func makeFileContent(content []byte, fileName string, FileDir string, contentNum
 //@param: fileName string, FileMd5 string
 //@return: error, string
 
-func MakeFile(fileName string, FileMd5 string) (string, error) {
-	rd, err := os.ReadDir(breakpointDir + FileMd5)
+func MakeFile(fileName string, FileMd5 string) (error, string) {
+	rd, err := ioutil.ReadDir(breakpointDir + FileMd5)
 	if err != nil {
-		return finishDir + fileName, err
+		return err, finishDir + fileName
 	}
 	_ = os.MkdirAll(finishDir, os.ModePerm)
 	fd, err := os.OpenFile(finishDir+fileName, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0o644)
 	if err != nil {
-		return finishDir + fileName, err
+		return err, finishDir + fileName
 	}
 	defer fd.Close()
 	for k := range rd {
-		content, _ := os.ReadFile(breakpointDir + FileMd5 + "/" + fileName + "_" + strconv.Itoa(k))
+		content, _ := ioutil.ReadFile(breakpointDir + FileMd5 + "/" + fileName + "_" + strconv.Itoa(k))
 		_, err = fd.Write(content)
 		if err != nil {
 			_ = os.Remove(finishDir + fileName)
-			return finishDir + fileName, err
+			return err, finishDir + fileName
 		}
 	}
-	return finishDir + fileName, nil
+	return nil, finishDir + fileName
 }
 
 //@author: [piexlmax](https://github.com/piexlmax)

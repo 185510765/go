@@ -47,9 +47,9 @@ func (operationRecordService *OperationRecordService) DeleteSysOperationRecord(s
 //@function: DeleteSysOperationRecord
 //@description: 根据id获取单条操作记录
 //@param: id uint
-//@return: sysOperationRecord system.SysOperationRecord, err error
+//@return: err error, sysOperationRecord model.SysOperationRecord
 
-func (operationRecordService *OperationRecordService) GetSysOperationRecord(id uint) (sysOperationRecord system.SysOperationRecord, err error) {
+func (operationRecordService *OperationRecordService) GetSysOperationRecord(id uint) (err error, sysOperationRecord system.SysOperationRecord) {
 	err = global.GVA_DB.Where("id = ?", id).First(&sysOperationRecord).Error
 	return
 }
@@ -59,9 +59,9 @@ func (operationRecordService *OperationRecordService) GetSysOperationRecord(id u
 //@function: GetSysOperationRecordInfoList
 //@description: 分页获取操作记录列表
 //@param: info systemReq.SysOperationRecordSearch
-//@return: list interface{}, total int64, err error
+//@return: err error, list interface{}, total int64
 
-func (operationRecordService *OperationRecordService) GetSysOperationRecordInfoList(info systemReq.SysOperationRecordSearch) (list interface{}, total int64, err error) {
+func (operationRecordService *OperationRecordService) GetSysOperationRecordInfoList(info systemReq.SysOperationRecordSearch) (err error, list interface{}, total int64) {
 	limit := info.PageSize
 	offset := info.PageSize * (info.Page - 1)
 	// 创建db
@@ -82,5 +82,5 @@ func (operationRecordService *OperationRecordService) GetSysOperationRecordInfoL
 		return
 	}
 	err = db.Order("id desc").Limit(limit).Offset(offset).Preload("User").Find(&sysOperationRecords).Error
-	return sysOperationRecords, total, err
+	return err, sysOperationRecords, total
 }

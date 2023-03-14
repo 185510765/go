@@ -5,9 +5,7 @@
     </div>
     <div class="log">
       <div v-for="(item,key) in dataTimeline" :key="key" class="log-item">
-        <div class="flex-1 flex key-box">
-          <span class="key" :class="key<3&&'top'">{{ key+1 }}</span>
-        </div>
+        <div class="flex-1 flex key-box"><span class="key" :class="key<3&&'top'">{{ key+1 }}</span></div>
         <div class="flex-5 flex message">{{ item.message }}</div>
         <div class="flex-3 flex form">{{ item.from }}</div>
       </div>
@@ -16,37 +14,37 @@
 </template>
 
 <script>
-export default {
-  name: 'DashboardTable',
-}
-</script>
-<script setup>
 import { Commits } from '@/api/github'
 import { formatTimeToStr } from '@/utils/date.js'
-import { ref } from 'vue'
-
-const loading = ref(true)
-const dataTimeline = ref([])
-
-const loadCommits = () => {
-  Commits(0).then(({ data }) => {
-    loading.value = false
-    data.forEach((element, index) => {
-      if (element.commit.message && index < 10) {
-        dataTimeline.value.push({
-          from: formatTimeToStr(element.commit.author.date, 'yyyy-MM-dd'),
-          title: element.commit.author.name,
-          showDayAndMonth: true,
-          message: element.commit.message,
+export default {
+  data() {
+    return {
+      loading: true,
+      dataTimeline: [],
+    }
+  },
+  created() {
+    this.loadCommits()
+  },
+  methods: {
+    loadCommits() {
+      Commits(0).then(({ data }) => {
+        this.loading = false
+        data.forEach((element, index) => {
+          if (element.commit.message && index < 10) {
+            this.dataTimeline.push({
+              from: formatTimeToStr(element.commit.author.date, 'yyyy-MM-dd'),
+              title: element.commit.author.name,
+              showDayAndMonth: true,
+              message: element.commit.message,
+            })
+          }
         })
-      }
-    })
-  })
+      })
+    },
+  }
 }
-
-loadCommits()
 </script>
-
 <style lang="scss" scoped>
 .commit-table{
     background-color: #fff;

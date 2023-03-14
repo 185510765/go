@@ -4,12 +4,12 @@
       <div class="gva-card gva-top-card">
         <div class="gva-top-card-left">
           <div class="gva-top-card-left-title">早安，管理员，请开始一天的工作吧</div>
-          <div class="gva-top-card-left-dot">{{ weatherInfo }}</div>
+          <div class="gva-top-card-left-dot">今日晴，0℃ - 10℃，天气寒冷，注意添加衣物。</div>
           <div class="gva-top-card-left-rows">
             <el-row>
               <el-col :span="8" :xs="24" :sm="8">
                 <div class="flex-center">
-                  <el-icon class="dashboard-icon">
+                  <el-icon class="dasboard-icon">
                     <sort />
                   </el-icon>
                   今日流量 (1231231)
@@ -17,7 +17,7 @@
               </el-col>
               <el-col :span="8" :xs="24" :sm="8">
                 <div class="flex-center">
-                  <el-icon class="dashboard-icon">
+                  <el-icon class="dasboard-icon">
                     <avatar />
                   </el-icon>
                   总用户数 (24001)
@@ -25,7 +25,7 @@
               </el-col>
               <el-col :span="8" :xs="24" :sm="8">
                 <div class="flex-center">
-                  <el-icon class="dashboard-icon">
+                  <el-icon class="dasboard-icon">
                     <comment />
                   </el-icon>
                   好评率 (99%)
@@ -47,8 +47,8 @@
               <a
                 style="color:#409EFF"
                 target="view_window"
-                href="https://plugin.gin-vue-admin.com/#/layout/home"
-              >https://plugin.gin-vue-admin.com</a>
+                href="https://github.com/flipped-aurora/gva-plugins"
+              >https://github.com/flipped-aurora/gva-plugins</a>
             </div>
           </div>
         </div>
@@ -103,71 +103,68 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import EchartsLine from '@/view/dashboard/dashboardCharts/echartsLine.vue'
-import DashboardTable from '@/view/dashboard/dashboardTable/dashboardTable.vue'
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useWeatherInfo } from '@/view/dashboard/weather.js'
-
-const weatherInfo = useWeatherInfo()
-
-const toolCards = ref([
-  {
-    label: '用户管理',
-    icon: 'monitor',
-    name: 'user',
-    color: '#ff9c6e',
-    bg: 'rgba(255, 156, 110,.3)'
-  },
-  {
-    label: '角色管理',
-    icon: 'setting',
-    name: 'authority',
-    color: '#69c0ff',
-    bg: 'rgba(105, 192, 255,.3)'
-  },
-  {
-    label: '菜单管理',
-    icon: 'menu',
-    name: 'menu',
-    color: '#b37feb',
-    bg: 'rgba(179, 127, 235,.3)'
-  },
-  {
-    label: '代码生成器',
-    icon: 'cpu',
-    name: 'autoCode',
-    color: '#ffd666',
-    bg: 'rgba(255, 214, 102,.3)'
-  },
-  {
-    label: '表单生成器',
-    icon: 'document-checked',
-    name: 'formCreate',
-    color: '#ff85c0',
-    bg: 'rgba(255, 133, 192,.3)'
-  },
-  {
-    label: '关于我们',
-    icon: 'user',
-    name: 'about',
-    color: '#5cdbd3',
-    bg: 'rgba(92, 219, 211,.3)'
-  }
-])
-
-const router = useRouter()
-
-const toTarget = (name) => {
-  router.push({ name })
-}
-
-</script>
 <script>
+import echartsLine from '@/view/dashboard/dashboardCharts/echartsLine.vue'
+import dashboardTable from '@/view/dashboard/dashboardTable/dashboardTable.vue'
 export default {
-  name: 'Dashboard'
+  name: 'Dashboard',
+  components: {
+    echartsLine,
+    dashboardTable
+  },
+  data() {
+    return {
+      toolCards: [
+        {
+          label: '用户管理',
+          icon: 'monitor',
+          name: 'user',
+          color: '#ff9c6e',
+          bg: 'rgba(255, 156, 110,.3)'
+        },
+        {
+          label: '角色管理',
+          icon: 'setting',
+          name: 'authority',
+          color: '#69c0ff',
+          bg: 'rgba(105, 192, 255,.3)'
+        },
+        {
+          label: '菜单管理',
+          icon: 'menu',
+          name: 'menu',
+          color: '#b37feb',
+          bg: 'rgba(179, 127, 235,.3)'
+        },
+        {
+          label: '代码生成器',
+          icon: 'cpu',
+          name: 'autoCode',
+          color: '#ffd666',
+          bg: 'rgba(255, 214, 102,.3)'
+        },
+        {
+          label: '表单生成器',
+          icon: 'document-checked',
+          name: 'formCreate',
+          color: '#ff85c0',
+          bg: 'rgba(255, 133, 192,.3)'
+        },
+        {
+          label: '关于我们',
+          icon: 'user',
+          name: 'about',
+          color: '#5cdbd3',
+          bg: 'rgba(92, 219, 211,.3)'
+        }
+      ]
+    }
+  },
+  methods: {
+    toTarget(name) {
+      this.$router.push({ name })
+    }
+  }
 }
 </script>
 
@@ -208,7 +205,7 @@ export default {
                 color: #343844;
             }
             &-dot {
-                font-size: 16px;
+                font-size: 14px;
                 color: #6B7687;
                 margin-top: 24px;
             }
@@ -285,7 +282,7 @@ export default {
       padding: 14px;
     }
 }
-.dashboard-icon {
+.dasboard-icon {
     font-size: 20px;
     color: rgb(85, 160, 248);
     width: 30px;
@@ -297,7 +294,7 @@ export default {
     @include flex-center;
 }
 
-//小屏幕不显示右侧，将登录框居中
+//小屏幕不显示右侧，将登陆框居中
 @media (max-width: 750px) {
     .gva-card {
         padding: 20px 10px !important;
@@ -321,7 +318,7 @@ export default {
                 line-height: 20px;
             }
         }
-        .dashboard-icon {
+        .dasboard-icon {
             font-size: 18px;
         }
     }

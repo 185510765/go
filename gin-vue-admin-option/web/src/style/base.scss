@@ -1,4 +1,8 @@
-.clearfix:after {
+.clearflex {
+    *zoom: 1;
+}
+
+.clearflex:after {
     content: '';
     display: block;
     height: 0;
@@ -53,13 +57,4 @@
 
 .title-3 {
     text-align: center;
-}
-
-.keyword{
-  width: 220px;
-  margin: 0 0 0 30px;
-}
-
-#nprogress .bar {
-    background: #4D70FF !important; //自定义颜色
 }

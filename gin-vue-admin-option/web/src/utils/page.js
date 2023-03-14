@@ -1,9 +1,7 @@
-import { fmtTitle } from '@/utils/fmtRouterTitle'
 import config from '@/core/config'
-export default function getPageTitle(pageTitle, route) {
+export default function getPageTitle(pageTitle) {
   if (pageTitle) {
-    const title = fmtTitle(pageTitle, route)
-    return `${title} - ${config.appName}`
+    return `${pageTitle} - ${config.appName}`
   }
   return `${config.appName}`
 }

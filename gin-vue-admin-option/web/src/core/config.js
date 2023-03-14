@@ -18,7 +18,7 @@ export const viteLogo = (env) => {
     )
     console.log(
       chalk.green(
-        `> 当前版本:v2.5.5`
+        `> 当前版本:V2.4.6`
       )
     )
     console.log(
@@ -33,7 +33,7 @@ export const viteLogo = (env) => {
     )
     console.log(
       chalk.green(
-        `> 插件市场:https://plugin.gin-vue-admin.com`
+        `> 默认自动化文档地址:http://127.0.0.1:${env.VITE_SERVER_PORT}/swagger/index.html`
       )
     )
     console.log(
@@ -48,7 +48,7 @@ export const viteLogo = (env) => {
     )
     console.log(
       chalk.green(
-        `> 如果项目让您获得了收益，希望您能请团队喝杯可乐:https://www.gin-vue-admin.com/coffee/index.html`
+        `> 如果项目让您获得了收益，希望您能请团队喝杯可乐:https://www.github.com/flipped-aurora/gin-vue-admin/server.com/docs/coffee`
       )
     )
     console.log('\n')

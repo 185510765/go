@@ -1,7 +1,6 @@
 package initialize
 
 import (
-	"github.com/flipped-aurora/gin-vue-admin/server/config"
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"gorm.io/gorm"
 )
@@ -16,13 +15,9 @@ func DBList() {
 		}
 		switch info.Type {
 		case "mysql":
-			dbMap[info.AliasName] = GormMysqlByConfig(config.Mysql{GeneralDB: info.GeneralDB})
-		case "mssql":
-			dbMap[info.AliasName] = GormMssqlByConfig(config.Mssql{GeneralDB: info.GeneralDB})
+			dbMap[info.Dbname] = GormMysqlByConfig(info)
 		case "pgsql":
-			dbMap[info.AliasName] = GormPgSqlByConfig(config.Pgsql{GeneralDB: info.GeneralDB})
-		case "oracle":
-			dbMap[info.AliasName] = GormOracleByConfig(config.Oracle{GeneralDB: info.GeneralDB})
+			dbMap[info.Dbname] = GormPgSqlByConfig(info)
 		default:
 			continue
 		}

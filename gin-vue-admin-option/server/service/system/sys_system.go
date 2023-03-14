@@ -11,12 +11,12 @@ import (
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetSystemConfig
 //@description: 读取配置文件
-//@return: conf config.Server, err error
+//@return: err error, conf config.Server
 
 type SystemConfigService struct{}
 
-func (systemConfigService *SystemConfigService) GetSystemConfig() (conf config.Server, err error) {
-	return global.GVA_CONFIG, nil
+func (systemConfigService *SystemConfigService) GetSystemConfig() (err error, conf config.Server) {
+	return nil, global.GVA_CONFIG
 }
 
 // @description   set system config,
@@ -47,7 +47,7 @@ func (systemConfigService *SystemConfigService) GetServerInfo() (server *utils.S
 		global.GVA_LOG.Error("func utils.InitCPU() Failed", zap.String("err", err.Error()))
 		return &s, err
 	}
-	if s.Ram, err = utils.InitRAM(); err != nil {
+	if s.Rrm, err = utils.InitRAM(); err != nil {
 		global.GVA_LOG.Error("func utils.InitRAM() Failed", zap.String("err", err.Error()))
 		return &s, err
 	}

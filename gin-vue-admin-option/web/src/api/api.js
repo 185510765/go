@@ -105,7 +105,7 @@ export const getAllApis = (data) => {
 // @accept application/json
 // @Produce application/json
 // @Param data body dbModel.Api true "删除api"
-// @Success 200 {string} json "{"success":true,"data":{},"msg":"删除成功"}"
+// @Success 200 {string} json "{"success":true,"data":{},"msg":"获取成功"}"
 // @Router /api/deleteApi [post]
 export const deleteApi = (data) => {
   return service({

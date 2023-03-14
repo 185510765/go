@@ -1,4 +1,5 @@
 import service from '@/utils/request'
+
 // @Tags InitDB
 // @Summary 初始化用户数据库
 // @Produce  application/json

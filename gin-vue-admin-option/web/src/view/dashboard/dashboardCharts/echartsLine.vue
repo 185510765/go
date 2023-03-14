@@ -9,10 +9,10 @@
     />
   </div>
 </template>
-<script setup>
+<script>
 import * as echarts from 'echarts'
-import { nextTick, onMounted, onUnmounted, ref, shallowRef } from 'vue'
-// import 'echarts/theme/macarons'
+import { toRaw } from 'vue'
+import 'echarts/theme/macarons'
 
 var dataAxis = []
 for (var i = 1; i < 13; i++) {
@@ -40,79 +40,86 @@ for (var i = 0; i < data.length; i++) {
   dataShadow.push(yMax)
 }
 
-const chart = shallowRef(null)
-const echart = ref(null)
-const initChart = () => {
-  chart.value = echarts.init(echart.value /* 'macarons' */)
-  setOptions()
-}
-const setOptions = () => {
-  chart.value.setOption({
-    grid: {
-      left: '40',
-      right: '20',
-      top: '40',
-      bottom: '20',
+export default {
+  name: 'Line',
+  data() {
+    return {
+      chart: null,
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.initChart()
+    })
+  },
+  beforeUnmount() {
+    if (!this.chart) {
+      return
+    }
+    this.chart.dispose()
+    this.chart = null
+  },
+  methods: {
+    initChart() {
+      this.chart = echarts.init(this.$refs.echart, 'macarons')
+      this.setOptions()
     },
-    xAxis: {
-      data: dataAxis,
-      axisTick: {
-        show: false,
-      },
-      axisLine: {
-        show: false,
-      },
-      z: 10,
-    },
-    yAxis: {
-      axisLine: {
-        show: false,
-      },
-      axisTick: {
-        show: false,
-      },
-      axisLabel: {
-        textStyle: {
-          color: '#999',
+    setOptions() {
+      toRaw(this.chart).setOption({
+        grid: {
+          left: '40',
+          right: '20',
+          top: '40',
+          bottom: '20',
         },
-      },
-    },
-    dataZoom: [
-      {
-        type: 'inside',
-      },
-    ],
-    series: [
-      {
-        type: 'bar',
-        barWidth: '40%',
-        itemStyle: {
-          borderRadius: [5, 5, 0, 0],
-          color: '#188df0',
+        xAxis: {
+          data: dataAxis,
+          axisTick: {
+            show: false,
+          },
+          axisLine: {
+            show: false,
+          },
+          z: 10,
         },
-        emphasis: {
-          itemStyle: {
-            color: '#188df0',
+        yAxis: {
+          axisLine: {
+            show: false,
+          },
+          axisTick: {
+            show: false,
+          },
+          axisLabel: {
+            textStyle: {
+              color: '#999',
+            },
           },
         },
-        data: data,
-      },
-    ],
-  })
+        dataZoom: [
+          {
+            type: 'inside',
+          },
+        ],
+        series: [
+          {
+            type: 'bar',
+            barWidth: '40%',
+            itemStyle: {
+              borderRadius: [5, 5, 0, 0],
+              color: '#188df0',
+            },
+            emphasis: {
+              itemStyle: {
+                color: '#188df0',
+              },
+            },
+            data: data,
+          },
+        ],
+      })
+    },
+  },
 }
-
-onMounted(async() => {
-  await nextTick()
-  initChart()
-})
-
-onUnmounted(() => {
-  if (!chart.value) {
-    return
-  }
-  chart.value.dispose()
-  chart.value = null
-})
 </script>
 <style lang="scss" scoped>
 .dashboard-line-box {

@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"errors"
 	"strconv"
 	"time"
 
@@ -36,7 +35,7 @@ func JWTAuth() gin.HandlerFunc {
 		// parseToken 解析token包含的信息
 		claims, err := j.ParseToken(token)
 		if err != nil {
-			if errors.Is(err, utils.TokenExpired) {
+			if err == utils.TokenExpired {
 				response.FailWithDetailed(gin.H{"reload": true}, "授权已过期", c)
 				c.Abort()
 				return
@@ -45,24 +44,20 @@ func JWTAuth() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
-
-		// 已登录用户被管理员禁用 需要使该用户的jwt失效 此处比较消耗性能 如果需要 请自行打开
 		// 用户被删除的逻辑 需要优化 此处比较消耗性能 如果需要 请自行打开
-
-		//if user, err := userService.FindUserByUuid(claims.UUID.String()); err != nil || user.Enable == 2 {
+		//if err, _ = userService.FindUserByUuid(claims.UUID.String()); err != nil {
 		//	_ = jwtService.JsonInBlacklist(system.JwtBlacklist{Jwt: token})
 		//	response.FailWithDetailed(gin.H{"reload": true}, err.Error(), c)
 		//	c.Abort()
 		//}
 		if claims.ExpiresAt-time.Now().Unix() < claims.BufferTime {
-			dr, _ := utils.ParseDuration(global.GVA_CONFIG.JWT.ExpiresTime)
-			claims.ExpiresAt = time.Now().Add(dr).Unix()
+			claims.ExpiresAt = time.Now().Unix() + global.GVA_CONFIG.JWT.ExpiresTime
 			newToken, _ := j.CreateTokenByOldToken(token, *claims)
 			newClaims, _ := j.ParseToken(newToken)
 			c.Header("new-token", newToken)
 			c.Header("new-expires-at", strconv.FormatInt(newClaims.ExpiresAt, 10))
 			if global.GVA_CONFIG.System.UseMultipoint {
-				RedisJwtToken, err := jwtService.GetRedisJWT(newClaims.Username)
+				err, RedisJwtToken := jwtService.GetRedisJWT(newClaims.Username)
 				if err != nil {
 					global.GVA_LOG.Error("get redis jwt failed", zap.Error(err))
 				} else { // 当之前的取成功时才进行拉黑操作

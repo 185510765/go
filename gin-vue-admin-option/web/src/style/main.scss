@@ -8,7 +8,6 @@
  */
 
 @import '@/style/basics.scss';
-@import '@/style/iconfont.css';
 html {
     line-height: 1.15;
     /* 1 */
@@ -420,6 +419,12 @@ template {
 HTML,
 body,
 div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 ul,
 ol,
 dl,
@@ -451,6 +456,9 @@ address,
 caption,
 cite,
 code,
+dfn,
+em,
+strong,
 th,
 var {
     font-style: normal;
@@ -459,6 +467,22 @@ var {
 
 a {
     text-decoration: none;
+}
+
+a:link {
+    color: #fff;
+}
+
+a:visited {
+    color: #fff;
+}
+
+a:hover {
+    color: #fff;
+}
+
+a:active {
+    color: #fff;
 }
 
 input::-ms-clear {
@@ -540,7 +564,7 @@ li {
         position: fixed;
         top: 0;
     }
-    .gva-aside {
+    .el-aside {
         -webkit-transition: width .2s;
         transition: width .2s;
         width: $width-aside;
@@ -560,12 +584,10 @@ li {
             line-height: $height-aside-tilte;
             text-align: center;
             transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             .logoimg {
                 width: $width-aside-img;
                 height: $height-aside-img;
+                vertical-align: middle;
                 background: #fff;
                 border-radius: 50%;
                 padding: 3px;
@@ -575,19 +597,23 @@ li {
                 color: #fff;
                 font-weight: 600;
                 font-size: 20px;
+                vertical-align: middle;
                 padding-left: 10px;
             }
         }
     }
     .aside {
-        .el-menu--collapse {
-            >.el-menu-item {
-                display: flex;
-                justify-content: center;
+        .el-menu-item {
+            >div {
+                padding: 0 15px !important;
             }
         }
         .el-sub-menu {
             .el-menu {
+                .el-menu-item {
+                    height: 44px;
+                    line-height: 44px;
+                }
                 .is-active {
                     // 关闭三级菜单二级菜单样式
                     ul {
@@ -602,6 +628,18 @@ li {
                 }
             }
         }
+        .el-menu-item:focus,
+        .el-menu-item:hover {
+            background-color: transparent;
+        }
+        .el-menu-item:hover i,
+        .el-menu-item:hover span {
+            color: #fff;
+        }
+        .el-sub-menu__title:hover i,
+        .el-sub-menu__title:hover span {
+            color: #fff;
+        }
     }
     .hideside {
         .aside {
@@ -609,7 +647,7 @@ li {
         }
     }
     .mobile.hideside {
-        .gva-aside {
+        .el-aside {
             -webkit-transition-duration: .2s;
             transition-duration: .2s;
             -webkit-transform: translate3d(-210px, 0, 0);
@@ -617,7 +655,7 @@ li {
         }
     }
     .mobile {
-        .gva-aside {
+        .el-aside {
             -webkit-transition: -webkit-transform .28s;
             transition: -webkit-transform .28s;
             transition: transform .28s;
@@ -627,6 +665,8 @@ li {
     }
     .main-cont.el-main {
         min-height: 100%;
+        -webkit-transition: margin-left .28s;
+        transition: margin-left .28s;
         margin-left: $width-aside;
         position: relative;
     }
@@ -679,6 +719,7 @@ li {
         }
         th {
             padding: 6px 0;
+            background: #F7FBFF;
             .cell {
                 color: rgba($color: #000000, $alpha: 0.85);
                 font-size: 14px;
@@ -698,7 +739,6 @@ li {
             border-bottom: 1px solid #e8e8e8;
         }
         th.is-leaf {
-            background: #F7FBFF;
             border-bottom: none;
         }
     }
@@ -927,6 +967,21 @@ li {
     }
 }
 
+.el-input-number__decrease,
+.el-input-number__increase {
+    position: absolute;
+    z-index: 1;
+    top: 3px !important;
+    width: 42px;
+    height: 29px;
+    line-height: 29px;
+    text-align: center;
+    background: #F5F7FA;
+    color: #606266;
+    cursor: pointer;
+    font-size: 12px;
+}
+
 $headerHigh: 52px;
 $mainHight: 100vh;
 .dropdown-group {
@@ -1081,22 +1136,10 @@ $mainHight: 100vh;
 
 .transition-box {
     overflow: hidden;
-    width: 160px;
+    width: 120px;
     margin-right: 32px;
     text-align: center;
     margin-top: -12px;
-		.el-input__wrapper{
-			.el-input__inner{
-				height: 100%;
-			}
-			box-shadow: none !important;
-		}
-		.el-select .el-input .el-input__wrapper.is-focus{
-			box-shadow: none !important;
-		}
-		.el-select .el-input.is-focus .el-input__wrapper{
-			box-shadow: none !important;
-		}
 }
 
 .screenfull {

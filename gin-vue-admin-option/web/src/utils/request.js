@@ -1,8 +1,7 @@
 import axios from 'axios' // 引入axios
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { useUserStore } from '@/pinia/modules/user'
+import { store } from '@/store'
 import { emitter } from '@/utils/bus.js'
-import router from '@/router/index'
 
 const service = axios.create({
   baseURL: import.meta.env.VITE_BASE_API,
@@ -35,19 +34,18 @@ service.interceptors.request.use(
     if (!config.donNotShowLoading) {
       showLoading()
     }
-    const userStore = useUserStore()
+    const token = store.getters['user/token']
+    const user = store.getters['user/userInfo']
+    config.data = JSON.stringify(config.data)
     config.headers = {
       'Content-Type': 'application/json',
-      'x-token': userStore.token,
-      'x-user-id': userStore.userInfo.ID,
-      ...config.headers
+      'x-token': token,
+      'x-user-id': user.ID
     }
     return config
   },
   error => {
-    if (!error.config.donNotShowLoading) {
-      closeLoading()
-    }
+    closeLoading()
     ElMessage({
       showClose: true,
       message: error,
@@ -60,12 +58,9 @@ service.interceptors.request.use(
 // http response 拦截器
 service.interceptors.response.use(
   response => {
-    const userStore = useUserStore()
-    if (!response.config.donNotShowLoading) {
-      closeLoading()
-    }
+    closeLoading()
     if (response.headers['new-token']) {
-      userStore.setToken(response.headers['new-token'])
+      store.commit('user/setToken', response.headers['new-token'])
     }
     if (response.data.code === 0 || response.headers.success === 'true') {
       if (response.headers.msg) {
@@ -75,35 +70,17 @@ service.interceptors.response.use(
     } else {
       ElMessage({
         showClose: true,
-        message: response.data.msg || decodeURI(response.headers.msg),
+        message: response.data.msg,
         type: 'error'
       })
       if (response.data.data && response.data.data.reload) {
-        userStore.token = ''
-        localStorage.clear()
-        router.push({ name: 'Login', replace: true })
+        store.commit('user/LoginOut')
       }
       return response.data.msg ? response.data : response
     }
   },
   error => {
-    if (!error.config.donNotShowLoading) {
-      closeLoading()
-    }
-
-    if (!error.response) {
-      ElMessageBox.confirm(`
-        <p>检测到请求错误</p>
-        <p>${error}</p>
-        `, '请求报错', {
-        dangerouslyUseHTMLString: true,
-        distinguishCancelAndClose: true,
-        confirmButtonText: '稍后重试',
-        cancelButtonText: '取消'
-      })
-      return
-    }
-
+    closeLoading()
     switch (error.response.status) {
       case 500:
         ElMessageBox.confirm(`
@@ -113,13 +90,10 @@ service.interceptors.response.use(
           dangerouslyUseHTMLString: true,
           distinguishCancelAndClose: true,
           confirmButtonText: '清理缓存',
-          cancelButtonText: '取消'
+          cancelButtonText: this.$t('general.cancel')
         })
           .then(() => {
-            const userStore = useUserStore()
-            userStore.token = ''
-            localStorage.clear()
-            router.push({ name: 'Login', replace: true })
+            store.commit('user/LoginOut')
           })
         break
       case 404:
@@ -130,7 +104,7 @@ service.interceptors.response.use(
           dangerouslyUseHTMLString: true,
           distinguishCancelAndClose: true,
           confirmButtonText: '我知道了',
-          cancelButtonText: '取消'
+          cancelButtonText: this.$t('general.cancel')
         })
         break
     }
@@ -138,4 +112,5 @@ service.interceptors.response.use(
     return error
   }
 )
+
 export default service

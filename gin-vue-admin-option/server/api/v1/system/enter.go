@@ -16,7 +16,6 @@ type ApiGroup struct {
 	OperationRecordApi
 	AutoCodeHistoryApi
 	DictionaryDetailApi
-	AuthorityBtnApi
 }
 
 var (
@@ -34,5 +33,4 @@ var (
 	operationRecordService  = service.ServiceGroupApp.SystemServiceGroup.OperationRecordService
 	autoCodeHistoryService  = service.ServiceGroupApp.SystemServiceGroup.AutoCodeHistoryService
 	dictionaryDetailService = service.ServiceGroupApp.SystemServiceGroup.DictionaryDetailService
-	authorityBtnService     = service.ServiceGroupApp.SystemServiceGroup.AuthorityBtnService
 )

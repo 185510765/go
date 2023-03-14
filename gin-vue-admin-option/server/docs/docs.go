@@ -54,21 +54,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "创建基础api",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"创建成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -104,21 +92,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除api",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -154,21 +130,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除选中Api",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -193,24 +157,9 @@ var doc = `{
                 "summary": "获取所有的Api 不分页",
                 "responses": {
                     "200": {
-                        "description": "获取所有的Api 不分页,返回包括api列表",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.SysAPIListResponse"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -246,21 +195,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "根据id获取api,返回包括api详情",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.SysAPIResponse"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -296,24 +233,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "分页获取API列表,返回包括列表,总数,页码,每页数量",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.PageResult"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -335,7 +257,7 @@ var doc = `{
                 "tags": [
                     "SysApi"
                 ],
-                "summary": "修改基础api",
+                "summary": "创建基础api",
                 "parameters": [
                     {
                         "description": "api路径, api中文描述, api组, 方法",
@@ -349,21 +271,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "修改基础api",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"修改成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -399,24 +309,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "拷贝角色,返回包括系统角色详情",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"拷贝成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.SysAuthorityResponse"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -452,24 +347,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "创建角色,返回包括系统角色详情",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"创建成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.SysAuthorityResponse"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -505,21 +385,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除角色",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -555,24 +423,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "分页获取角色列表,返回包括列表,总数,页码,每页数量",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.PageResult"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -608,21 +461,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "设置角色资源权限",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"设置成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -658,274 +499,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "更新角色信息,返回包括系统角色详情",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"更新成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.SysAuthorityResponse"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/authorityBtn/canRemoveAuthorityBtn": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "AuthorityBtn"
-                ],
-                "summary": "设置权限按钮",
-                "responses": {
-                    "200": {
-                        "description": "删除成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/authorityBtn/getAuthorityBtn": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "AuthorityBtn"
-                ],
-                "summary": "获取权限按钮",
-                "parameters": [
-                    {
-                        "description": "菜单id, 角色id, 选中的按钮id",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/request.SysAuthorityBtnReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "返回列表成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.SysAuthorityBtnRes"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/authorityBtn/setAuthorityBtn": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "AuthorityBtn"
-                ],
-                "summary": "设置权限按钮",
-                "parameters": [
-                    {
-                        "description": "菜单id, 角色id, 选中的按钮id",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/request.SysAuthorityBtnReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "返回列表成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/autoCode/createPackage": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "AutoCode"
-                ],
-                "summary": "创建package",
-                "parameters": [
-                    {
-                        "description": "创建package",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/system.SysAutoCode"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "创建package成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/autoCode/createPlug": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "multipart/form-data"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "AutoCode"
-                ],
-                "summary": "安装插件",
-                "parameters": [
-                    {
-                        "type": "file",
-                        "description": "this is a test file",
-                        "name": "plug",
-                        "in": "formData",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "安装插件成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object"
-                                            }
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -969,60 +545,6 @@ var doc = `{
                 }
             }
         },
-        "/autoCode/delPackage": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "AutoCode"
-                ],
-                "summary": "删除package",
-                "parameters": [
-                    {
-                        "description": "创建package",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/system.SysAutoCode"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "删除package成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
         "/autoCode/delSysHistory": {
             "post": {
                 "security": [
@@ -1042,32 +564,20 @@ var doc = `{
                 "summary": "删除回滚记录",
                 "parameters": [
                     {
-                        "description": "请求参数",
+                        "description": "删除回滚记录",
                         "name": "data",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/request.GetById"
+                            "$ref": "#/definitions/request.AutoHistoryByID"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除回滚记录",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -1092,25 +602,9 @@ var doc = `{
                 "summary": "获取当前表所有字段",
                 "responses": {
                     "200": {
-                        "description": "获取当前表所有字段",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -1135,25 +629,9 @@ var doc = `{
                 "summary": "获取当前所有数据库",
                 "responses": {
                     "200": {
-                        "description": "获取当前所有数据库",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -1175,82 +653,23 @@ var doc = `{
                 "tags": [
                     "AutoCode"
                 ],
-                "summary": "获取meta信息",
+                "summary": "回滚",
                 "parameters": [
                     {
-                        "description": "请求参数",
+                        "description": "获取meta信息",
                         "name": "data",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/request.GetById"
+                            "$ref": "#/definitions/request.AutoHistoryByID"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "获取meta信息",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/autoCode/getPackage": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "AutoCode"
-                ],
-                "summary": "获取package",
-                "responses": {
-                    "200": {
-                        "description": "创建package成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -1275,7 +694,7 @@ var doc = `{
                 "summary": "查询回滚记录",
                 "parameters": [
                     {
-                        "description": "请求参数",
+                        "description": "查询回滚记录",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -1286,24 +705,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "查询回滚记录,返回包括列表,总数,页码,每页数量",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.PageResult"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -1328,25 +732,9 @@ var doc = `{
                 "summary": "获取当前数据库所有表",
                 "responses": {
                     "200": {
-                        "description": "获取当前数据库所有表",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -1382,25 +770,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "预览创建后的代码",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"创建成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -1422,35 +794,255 @@ var doc = `{
                 "tags": [
                     "AutoCode"
                 ],
-                "summary": "回滚自动生成代码",
+                "summary": "回滚",
                 "parameters": [
                     {
-                        "description": "请求参数",
+                        "description": "回滚自动生成代码",
                         "name": "data",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/request.RollBack"
+                            "$ref": "#/definitions/request.AutoHistoryByID"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "回滚自动生成代码",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"回滚成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/autoCodeExample/createAutoCodeExample": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AutoCodeExample"
+                ],
+                "summary": "创建AutoCodeExample",
+                "parameters": [
+                    {
+                        "description": "AutoCodeExample模型",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/autocode.AutoCodeExample"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"创建成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/autoCodeExample/deleteAutoCodeExample": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AutoCodeExample"
+                ],
+                "summary": "删除AutoCodeExample",
+                "parameters": [
+                    {
+                        "description": "AutoCodeExample模型",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/autocode.AutoCodeExample"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/autoCodeExample/findAutoCodeExample": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AutoCodeExample"
+                ],
+                "summary": "用id查询AutoCodeExample",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "展示值",
+                        "name": "autoCodeExampleField",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "创建时间",
+                        "name": "createdAt",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "主键ID",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "更新时间",
+                        "name": "updatedAt",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"查询成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/autoCodeExample/getAutoCodeExampleList": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AutoCodeExample"
+                ],
+                "summary": "分页获取AutoCodeExample列表",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "展示值",
+                        "name": "autoCodeExampleField",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "创建时间",
+                        "name": "createdAt",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "主键ID",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "页码",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "每页大小",
+                        "name": "pageSize",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "更新时间",
+                        "name": "updatedAt",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/autoCodeExample/updateAutoCodeExample": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "AutoCodeExample"
+                ],
+                "summary": "更新AutoCodeExample",
+                "parameters": [
+                    {
+                        "description": "更新AutoCodeExample",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/autocode.AutoCodeExample"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"更新成功\"}",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
@@ -1475,24 +1067,9 @@ var doc = `{
                 "summary": "生成验证码",
                 "responses": {
                     "200": {
-                        "description": "生成验证码,返回包括随机数id,base64,验证码长度",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"验证码获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.SysCaptchaResponse"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -1520,24 +1097,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "返回包括用户信息,token,过期时间",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"登陆成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.LoginResponse"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -1573,21 +1135,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "更新角色api权限",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"更新成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -1623,24 +1173,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "获取权限列表,返回包括casbin详情列表",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.PolicyPathResponse"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -1689,7 +1224,7 @@ var doc = `{
                         "in": "query"
                     },
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "管理角色ID",
                         "name": "sysUserAuthorityID",
                         "in": "query"
@@ -1709,24 +1244,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "获取单一客户信息,返回包括客户详情",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.ExaCustomerResponse"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -1760,21 +1280,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "更新客户信息",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"更新成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -1808,21 +1316,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "创建客户",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"创建成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -1856,21 +1352,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除客户",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -1895,12 +1379,6 @@ var doc = `{
                 "summary": "分页获取权限客户列表",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "关键字",
-                        "name": "keyword",
-                        "in": "query"
-                    },
-                    {
                         "type": "integer",
                         "description": "页码",
                         "name": "page",
@@ -1915,24 +1393,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "分页获取权限客户列表,返回包括列表,总数,页码,每页数量",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.PageResult"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2093,21 +1556,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "导入Excel文件",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"导入成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2129,24 +1580,9 @@ var doc = `{
                 "summary": "加载Excel数据",
                 "responses": {
                     "200": {
-                        "description": "加载Excel数据,返回包括列表,总数,页码,每页数量",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"加载数据成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.PageResult"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2180,21 +1616,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "断点续传到服务器",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"切片创建成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2227,21 +1651,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除文件",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2275,24 +1687,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "创建文件,返回包括文件路径",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"file uploaded, 文件创建成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.FilePathResponse"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2328,24 +1725,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "分页文件列表,返回包括列表,总数,页码,每页数量",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.PageResult"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2379,21 +1761,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除切片",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"缓存切片删除成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2427,24 +1797,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "上传文件示例,返回包括文件详情",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"上传成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.ExaFileResponse"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2461,25 +1816,9 @@ var doc = `{
                 "summary": "初始化用户数据库",
                 "responses": {
                     "200": {
-                        "description": "初始化用户数据库",
+                        "description": "{\"code\":0,\"data\":{},\"msg\":\"探测完成\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2507,21 +1846,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "初始化用户数据库",
+                        "description": "{\"code\":0,\"data\":{},\"msg\":\"自动创建数据库成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2546,21 +1873,9 @@ var doc = `{
                 "summary": "jwt加入黑名单",
                 "responses": {
                     "200": {
-                        "description": "jwt加入黑名单",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"拉黑成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2596,21 +1911,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "新增菜单",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"添加成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2646,21 +1949,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "增加menu和角色关联关系",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"添加成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2696,21 +1987,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除菜单",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2746,24 +2025,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "根据id获取菜单,返回包括系统菜单列表",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.SysBaseMenuResponse"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2796,24 +2060,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "获取用户动态路由,返回包括系统菜单列表",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.SysBaseMenusResponse"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2846,24 +2095,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "获取用户动态路由,返回包括系统菜单详情列表",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.SysMenusResponse"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2899,25 +2133,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "获取指定角色menu",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -2953,24 +2171,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "分页获取基础menu列表,返回包括列表,总数,页码,每页数量",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.PageResult"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -3006,21 +2209,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "更新菜单",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"更新成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -3056,21 +2247,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "创建SysDictionary",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"创建成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -3106,21 +2285,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除SysDictionary",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -3189,25 +2356,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "用id查询SysDictionary",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"查询成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -3251,12 +2402,6 @@ var doc = `{
                     },
                     {
                         "type": "string",
-                        "description": "关键字",
-                        "name": "keyword",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
                         "description": "字典名（中）",
                         "name": "name",
                         "in": "query"
@@ -3294,24 +2439,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "分页获取SysDictionary列表,返回包括列表,总数,页码,每页数量",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.PageResult"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -3347,21 +2477,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "更新SysDictionary",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"更新成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -3397,21 +2515,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "创建SysDictionaryDetail",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"创建成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -3447,21 +2553,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除SysDictionaryDetail",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -3536,25 +2630,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "用id查询SysDictionaryDetail",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"查询成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -3588,12 +2666,6 @@ var doc = `{
                         "type": "integer",
                         "description": "主键ID",
                         "name": "id",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "关键字",
-                        "name": "keyword",
                         "in": "query"
                     },
                     {
@@ -3647,24 +2719,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "分页获取SysDictionaryDetail列表,返回包括列表,总数,页码,每页数量",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.PageResult"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -3700,21 +2757,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "更新SysDictionaryDetail",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"更新成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -3750,21 +2795,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "创建SysOperationRecord",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -3800,21 +2833,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除SysOperationRecord",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -3850,21 +2871,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "批量删除SysOperationRecord",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"批量删除成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -3969,25 +2978,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "用id查询SysOperationRecord",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"查询成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -4049,12 +3042,6 @@ var doc = `{
                     },
                     {
                         "type": "string",
-                        "description": "关键字",
-                        "name": "keyword",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
                         "description": "延迟",
                         "name": "latency",
                         "in": "query"
@@ -4110,24 +3097,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "分页获取SysOperationRecord列表,返回包括列表,总数,页码,每页数量",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.PageResult"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -4149,25 +3121,9 @@ var doc = `{
                 "summary": "获取服务器信息",
                 "responses": {
                     "200": {
-                        "description": "获取服务器信息",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -4189,24 +3145,9 @@ var doc = `{
                 "summary": "获取配置文件内容",
                 "responses": {
                     "200": {
-                        "description": "获取配置文件内容,返回包括系统配置",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.SysConfigResponse"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -4228,21 +3169,9 @@ var doc = `{
                 "summary": "重启系统",
                 "responses": {
                     "200": {
-                        "description": "重启系统",
+                        "description": "{\"code\":0,\"data\":{},\"msg\":\"重启系统成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -4275,120 +3204,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "设置配置文件内容",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"设置成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/user/SetSelfInfo": {
-            "put": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "SysUser"
-                ],
-                "summary": "设置用户信息",
-                "parameters": [
-                    {
-                        "description": "ID, 用户名, 昵称, 头像链接",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/system.SysUser"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "设置用户信息",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/user/admin_register": {
-            "post": {
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "SysUser"
-                ],
-                "summary": "用户注册账号",
-                "parameters": [
-                    {
-                        "description": "用户名, 昵称, 密码, 角色ID",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/request.Register"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "用户注册账号,返回包括用户信息",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.SysUserResponse"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -4415,27 +3233,15 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/request.ChangePasswordReq"
+                            "$ref": "#/definitions/request.ChangePasswordStruct"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "用户修改密码",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"修改成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -4471,21 +3277,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "删除用户",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -4510,25 +3304,9 @@ var doc = `{
                 "summary": "获取用户信息",
                 "responses": {
                     "200": {
-                        "description": "获取用户信息",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -4564,71 +3342,39 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "分页获取用户列表,返回包括列表,总数,页码,每页数量",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/response.PageResult"
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
             }
         },
-        "/user/resetPassword": {
+        "/user/register": {
             "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "SysUser"
                 ],
-                "summary": "重置用户密码",
+                "summary": "用户注册账号",
                 "parameters": [
                     {
-                        "description": "ID",
+                        "description": "用户名, 昵称, 密码, 角色ID",
                         "name": "data",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/system.SysUser"
+                            "$ref": "#/definitions/request.Register"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "重置用户密码",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"注册成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -4664,21 +3410,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "设置用户权限",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"修改成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -4714,21 +3448,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "设置用户权限",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"修改成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -4764,25 +3486,9 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "设置用户信息",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"设置成功\"}",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "additionalProperties": true
-                                        },
-                                        "msg": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            ]
+                            "type": "string"
                         }
                     }
                 }
@@ -4790,22 +3496,43 @@ var doc = `{
         }
     },
     "definitions": {
+        "autocode.AutoCodeExample": {
+            "type": "object",
+            "properties": {
+                "autoCodeExampleField": {
+                    "description": "展示值",
+                    "type": "string"
+                },
+                "createdAt": {
+                    "description": "创建时间",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "主键ID",
+                    "type": "integer"
+                },
+                "updatedAt": {
+                    "description": "更新时间",
+                    "type": "string"
+                }
+            }
+        },
         "config.AliyunOSS": {
             "type": "object",
             "properties": {
-                "access-key-id": {
+                "accessKeyId": {
                     "type": "string"
                 },
-                "access-key-secret": {
+                "accessKeySecret": {
                     "type": "string"
                 },
-                "base-path": {
+                "basePath": {
                     "type": "string"
                 },
-                "bucket-name": {
+                "bucketName": {
                     "type": "string"
                 },
-                "bucket-url": {
+                "bucketUrl": {
                     "type": "string"
                 },
                 "endpoint": {
@@ -4822,106 +3549,37 @@ var doc = `{
                 "server": {
                     "type": "string"
                 },
-                "server-api": {
+                "serverApi": {
                     "type": "string"
                 },
-                "server-initialize": {
+                "serverInitialize": {
                     "type": "string"
                 },
-                "server-model": {
+                "serverModel": {
                     "type": "string"
                 },
-                "server-plug": {
+                "serverRequest": {
                     "type": "string"
                 },
-                "server-request": {
+                "serverRouter": {
                     "type": "string"
                 },
-                "server-router": {
+                "serverService": {
                     "type": "string"
                 },
-                "server-service": {
-                    "type": "string"
-                },
-                "transfer-restart": {
+                "transferRestart": {
                     "type": "boolean"
                 },
                 "web": {
                     "type": "string"
                 },
-                "web-api": {
+                "webApi": {
                     "type": "string"
                 },
-                "web-form": {
+                "webForm": {
                     "type": "string"
                 },
-                "web-table": {
-                    "type": "string"
-                }
-            }
-        },
-        "config.AwsS3": {
-            "type": "object",
-            "properties": {
-                "base-url": {
-                    "type": "string"
-                },
-                "bucket": {
-                    "type": "string"
-                },
-                "disable-ssl": {
-                    "type": "boolean"
-                },
-                "endpoint": {
-                    "type": "string"
-                },
-                "path-prefix": {
-                    "type": "string"
-                },
-                "region": {
-                    "type": "string"
-                },
-                "s3-force-path-style": {
-                    "type": "boolean"
-                },
-                "secret-id": {
-                    "type": "string"
-                },
-                "secret-key": {
-                    "type": "string"
-                }
-            }
-        },
-        "config.CORS": {
-            "type": "object",
-            "properties": {
-                "mode": {
-                    "type": "string"
-                },
-                "whitelist": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/config.CORSWhitelist"
-                    }
-                }
-            }
-        },
-        "config.CORSWhitelist": {
-            "type": "object",
-            "properties": {
-                "allow-credentials": {
-                    "type": "boolean"
-                },
-                "allow-headers": {
-                    "type": "string"
-                },
-                "allow-methods": {
-                    "type": "string"
-                },
-                "allow-origin": {
-                    "type": "string"
-                },
-                "expose-headers": {
+                "webTable": {
                     "type": "string"
                 }
             }
@@ -4929,17 +3587,26 @@ var doc = `{
         "config.Captcha": {
             "type": "object",
             "properties": {
-                "img-height": {
+                "imgHeight": {
                     "description": "验证码高度",
                     "type": "integer"
                 },
-                "img-width": {
+                "imgWidth": {
                     "description": "验证码宽度",
                     "type": "integer"
                 },
-                "key-long": {
+                "keyLong": {
                     "description": "验证码长度",
                     "type": "integer"
+                }
+            }
+        },
+        "config.Casbin": {
+            "type": "object",
+            "properties": {
+                "modelPath": {
+                    "description": "存放casbin模型的相对路径",
+                    "type": "string"
                 }
             }
         },
@@ -4971,7 +3638,7 @@ var doc = `{
                     "description": "服务器地址",
                     "type": "string"
                 },
-                "is-ssl": {
+                "isSSL": {
                     "description": "是否SSL",
                     "type": "boolean"
                 },
@@ -5001,42 +3668,18 @@ var doc = `{
                 }
             }
         },
-        "config.HuaWeiObs": {
-            "type": "object",
-            "properties": {
-                "access-key": {
-                    "type": "string"
-                },
-                "bucket": {
-                    "type": "string"
-                },
-                "endpoint": {
-                    "type": "string"
-                },
-                "path": {
-                    "type": "string"
-                },
-                "secret-key": {
-                    "type": "string"
-                }
-            }
-        },
         "config.JWT": {
             "type": "object",
             "properties": {
-                "buffer-time": {
+                "bufferTime": {
                     "description": "缓冲时间",
-                    "type": "string"
+                    "type": "integer"
                 },
-                "expires-time": {
+                "expiresTime": {
                     "description": "过期时间",
-                    "type": "string"
+                    "type": "integer"
                 },
-                "issuer": {
-                    "description": "签发者",
-                    "type": "string"
-                },
-                "signing-key": {
+                "signingKey": {
                     "description": "jwt签名",
                     "type": "string"
                 }
@@ -5046,11 +3689,7 @@ var doc = `{
             "type": "object",
             "properties": {
                 "path": {
-                    "description": "本地文件访问路径",
-                    "type": "string"
-                },
-                "store-path": {
-                    "description": "本地文件存储路径",
+                    "description": "本地文件路径",
                     "type": "string"
                 }
             }
@@ -5062,23 +3701,23 @@ var doc = `{
                     "description": "高级配置",
                     "type": "string"
                 },
-                "db-name": {
+                "dbname": {
                     "description": "数据库名",
                     "type": "string"
                 },
-                "log-mode": {
+                "logMode": {
                     "description": "是否开启Gorm全局日志",
                     "type": "string"
                 },
-                "log-zap": {
+                "logZap": {
                     "description": "是否通过zap写入日志文件",
                     "type": "boolean"
                 },
-                "max-idle-conns": {
+                "maxIdleConns": {
                     "description": "空闲中的最大连接数",
                     "type": "integer"
                 },
-                "max-open-conns": {
+                "maxOpenConns": {
                     "description": "打开到数据库的最大连接数",
                     "type": "integer"
                 },
@@ -5088,55 +3727,6 @@ var doc = `{
                 },
                 "path": {
                     "description": "服务器地址:端口",
-                    "type": "string"
-                },
-                "port": {
-                    "description": ":端口",
-                    "type": "string"
-                },
-                "username": {
-                    "description": "数据库用户名",
-                    "type": "string"
-                }
-            }
-        },
-        "config.Pgsql": {
-            "type": "object",
-            "properties": {
-                "config": {
-                    "description": "高级配置",
-                    "type": "string"
-                },
-                "db-name": {
-                    "description": "数据库名",
-                    "type": "string"
-                },
-                "log-mode": {
-                    "description": "是否开启Gorm全局日志",
-                    "type": "string"
-                },
-                "log-zap": {
-                    "description": "是否通过zap写入日志文件",
-                    "type": "boolean"
-                },
-                "max-idle-conns": {
-                    "description": "空闲中的最大连接数",
-                    "type": "integer"
-                },
-                "max-open-conns": {
-                    "description": "打开到数据库的最大连接数",
-                    "type": "integer"
-                },
-                "password": {
-                    "description": "数据库密码",
-                    "type": "string"
-                },
-                "path": {
-                    "description": "服务器地址:端口",
-                    "type": "string"
-                },
-                "port": {
-                    "description": ":端口",
                     "type": "string"
                 },
                 "username": {
@@ -5148,7 +3738,7 @@ var doc = `{
         "config.Qiniu": {
             "type": "object",
             "properties": {
-                "access-key": {
+                "accessKey": {
                     "description": "秘钥AK",
                     "type": "string"
                 },
@@ -5156,19 +3746,19 @@ var doc = `{
                     "description": "空间名称",
                     "type": "string"
                 },
-                "img-path": {
+                "imgPath": {
                     "description": "CDN加速域名",
                     "type": "string"
                 },
-                "secret-key": {
+                "secretKey": {
                     "description": "秘钥SK",
                     "type": "string"
                 },
-                "use-cdn-domains": {
+                "useCdnDomains": {
                     "description": "上传是否使用CDN上传加速",
                     "type": "boolean"
                 },
-                "use-https": {
+                "useHttps": {
                     "description": "是否使用https",
                     "type": "boolean"
                 },
@@ -5198,37 +3788,24 @@ var doc = `{
         "config.Server": {
             "type": "object",
             "properties": {
-                "aliyun-oss": {
+                "aliyunOSS": {
                     "$ref": "#/definitions/config.AliyunOSS"
                 },
-                "autocode": {
+                "autoCode": {
                     "description": "auto",
                     "$ref": "#/definitions/config.Autocode"
-                },
-                "aws-s3": {
-                    "$ref": "#/definitions/config.AwsS3"
                 },
                 "captcha": {
                     "$ref": "#/definitions/config.Captcha"
                 },
-                "cors": {
-                    "description": "跨域配置",
-                    "$ref": "#/definitions/config.CORS"
-                },
-                "db-list": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/config.SpecializedDB"
-                    }
+                "casbin": {
+                    "$ref": "#/definitions/config.Casbin"
                 },
                 "email": {
                     "$ref": "#/definitions/config.Email"
                 },
                 "excel": {
                     "$ref": "#/definitions/config.Excel"
-                },
-                "hua-wei-obs": {
-                    "$ref": "#/definitions/config.HuaWeiObs"
                 },
                 "jwt": {
                     "$ref": "#/definitions/config.JWT"
@@ -5241,9 +3818,6 @@ var doc = `{
                     "description": "gorm",
                     "$ref": "#/definitions/config.Mysql"
                 },
-                "pgsql": {
-                    "$ref": "#/definitions/config.Pgsql"
-                },
                 "qiniu": {
                     "$ref": "#/definitions/config.Qiniu"
                 },
@@ -5253,7 +3827,7 @@ var doc = `{
                 "system": {
                     "$ref": "#/definitions/config.System"
                 },
-                "tencent-cos": {
+                "tencentCOS": {
                     "$ref": "#/definitions/config.TencentCOS"
                 },
                 "timer": {
@@ -5264,60 +3838,6 @@ var doc = `{
                 }
             }
         },
-        "config.SpecializedDB": {
-            "type": "object",
-            "properties": {
-                "alias-name": {
-                    "type": "string"
-                },
-                "config": {
-                    "description": "高级配置",
-                    "type": "string"
-                },
-                "db-name": {
-                    "description": "数据库名",
-                    "type": "string"
-                },
-                "disable": {
-                    "type": "boolean"
-                },
-                "log-mode": {
-                    "description": "是否开启Gorm全局日志",
-                    "type": "string"
-                },
-                "log-zap": {
-                    "description": "是否通过zap写入日志文件",
-                    "type": "boolean"
-                },
-                "max-idle-conns": {
-                    "description": "空闲中的最大连接数",
-                    "type": "integer"
-                },
-                "max-open-conns": {
-                    "description": "打开到数据库的最大连接数",
-                    "type": "integer"
-                },
-                "password": {
-                    "description": "数据库密码",
-                    "type": "string"
-                },
-                "path": {
-                    "description": "服务器地址:端口",
-                    "type": "string"
-                },
-                "port": {
-                    "description": ":端口",
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "username": {
-                    "description": "数据库用户名",
-                    "type": "string"
-                }
-            }
-        },
         "config.System": {
             "type": "object",
             "properties": {
@@ -5325,7 +3845,7 @@ var doc = `{
                     "description": "端口值",
                     "type": "integer"
                 },
-                "db-type": {
+                "dbType": {
                     "description": "数据库类型:mysql(默认)|sqlite|sqlserver|postgresql",
                     "type": "string"
                 },
@@ -5333,22 +3853,12 @@ var doc = `{
                     "description": "环境值",
                     "type": "string"
                 },
-                "iplimit-count": {
-                    "type": "integer"
-                },
-                "iplimit-time": {
-                    "type": "integer"
-                },
-                "oss-type": {
+                "ossType": {
                     "description": "Oss类型",
                     "type": "string"
                 },
-                "use-multipoint": {
+                "useMultipoint": {
                     "description": "多点登录拦截",
-                    "type": "boolean"
-                },
-                "use-redis": {
-                    "description": "使用redis",
                     "type": "boolean"
                 }
             }
@@ -5356,22 +3866,22 @@ var doc = `{
         "config.TencentCOS": {
             "type": "object",
             "properties": {
-                "base-url": {
+                "baseURL": {
                     "type": "string"
                 },
                 "bucket": {
                     "type": "string"
                 },
-                "path-prefix": {
+                "pathPrefix": {
                     "type": "string"
                 },
                 "region": {
                     "type": "string"
                 },
-                "secret-id": {
+                "secretID": {
                     "type": "string"
                 },
-                "secret-key": {
+                "secretKey": {
                     "type": "string"
                 }
             }
@@ -5392,10 +3902,6 @@ var doc = `{
                 "start": {
                     "description": "是否启用",
                     "type": "boolean"
-                },
-                "with_seconds": {
-                    "description": "是否精确到秒",
-                    "type": "boolean"
                 }
             }
         },
@@ -5406,7 +3912,7 @@ var doc = `{
                     "description": "日志文件夹",
                     "type": "string"
                 },
-                "encode-level": {
+                "encodeLevel": {
                     "description": "编码级",
                     "type": "string"
                 },
@@ -5418,23 +3924,23 @@ var doc = `{
                     "description": "级别",
                     "type": "string"
                 },
-                "log-in-console": {
+                "linkName": {
+                    "description": "软链接名称",
+                    "type": "string"
+                },
+                "logInConsole": {
                     "description": "输出控制台",
                     "type": "boolean"
-                },
-                "max-age": {
-                    "description": "日志留存时间",
-                    "type": "integer"
                 },
                 "prefix": {
                     "description": "日志前缀",
                     "type": "string"
                 },
-                "show-line": {
+                "showLine": {
                     "description": "显示行",
                     "type": "boolean"
                 },
-                "stacktrace-key": {
+                "stacktraceKey": {
                     "description": "栈名",
                     "type": "string"
                 }
@@ -5465,74 +3971,10 @@ var doc = `{
                 },
                 "sysUserAuthorityID": {
                     "description": "管理角色ID",
-                    "type": "integer"
+                    "type": "string"
                 },
                 "sysUserId": {
                     "description": "管理ID",
-                    "type": "integer"
-                },
-                "updatedAt": {
-                    "description": "更新时间",
-                    "type": "string"
-                }
-            }
-        },
-        "example.ExaFile": {
-            "type": "object",
-            "properties": {
-                "chunkTotal": {
-                    "type": "integer"
-                },
-                "createdAt": {
-                    "description": "创建时间",
-                    "type": "string"
-                },
-                "exaFileChunk": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/example.ExaFileChunk"
-                    }
-                },
-                "fileMd5": {
-                    "type": "string"
-                },
-                "fileName": {
-                    "type": "string"
-                },
-                "filePath": {
-                    "type": "string"
-                },
-                "id": {
-                    "description": "主键ID",
-                    "type": "integer"
-                },
-                "isFinish": {
-                    "type": "boolean"
-                },
-                "updatedAt": {
-                    "description": "更新时间",
-                    "type": "string"
-                }
-            }
-        },
-        "example.ExaFileChunk": {
-            "type": "object",
-            "properties": {
-                "createdAt": {
-                    "description": "创建时间",
-                    "type": "string"
-                },
-                "exaFileID": {
-                    "type": "integer"
-                },
-                "fileChunkNumber": {
-                    "type": "integer"
-                },
-                "fileChunkPath": {
-                    "type": "string"
-                },
-                "id": {
-                    "description": "主键ID",
                     "type": "integer"
                 },
                 "updatedAt": {
@@ -5594,7 +4036,7 @@ var doc = `{
             "properties": {
                 "authorityId": {
                     "description": "角色ID",
-                    "type": "integer"
+                    "type": "string"
                 },
                 "menus": {
                     "type": "array",
@@ -5604,12 +4046,20 @@ var doc = `{
                 }
             }
         },
+        "request.AutoHistoryByID": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
         "request.CasbinInReceive": {
             "type": "object",
             "properties": {
                 "authorityId": {
                     "description": "权限id",
-                    "type": "integer"
+                    "type": "string"
                 },
                 "casbinInfos": {
                     "type": "array",
@@ -5632,7 +4082,7 @@ var doc = `{
                 }
             }
         },
-        "request.ChangePasswordReq": {
+        "request.ChangePasswordStruct": {
             "type": "object",
             "properties": {
                 "newPassword": {
@@ -5641,6 +4091,10 @@ var doc = `{
                 },
                 "password": {
                     "description": "密码",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "用户名",
                     "type": "string"
                 }
             }
@@ -5653,7 +4107,7 @@ var doc = `{
             "properties": {
                 "authorityId": {
                     "description": "角色ID",
-                    "type": "integer"
+                    "type": "string"
                 }
             }
         },
@@ -5662,7 +4116,7 @@ var doc = `{
             "properties": {
                 "id": {
                     "description": "主键ID",
-                    "type": "integer"
+                    "type": "number"
                 }
             }
         },
@@ -5686,10 +4140,6 @@ var doc = `{
             "properties": {
                 "dbName": {
                     "description": "数据库名",
-                    "type": "string"
-                },
-                "dbType": {
-                    "description": "数据库类型",
                     "type": "string"
                 },
                 "host": {
@@ -5734,10 +4184,6 @@ var doc = `{
         "request.PageInfo": {
             "type": "object",
             "properties": {
-                "keyword": {
-                    "description": "关键字",
-                    "type": "string"
-                },
                 "page": {
                     "description": "页码",
                     "type": "integer"
@@ -5752,16 +4198,13 @@ var doc = `{
             "type": "object",
             "properties": {
                 "authorityId": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "authorityIds": {
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "string"
                     }
-                },
-                "enable": {
-                    "type": "integer"
                 },
                 "headerImg": {
                     "type": "string"
@@ -5774,19 +4217,6 @@ var doc = `{
                 },
                 "userName": {
                     "type": "string"
-                }
-            }
-        },
-        "request.RollBack": {
-            "type": "object",
-            "properties": {
-                "deleteTable": {
-                    "description": "是否删除表",
-                    "type": "boolean"
-                },
-                "id": {
-                    "description": "主键ID",
-                    "type": "integer"
                 }
             }
         },
@@ -5812,10 +4242,6 @@ var doc = `{
                 "id": {
                     "description": "主键ID",
                     "type": "integer"
-                },
-                "keyword": {
-                    "description": "关键字",
-                    "type": "string"
                 },
                 "method": {
                     "description": "方法:创建POST(默认)|查看GET|更新PUT|删除DELETE",
@@ -5848,7 +4274,7 @@ var doc = `{
             "properties": {
                 "authorityId": {
                     "description": "角色ID",
-                    "type": "integer"
+                    "type": "string"
                 }
             }
         },
@@ -5859,7 +4285,7 @@ var doc = `{
                     "description": "角色ID",
                     "type": "array",
                     "items": {
-                        "type": "integer"
+                        "type": "string"
                     }
                 },
                 "id": {
@@ -5867,30 +4293,9 @@ var doc = `{
                 }
             }
         },
-        "request.SysAuthorityBtnReq": {
-            "type": "object",
-            "properties": {
-                "authorityId": {
-                    "type": "integer"
-                },
-                "menuID": {
-                    "type": "integer"
-                },
-                "selected": {
-                    "type": "array",
-                    "items": {
-                        "type": "integer"
-                    }
-                }
-            }
-        },
         "request.SysAutoHistory": {
             "type": "object",
             "properties": {
-                "keyword": {
-                    "description": "关键字",
-                    "type": "string"
-                },
                 "page": {
                     "description": "页码",
                     "type": "integer"
@@ -5918,124 +4323,6 @@ var doc = `{
                 }
             }
         },
-        "response.ExaCustomerResponse": {
-            "type": "object",
-            "properties": {
-                "customer": {
-                    "$ref": "#/definitions/example.ExaCustomer"
-                }
-            }
-        },
-        "response.ExaFileResponse": {
-            "type": "object",
-            "properties": {
-                "file": {
-                    "$ref": "#/definitions/example.ExaFileUploadAndDownload"
-                }
-            }
-        },
-        "response.FilePathResponse": {
-            "type": "object",
-            "properties": {
-                "filePath": {
-                    "type": "string"
-                }
-            }
-        },
-        "response.FileResponse": {
-            "type": "object",
-            "properties": {
-                "file": {
-                    "$ref": "#/definitions/example.ExaFile"
-                }
-            }
-        },
-        "response.LoginResponse": {
-            "type": "object",
-            "properties": {
-                "expiresAt": {
-                    "type": "integer"
-                },
-                "token": {
-                    "type": "string"
-                },
-                "user": {
-                    "$ref": "#/definitions/system.SysUser"
-                }
-            }
-        },
-        "response.PageResult": {
-            "type": "object",
-            "properties": {
-                "list": {
-                    "type": "object"
-                },
-                "page": {
-                    "type": "integer"
-                },
-                "pageSize": {
-                    "type": "integer"
-                },
-                "total": {
-                    "type": "integer"
-                }
-            }
-        },
-        "response.PolicyPathResponse": {
-            "type": "object",
-            "properties": {
-                "paths": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/request.CasbinInfo"
-                    }
-                }
-            }
-        },
-        "response.Response": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "integer"
-                },
-                "data": {
-                    "type": "object"
-                },
-                "msg": {
-                    "type": "string"
-                }
-            }
-        },
-        "response.SysAPIListResponse": {
-            "type": "object",
-            "properties": {
-                "apis": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/system.SysApi"
-                    }
-                }
-            }
-        },
-        "response.SysAPIResponse": {
-            "type": "object",
-            "properties": {
-                "api": {
-                    "$ref": "#/definitions/system.SysApi"
-                }
-            }
-        },
-        "response.SysAuthorityBtnRes": {
-            "type": "object",
-            "properties": {
-                "selected": {
-                    "type": "array",
-                    "items": {
-                        "type": "integer"
-                    }
-                }
-            }
-        },
         "response.SysAuthorityCopyResponse": {
             "type": "object",
             "properties": {
@@ -6044,75 +4331,7 @@ var doc = `{
                 },
                 "oldAuthorityId": {
                     "description": "旧角色ID",
-                    "type": "integer"
-                }
-            }
-        },
-        "response.SysAuthorityResponse": {
-            "type": "object",
-            "properties": {
-                "authority": {
-                    "$ref": "#/definitions/system.SysAuthority"
-                }
-            }
-        },
-        "response.SysBaseMenuResponse": {
-            "type": "object",
-            "properties": {
-                "menu": {
-                    "$ref": "#/definitions/system.SysBaseMenu"
-                }
-            }
-        },
-        "response.SysBaseMenusResponse": {
-            "type": "object",
-            "properties": {
-                "menus": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/system.SysBaseMenu"
-                    }
-                }
-            }
-        },
-        "response.SysCaptchaResponse": {
-            "type": "object",
-            "properties": {
-                "captchaId": {
                     "type": "string"
-                },
-                "captchaLength": {
-                    "type": "integer"
-                },
-                "picPath": {
-                    "type": "string"
-                }
-            }
-        },
-        "response.SysConfigResponse": {
-            "type": "object",
-            "properties": {
-                "config": {
-                    "$ref": "#/definitions/config.Server"
-                }
-            }
-        },
-        "response.SysMenusResponse": {
-            "type": "object",
-            "properties": {
-                "menus": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/system.SysMenu"
-                    }
-                }
-            }
-        },
-        "response.SysUserResponse": {
-            "type": "object",
-            "properties": {
-                "user": {
-                    "$ref": "#/definitions/system.SysUser"
                 }
             }
         },
@@ -6125,10 +4344,6 @@ var doc = `{
                 },
                 "autoCreateApiToSql": {
                     "description": "是否自动创建api",
-                    "type": "boolean"
-                },
-                "autoCreateResource": {
-                    "description": "是否自动创建资源标识",
                     "type": "boolean"
                 },
                 "autoMoveFile": {
@@ -6145,14 +4360,8 @@ var doc = `{
                         "$ref": "#/definitions/system.Field"
                     }
                 },
-                "hasTimer": {
-                    "type": "boolean"
-                },
                 "humpPackageName": {
                     "description": "go文件名称",
-                    "type": "string"
-                },
-                "package": {
                     "type": "string"
                 },
                 "packageName": {
@@ -6172,10 +4381,6 @@ var doc = `{
         "system.Field": {
             "type": "object",
             "properties": {
-                "clearable": {
-                    "description": "是否可清空",
-                    "type": "boolean"
-                },
                 "columnName": {
                     "description": "数据库字段",
                     "type": "string"
@@ -6184,16 +4389,16 @@ var doc = `{
                     "description": "数据库字段描述",
                     "type": "string"
                 },
+                "dataType": {
+                    "description": "数据库字段类型",
+                    "type": "string"
+                },
                 "dataTypeLong": {
                     "description": "数据库字段长度",
                     "type": "string"
                 },
                 "dictType": {
                     "description": "字典",
-                    "type": "string"
-                },
-                "errorText": {
-                    "description": "校验失败文字",
                     "type": "string"
                 },
                 "fieldDesc": {
@@ -6215,10 +4420,6 @@ var doc = `{
                 "fieldType": {
                     "description": "Field数据类型",
                     "type": "string"
-                },
-                "require": {
-                    "description": "是否必填",
-                    "type": "boolean"
                 }
             }
         },
@@ -6260,7 +4461,7 @@ var doc = `{
             "properties": {
                 "authorityId": {
                     "description": "角色ID",
-                    "type": "integer"
+                    "type": "string"
                 },
                 "authorityName": {
                     "description": "角色名",
@@ -6297,32 +4498,6 @@ var doc = `{
                 },
                 "parentId": {
                     "description": "父角色ID",
-                    "type": "integer"
-                },
-                "updatedAt": {
-                    "description": "更新时间",
-                    "type": "string"
-                }
-            }
-        },
-        "system.SysAutoCode": {
-            "type": "object",
-            "properties": {
-                "createdAt": {
-                    "description": "创建时间",
-                    "type": "string"
-                },
-                "desc": {
-                    "type": "string"
-                },
-                "id": {
-                    "description": "主键ID",
-                    "type": "integer"
-                },
-                "label": {
-                    "type": "string"
-                },
-                "packageName": {
                     "type": "string"
                 },
                 "updatedAt": {
@@ -6378,12 +4553,6 @@ var doc = `{
                     "description": "是否缓存",
                     "type": "boolean"
                 },
-                "menuBtn": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/system.SysBaseMenuBtn"
-                    }
-                },
                 "name": {
                     "description": "路由name",
                     "type": "string"
@@ -6409,32 +4578,6 @@ var doc = `{
                 "title": {
                     "description": "菜单名",
                     "type": "string"
-                },
-                "updatedAt": {
-                    "description": "更新时间",
-                    "type": "string"
-                }
-            }
-        },
-        "system.SysBaseMenuBtn": {
-            "type": "object",
-            "properties": {
-                "createdAt": {
-                    "description": "创建时间",
-                    "type": "string"
-                },
-                "desc": {
-                    "type": "string"
-                },
-                "id": {
-                    "description": "主键ID",
-                    "type": "integer"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "sysBaseMenuID": {
-                    "type": "integer"
                 },
                 "updatedAt": {
                     "description": "更新时间",
@@ -6550,100 +4693,6 @@ var doc = `{
                 }
             }
         },
-        "system.SysMenu": {
-            "type": "object",
-            "properties": {
-                "authoritys": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/system.SysAuthority"
-                    }
-                },
-                "btns": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "integer"
-                    }
-                },
-                "children": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/system.SysMenu"
-                    }
-                },
-                "closeTab": {
-                    "description": "自动关闭tab",
-                    "type": "boolean"
-                },
-                "component": {
-                    "description": "对应前端文件路径",
-                    "type": "string"
-                },
-                "createdAt": {
-                    "description": "创建时间",
-                    "type": "string"
-                },
-                "defaultMenu": {
-                    "description": "是否是基础路由（开发中）",
-                    "type": "boolean"
-                },
-                "hidden": {
-                    "description": "是否在列表隐藏",
-                    "type": "boolean"
-                },
-                "icon": {
-                    "description": "菜单图标",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "主键ID",
-                    "type": "integer"
-                },
-                "keepAlive": {
-                    "description": "是否缓存",
-                    "type": "boolean"
-                },
-                "menuBtn": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/system.SysBaseMenuBtn"
-                    }
-                },
-                "menuId": {
-                    "type": "string"
-                },
-                "name": {
-                    "description": "路由name",
-                    "type": "string"
-                },
-                "parameters": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/system.SysBaseMenuParameter"
-                    }
-                },
-                "parentId": {
-                    "description": "父菜单ID",
-                    "type": "string"
-                },
-                "path": {
-                    "description": "路由path",
-                    "type": "string"
-                },
-                "sort": {
-                    "description": "排序标记",
-                    "type": "integer"
-                },
-                "title": {
-                    "description": "菜单名",
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "description": "更新时间",
-                    "type": "string"
-                }
-            }
-        },
         "system.SysOperationRecord": {
             "type": "object",
             "properties": {
@@ -6722,7 +4771,7 @@ var doc = `{
                 },
                 "authorityId": {
                     "description": "用户角色ID",
-                    "type": "integer"
+                    "type": "string"
                 },
                 "baseColor": {
                     "description": "基础颜色",
@@ -6731,14 +4780,6 @@ var doc = `{
                 "createdAt": {
                     "description": "创建时间",
                     "type": "string"
-                },
-                "email": {
-                    "description": "用户邮箱",
-                    "type": "string"
-                },
-                "enable": {
-                    "description": "用户是否被冻结 1正常 2冻结",
-                    "type": "integer"
                 },
                 "headerImg": {
                     "description": "用户头像",
@@ -6750,10 +4791,6 @@ var doc = `{
                 },
                 "nickName": {
                     "description": "用户昵称",
-                    "type": "string"
-                },
-                "phone": {
-                    "description": "用户手机号",
                     "type": "string"
                 },
                 "sideMode": {

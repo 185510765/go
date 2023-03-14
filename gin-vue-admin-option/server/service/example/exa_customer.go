@@ -47,9 +47,9 @@ func (exa *CustomerService) UpdateExaCustomer(e *example.ExaCustomer) (err error
 //@function: GetExaCustomer
 //@description: 获取客户信息
 //@param: id uint
-//@return: customer model.ExaCustomer, err error
+//@return: err error, customer model.ExaCustomer
 
-func (exa *CustomerService) GetExaCustomer(id uint) (customer example.ExaCustomer, err error) {
+func (exa *CustomerService) GetExaCustomer(id uint) (err error, customer example.ExaCustomer) {
 	err = global.GVA_DB.Where("id = ?", id).First(&customer).Error
 	return
 }
@@ -58,28 +58,28 @@ func (exa *CustomerService) GetExaCustomer(id uint) (customer example.ExaCustome
 //@function: GetCustomerInfoList
 //@description: 分页获取客户列表
 //@param: sysUserAuthorityID string, info request.PageInfo
-//@return: list interface{}, total int64, err error
+//@return: err error, list interface{}, total int64
 
-func (exa *CustomerService) GetCustomerInfoList(sysUserAuthorityID uint, info request.PageInfo) (list interface{}, total int64, err error) {
+func (exa *CustomerService) GetCustomerInfoList(sysUserAuthorityID string, info request.PageInfo) (err error, list interface{}, total int64) {
 	limit := info.PageSize
 	offset := info.PageSize * (info.Page - 1)
 	db := global.GVA_DB.Model(&example.ExaCustomer{})
 	var a system.SysAuthority
 	a.AuthorityId = sysUserAuthorityID
-	auth, err := systemService.AuthorityServiceApp.GetAuthorityInfo(a)
+	err, auth := systemService.AuthorityServiceApp.GetAuthorityInfo(a)
 	if err != nil {
 		return
 	}
-	var dataId []uint
+	var dataId []string
 	for _, v := range auth.DataAuthorityId {
 		dataId = append(dataId, v.AuthorityId)
 	}
 	var CustomerList []example.ExaCustomer
 	err = db.Where("sys_user_authority_id in ?", dataId).Count(&total).Error
 	if err != nil {
-		return CustomerList, total, err
+		return err, CustomerList, total
 	} else {
 		err = db.Limit(limit).Offset(offset).Preload("SysUser").Where("sys_user_authority_id in ?", dataId).Find(&CustomerList).Error
 	}
-	return CustomerList, total, err
+	return err, CustomerList, total
 }

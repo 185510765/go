@@ -5,13 +5,15 @@
 </template>
 
 <script>
+var path = import.meta.env.VITE_BASE_PATH
+var port = import.meta.env.VITE_SERVER_PORT
 export default {
-  name: 'FormGenerator'
+  name: 'FormGenerator',
+  data() {
+    return {
+      basePath: path,
+      basePort: port
+    }
+  }
 }
-</script>
-
-<script setup>
-import { ref } from 'vue'
-const basePath = ref(import.meta.env.VITE_BASE_PATH)
-const basePort = ref(import.meta.env.VITE_SERVER_PORT)
 </script>

@@ -23,14 +23,14 @@ func (e *FileUploadAndDownloadService) Upload(file example.ExaFileUploadAndDownl
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: FindFile
-//@description: 查询文件记录
+//@description: 删除文件切片记录
 //@param: id uint
-//@return: model.ExaFileUploadAndDownload, error
+//@return: error, model.ExaFileUploadAndDownload
 
-func (e *FileUploadAndDownloadService) FindFile(id uint) (example.ExaFileUploadAndDownload, error) {
+func (e *FileUploadAndDownloadService) FindFile(id uint) (error, example.ExaFileUploadAndDownload) {
 	var file example.ExaFileUploadAndDownload
 	err := global.GVA_DB.Where("id = ?", id).First(&file).Error
-	return file, err
+	return err, file
 }
 
 //@author: [piexlmax](https://github.com/piexlmax)
@@ -41,7 +41,7 @@ func (e *FileUploadAndDownloadService) FindFile(id uint) (example.ExaFileUploadA
 
 func (e *FileUploadAndDownloadService) DeleteFile(file example.ExaFileUploadAndDownload) (err error) {
 	var fileFromDb example.ExaFileUploadAndDownload
-	fileFromDb, err = e.FindFile(file.ID)
+	err, fileFromDb = e.FindFile(file.ID)
 	if err != nil {
 		return
 	}
@@ -53,42 +53,32 @@ func (e *FileUploadAndDownloadService) DeleteFile(file example.ExaFileUploadAndD
 	return err
 }
 
-// EditFileName 编辑文件名或者备注
-func (e *FileUploadAndDownloadService) EditFileName(file example.ExaFileUploadAndDownload) (err error) {
-	var fileFromDb example.ExaFileUploadAndDownload
-	return global.GVA_DB.Where("id = ?", file.ID).First(&fileFromDb).Update("name", file.Name).Error
-}
-
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: GetFileRecordInfoList
 //@description: 分页获取数据
 //@param: info request.PageInfo
-//@return: list interface{}, total int64, err error
+//@return: err error, list interface{}, total int64
 
-func (e *FileUploadAndDownloadService) GetFileRecordInfoList(info request.PageInfo) (list interface{}, total int64, err error) {
+func (e *FileUploadAndDownloadService) GetFileRecordInfoList(info request.PageInfo) (err error, list interface{}, total int64) {
 	limit := info.PageSize
 	offset := info.PageSize * (info.Page - 1)
-	keyword := info.Keyword
 	db := global.GVA_DB.Model(&example.ExaFileUploadAndDownload{})
 	var fileLists []example.ExaFileUploadAndDownload
-	if len(keyword) > 0 {
-		db = db.Where("name LIKE ?", "%"+keyword+"%")
-	}
 	err = db.Count(&total).Error
 	if err != nil {
 		return
 	}
 	err = db.Limit(limit).Offset(offset).Order("updated_at desc").Find(&fileLists).Error
-	return fileLists, total, err
+	return err, fileLists, total
 }
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: UploadFile
 //@description: 根据配置文件判断是文件上传到本地或者七牛云
 //@param: header *multipart.FileHeader, noSave string
-//@return: file model.ExaFileUploadAndDownload, err error
+//@return: err error, file model.ExaFileUploadAndDownload
 
-func (e *FileUploadAndDownloadService) UploadFile(header *multipart.FileHeader, noSave string) (file example.ExaFileUploadAndDownload, err error) {
+func (e *FileUploadAndDownloadService) UploadFile(header *multipart.FileHeader, noSave string) (err error, file example.ExaFileUploadAndDownload) {
 	oss := upload.NewOss()
 	filePath, key, uploadErr := oss.UploadFile(header)
 	if uploadErr != nil {
@@ -102,7 +92,7 @@ func (e *FileUploadAndDownloadService) UploadFile(header *multipart.FileHeader, 
 			Tag:  s[len(s)-1],
 			Key:  key,
 		}
-		return f, e.Upload(f)
+		return e.Upload(f), f
 	}
 	return
 }

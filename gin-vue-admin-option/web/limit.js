@@ -7,7 +7,7 @@ fs.readdir(wfPath, (err, files) => {
   if (err) {
     console.log(err)
   } else {
-    if (files.length !== 0) {
+    if (files.length != 0) {
       files.forEach((item) => {
         if (item.split('.')[1] === 'cmd') {
           replaceStr(`${wfPath}/${item}`, /"%_prog%"/, '%_prog%')

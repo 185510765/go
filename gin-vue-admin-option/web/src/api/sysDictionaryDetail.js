@@ -1,4 +1,5 @@
 import service from '@/utils/request'
+
 // @Tags SysDictionaryDetail
 // @Summary 创建SysDictionaryDetail
 // @Security ApiKeyAuth
