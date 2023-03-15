@@ -7,5 +7,7 @@
 			"path": "web"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"editor.formatOnSave": true, // 保存时格式化代码
+	}
 }
