@@ -207,8 +207,17 @@ func pong(c *gin.Context) {
 }
 
 func loginEndpoint(c *gin.Context) {
-	c.JSON(http.StatusOK, map[string]string{
-		"msg": "loginEndpoint",
+	// // 定义一个包含多个元素的数组
+	// items := []string{"item1", "item2", "item3"}
+
+	// // 使用 c.JSON 返回数组
+	// c.JSON(http.StatusOK, gin.H{"items": items})
+
+	c.JSON(http.StatusOK, gin.H{
+		"code": 200,
+		"msg":  "loginEndpoint",
+		// "data": map[string]interface{}{},
+		"data": []string{},
 	})
 }
 func submitEndpoint(c *gin.Context) {
