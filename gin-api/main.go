@@ -1,11 +1,17 @@
 package main
 
 import (
-	"fmt"
+	config "gin-api/config"
+	routes "gin-api/routes"
 )
 
 func main() {
+	// config设置
+	config.Log()
+	config.App()
+	config.Database()
 
-	fmt.Println("成功了")
+	// 路由
+	routes.Web()
 
 }
