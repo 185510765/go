@@ -1,0 +1,11 @@
+.header {
+    height: 60px;
+    line-height: 60px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+    background: #fff;
+}
+
+.header-center {
+    width: 90%;
+    margin: 0 auto;
+}

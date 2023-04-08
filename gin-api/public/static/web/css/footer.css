@@ -1,0 +1,10 @@
+.footer {
+    margin-top: 50px;
+    height: 120px;
+    background: #333333;
+}
+
+.footer-center {
+    width: 90%;
+    margin: 0 auto;
+}

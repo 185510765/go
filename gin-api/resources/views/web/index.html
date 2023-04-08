@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+
+    <!-- meta -->
+    {{ template "meta" }}
+
+    <link rel="stylesheet" href="./public/static/web/css/index.css">
+    <script src="./public/static/web/js/index.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 头部 -->
+        {{ template "header" }}
+
+        <div class="container">
+            <div class="container-center">
+                <el-row :gutter="20">
+                    <el-col :span="4" v-for="(item, index) in cardList" :key="index">
+                        <el-card shadow="hover" class="card-item" @click="toPage(item.toPageUrl)">
+                            <img :src="item.imgUrl" class="card-item-img">
+                            <p class="card-item-title">${ item.title }</p>
+                            <p class="card-item-free">免费</p>
+                        </el-card>
+                    </el-col>
+
+                    <!-- <el-col :span="4">
+                        <el-card shadow="hover" class="card-item" @click="toPage()">
+                            <img src="./public/static/web/img/barcode.jpg" class="card-item-img">
+                            <p class="card-item-title">查询</p>
+                            <p class="card-item-free">免费</p>
+                        </el-card>
+                    </el-col>
+                    <el-col :span="4">
+                        <el-card shadow="hover" class="card-item"> Hover </el-card>
+                    </el-col> -->
+
+                </el-row>
+            </div>
+        </div>
+
+        <!-- 尾部 -->
+        {{ template "footer" }}
+    </div>
+    </div>
+</body>
+
+<script>
+    const { createApp } = Vue;
+    const config = {
+        locale: ElementPlusLocaleZhCn,
+        autoInsertSpace: true,
+        size: "default",
+    };
+
+    const app = {
+        delimiters: ["${", "}"],
+        data() {
+            return {
+                cardList: [
+                    { toPageUrl: 'barcode', imgUrl: './public/static/web/img/barcode.jpg', title: '查询' }
+                ],
+            };
+        },
+        mounted() {
+            this.init();
+        },
+        methods: {
+            init() { },
+
+            toPage(toPageUrl) {
+                // console.log(toPageUrl);
+                window.location.href = toPageUrl;
+            },
+        },
+    };
+    Vue.createApp(app).use(ElementPlus, config).mount("#app");
+</script>
+
+</html>

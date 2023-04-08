@@ -14,9 +14,13 @@ func Pong(c *gin.Context) {
 
 // 主页
 func Index(c *gin.Context) {
-	c.HTML(http.StatusOK, "index.gohtml", gin.H{
-		"code": http.StatusOK,
+	c.HTML(http.StatusOK, "index.html", gin.H{
+		// "code": http.StatusOK,
 		// "msg":  "<p>该项目是gin框架的学习笔记</p>",
-		"msg": "2023-02-3",
 	})
+}
+
+// 条形码查询页面
+func Barcode(c *gin.Context) {
+	c.HTML(http.StatusOK, "barcode.html", gin.H{})
 }

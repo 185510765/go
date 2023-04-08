@@ -1,44 +1,44 @@
 #app {
-    background: #fff;
+    background: #F6F6F6;
 }
 
-.header {
-    height: 60px;
-    line-height: 60px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, .2);
-}
 
-.header-center {
-    width: 90%;
-    margin: 0 auto;
-}
 
 .container {
-    background: #F0F2F5;
+    /* background: #F6F6F6; */
 }
 
 .container-center {
-    min-height: 800px;
+    background: #fff;
+    min-height: 700px;
     width: 90%;
     min-width: 1440px;
     margin: 0 auto;
     padding: 20px;
     border-radius: 4px;
     box-sizing: border-box;
-    background: #fff;
-    cursor: pointer;
-    position: relative;
-    top: 15px;
+    margin-top: 15px;
     text-align: center;
 }
 
 .card-item {
-    height: 240px;
+    height: 220px;
+    cursor: pointer;
+    margin-bottom: 20px;
 }
 
-.footer {
-    width: 90%;
-    height: 60px;
-    line-height: 60px;
-    margin: 0 auto;
+.card-item-img {
+    width: 100px;
+    height: 100px;
+}
+
+.card-item-title {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.card-item-free {
+    margin-top: 15px;
+    font-size: 20px;
+    color: #29c287;
 }
