@@ -14,13 +14,36 @@ func Pong(c *gin.Context) {
 
 // 主页
 func Index(c *gin.Context) {
-	c.HTML(http.StatusOK, "index.html", gin.H{
-		// "code": http.StatusOK,
-		// "msg":  "<p>该项目是gin框架的学习笔记</p>",
+	c.HTML(http.StatusOK, "index.html", gin.H{})
+}
+
+// api列表页面
+func ApiList(c *gin.Context) {
+	c.HTML(http.StatusOK, "api_list.html", gin.H{})
+}
+
+// api查询页面
+func Search(c *gin.Context) {
+	id := c.Param("id")
+
+	c.HTML(http.StatusOK, "search.html", gin.H{
+		"id":    id,
+		"title": "",
 	})
 }
 
-// 条形码查询页面
-func Barcode(c *gin.Context) {
-	c.HTML(http.StatusOK, "barcode.html", gin.H{})
+// api文档页面
+func Doc(c *gin.Context) {
+	id := c.Param("id")
+
+	c.HTML(http.StatusOK, "doc.html", gin.H{
+		"id":    id,
+		"title": "",
+	})
+}
+
+// *****************************************************************************************
+// 查询api列表数据
+func getApiList() {
+
 }

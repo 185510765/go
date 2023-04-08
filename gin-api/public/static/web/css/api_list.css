@@ -1,0 +1,44 @@
+#app {
+    background: #F6F6F6;
+}
+
+
+
+.container {
+    /* background: #F6F6F6; */
+}
+
+.container-center {
+    background: #fff;
+    min-height: 700px;
+    width: 90%;
+    min-width: 1440px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.card-item {
+    height: 220px;
+    /* cursor: pointer; */
+    margin-bottom: 20px;
+}
+
+.card-item-img {
+    width: 100px;
+    height: 100px;
+}
+
+.card-item-title {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.card-item-free {
+    margin-top: 15px;
+    font-size: 18px;
+    color: #29c287;
+}

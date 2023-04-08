@@ -5,18 +5,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>首页</title>
+    <title>Api文档</title>
 
     <!-- meta -->
     {{ template "meta" }}
 
-    <link rel="stylesheet" href="./public/static/web/css/index.css">
-    <script src="./public/static/web/js/index.js"></script>
+    <link rel="stylesheet" href="/public/static/web/css/doc.css">
+    <script src="/public/static/web/js/doc.js"></script>
 </head>
 
 <body>
     <div id="app">
-        主页
+        <!-- 头部 -->
+        {{ template "header" }}
+
+        {{ .id }}
+        Api文档
+
+        <!-- 尾部 -->
+        {{ template "footer" }}
     </div>
 </body>
 
@@ -36,10 +43,9 @@
             };
         },
         mounted() {
-            this.init();
         },
         methods: {
-            init() { },
+
         },
     };
     Vue.createApp(app).use(ElementPlus, config).mount("#app");

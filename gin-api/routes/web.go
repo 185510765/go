@@ -31,7 +31,14 @@ func Web() {
 	// 路由
 	router.GET("/ping", web.Pong)
 	router.GET("/index", web.Index)
-	router.GET("/barcode", web.Barcode)
+
+	// api列表
+	api_list := router.Group("/api_list")
+	{
+		api_list.GET("", web.ApiList)
+		api_list.GET("/search/:id", web.Search)
+		api_list.GET("/doc/:id", web.Doc)
+	}
 
 	router.Run("127.0.0.1:8080")
 }
