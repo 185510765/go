@@ -1,9 +1,11 @@
-package web
+package controller_web
 
 import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+
+	. "gin-api/app/services/web"
 )
 
 func Pong(c *gin.Context) {
@@ -19,7 +21,11 @@ func Index(c *gin.Context) {
 
 // api列表页面
 func ApiList(c *gin.Context) {
-	c.HTML(http.StatusOK, "api_list.html", gin.H{})
+	list := GetApiList()
+
+	c.HTML(http.StatusOK, "api_list.html", gin.H{
+		"list": list,
+	})
 }
 
 // api查询页面
@@ -40,10 +46,4 @@ func Doc(c *gin.Context) {
 		"id":    id,
 		"title": "",
 	})
-}
-
-// *****************************************************************************************
-// 查询api列表数据
-func getApiList() {
-
 }
