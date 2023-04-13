@@ -3,23 +3,25 @@ package model_web
 import (
 	"time"
 
+	. "gin-api/app/common/common"
+
 	"gorm.io/gorm"
 )
 
 type Model struct {
-	Id        uint `json:"id" gorm:"primary_key"`
+	Id        int `json:"id" gorm:"primary_key"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	DeletedAt gorm.DeletedAt `gorm:"index"`
 }
 
 type List struct {
-	Id        uint      `json:"id" gorm:"primary_key"`
-	Name      string    `json:"name" gorm:"name"`
-	Img       string    `json:"img" gorm:"img"`
-	Sort      int       `json:"sort" gorm:"sort"`
-	IsShow    int       `json:"is_show" gorm:"is_show"`
-	CreatedAt time.Time `json:"created_at" gorm:"created_at"`
-	UpdatedAt time.Time `json:"updated_at" gorm:"updated_at"`
-	DeletedAt time.Time `json:"deleted_at" gorm:"deleted_at"`
+	Id        int        `json:"id" gorm:"primary_key"`
+	Name      string     `json:"name" gorm:"name"`
+	Img       string     `json:"img" gorm:"img"`
+	Sort      int        `json:"sort" gorm:"sort"`
+	IsShow    int        `json:"is_show" gorm:"is_show"`
+	CreatedAt *LocalTime `json:"created_at" gorm:"created_at"`
+	UpdatedAt *LocalTime `json:"updated_at" gorm:"updated_at"`
+	DeletedAt *LocalTime `json:"deleted_at" gorm:"deleted_at"`
 }

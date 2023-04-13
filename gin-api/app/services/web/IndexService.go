@@ -16,3 +16,13 @@ func GetApiList() interface{} {
 
 	return list
 }
+
+// 获取一条list数据
+func GetOneList(id int) interface{} {
+	info := List{Id: id}
+	db.DB.First(&info)
+
+	info.Img = "/public/static/web/img/" + info.Img
+
+	return info
+}

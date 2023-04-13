@@ -32,13 +32,18 @@ func Web() {
 	router.GET("/ping", Pong)
 	router.GET("/index", Index)
 
-	// api列表
+	// api列表 页面
 	api_list := router.Group("/api_list")
 	{
 		api_list.GET("", ApiList)
 		api_list.GET("/search/:id", Search)
 		api_list.GET("/doc/:id", Doc)
 	}
+
+	// operate := router.Group("/operate")
+	// {
+	// 	operate.GET("/getSearchInfo", GetSearchInfo)
+	// }
 
 	router.Run("127.0.0.1:8080")
 }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>查询</title>
+    <title>查询-{{ .info.Name }}</title>
 
     <!-- meta -->
     {{ template "meta" }}
@@ -19,8 +19,15 @@
         <!-- 头部 -->
         {{ template "header" }}
 
-        {{ .id }}
-        查询
+        <div class="container">
+            <div class="container-center">
+                <form ref="searchBox" class="search-box" action="/api_list/search/{{ .info.Id }}" method="get">
+                    <el-input v-model="searchInput" name="searchInput" placeholder="请输入商品条码" class="search-input"
+                        clearable size="large"></el-input>
+                    <el-button type="primary" class="search-btn" @click="searchBtn()">搜 索</el-button>
+                </form>
+            </div>
+        </div>
 
         <!-- 尾部 -->
         {{ template "footer" }}
@@ -29,26 +36,35 @@
 
 <script>
     const { createApp } = Vue;
-    const config = {
-        locale: ElementPlusLocaleZhCn,
-        autoInsertSpace: true,
-        size: "default",
-    };
+    const { ElMessage } = ElementPlus;
+    // const config = {
+    //     locale: ElementPlusLocaleZhCn,
+    //     autoInsertSpace: true,
+    //     size: "default",
+    // };
 
     const app = {
         delimiters: ["${", "}"],
         data() {
             return {
-
+                searchInput: '',
             };
         },
         mounted() {
         },
         methods: {
+            searchBtn() {
+                if (this.searchInput == '' || this.searchInput == null) {
+                    ElMessage.error('请输入商品条码');
+                    return false;
+                }
 
+                var searchBox = this.$refs['searchBox'];
+                searchBox.submit();
+            },
         },
     };
-    Vue.createApp(app).use(ElementPlus, config).mount("#app");
+    Vue.createApp(app).use(ElementPlus, { locale: ElementPlusLocaleZhCn, autoInsertSpace: true, size: "default" }).mount("#app");
 </script>
 
 </html>
