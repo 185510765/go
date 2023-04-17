@@ -13,14 +13,6 @@ import (
 	"unicode/utf8"
 )
 
-// 时间格式化
-type LocalTime time.Time
-
-func (t *LocalTime) MarshalJSON() ([]byte, error) {
-	tTime := time.Time(*t)
-	return []byte(fmt.Sprintf("\"%v\"", tTime.Format("2006-01-02 15:04:05"))), nil
-}
-
 // 获取本周一时间戳
 func GetFirstDateOfWeekTS() (ts int64) {
 	now := time.Now()

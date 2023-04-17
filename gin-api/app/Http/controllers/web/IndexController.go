@@ -33,15 +33,37 @@ func ApiList(c *gin.Context) {
 func Search(c *gin.Context) {
 	id := c.Param("id")
 	int_id, _ := strconv.Atoi(id)
-	info := GetOneList(int_id)
+	info, tips := GetOneList(int_id)
 
-	// 查询限制（根据ip），限制查询频率（5秒）、一天中总的查询次数（100次）
-	// ip := c.ClientIP()
+	searchInput := c.Query("searchInput")
+	if searchInput == "" {
+		c.HTML(http.StatusOK, "search.html", gin.H{
+			"info":   info,
+			"status": 0,
+			"msg":    tips + "不能为空",
+		})
+		return
+	}
 
-	// searchInput := c.Query("searchInput")
+	// 查询限制（根据ip），限制查询频率（5秒）、24小时总的查询次数（100次）
+	ip := c.ClientIP()
+	var keySuffix string = id + ":" + ip
+	status, msg := ValidateSearch(c, searchInput, keySuffix)
+	if status == 0 {
+		c.HTML(http.StatusOK, "search.html", gin.H{
+			"info":   info,
+			"status": 0,
+			"msg":    msg,
+		})
+		return
+	}
+
+	// 查询接口数据
 
 	c.HTML(http.StatusOK, "search.html", gin.H{
-		"info": info,
+		"info":   info,
+		"status": status,
+		"msg":    msg,
 	})
 }
 
@@ -49,10 +71,11 @@ func Search(c *gin.Context) {
 func Doc(c *gin.Context) {
 	id := c.Param("id")
 	int_id, _ := strconv.Atoi(id)
-	info := GetOneList(int_id)
+	info, tips := GetOneList(int_id)
 
 	c.HTML(http.StatusOK, "doc.html", gin.H{
 		"info": info,
+		"tips": tips,
 	})
 }
 

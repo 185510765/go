@@ -22,10 +22,14 @@
         <div class="container">
             <div class="container-center">
                 <form ref="searchBox" class="search-box" action="/api_list/search/{{ .info.Id }}" method="get">
-                    <el-input v-model="searchInput" name="searchInput" placeholder="请输入商品条码" class="search-input"
-                        clearable size="large"></el-input>
+                    <el-input v-model="searchInput" name="searchInput" placeholder="请输入{{ .info.SearchInput }}"
+                        class="search-input" clearable size="large"></el-input>
                     <el-button type="primary" class="search-btn" @click="searchBtn()">搜 索</el-button>
                 </form>
+
+                {{ .info }} <br>
+                {{ .status }} <br>
+                {{ .msg }}
             </div>
         </div>
 
