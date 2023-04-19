@@ -45,7 +45,7 @@ func Search(c *gin.Context) {
 		return
 	}
 
-	// 查询限制（根据ip），限制查询频率（5秒）、24小时总的查询次数（100次）
+	// 查询限制（根据ip），限制查询频率（5秒）、24小时总的查询次数（100次），每个类型限制时间不共用
 	ip := c.ClientIP()
 	var keySuffix string = id + ":" + ip
 	status, msg := ValidateSearch(c, searchInput, keySuffix)
@@ -58,7 +58,8 @@ func Search(c *gin.Context) {
 		return
 	}
 
-	// 查询接口数据
+	// 查询操作
+	QueryData(int_id, searchInput)
 
 	c.HTML(http.StatusOK, "search.html", gin.H{
 		"info":   info,

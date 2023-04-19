@@ -1,6 +1,7 @@
 package service_web
 
 import (
+	"fmt"
 	"gin-api/app/common/cache"
 	db "gin-api/app/common/db"
 	. "gin-api/app/models/web"
@@ -64,5 +65,34 @@ func ValidateSearch(c *gin.Context, searchInput string, keySuffix string) (int, 
 	return 1, ""
 }
 
-// 查询数据操作
-// func
+/*
+  - 查询接口操作
+    先根据id类型查询不同的接口，然后再对比本地数据库数据
+    本地如果没有则添加，如果有则判断有变动则修改。
+  - @param {int} id
+  - @return {*}
+*/
+func QueryData(id int, searchInput string) interface{} {
+	switch id {
+	case 1: // 商品条形码
+		return QueryBarCode(searchInput)
+	case 2: // IP信息查询
+		fmt.Println(2)
+	case 3: // 全国天气查询
+		fmt.Println(3)
+	default:
+		fmt.Println("default")
+	}
+
+	return map[string]interface{}{}
+}
+
+// IP信息查询
+func QueryIp(searchInput string) {
+
+}
+
+// 全国天气查询
+func QueryWeather(searchInput string) {
+
+}

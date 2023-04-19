@@ -5,12 +5,15 @@ import (
 	"crypto/md5"
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"net/http"
 	"net/url"
 	"strconv"
 	"strings"
 	"time"
 	"unicode/utf8"
+
+	"github.com/gogf/gf/util/gconv"
 )
 
 // 获取本周一时间戳
@@ -149,4 +152,33 @@ func HttpGet(iUrl string, params map[string]string) ([]byte, error) {
 	}
 
 	return res, nil
+}
+
+// 类似php http_build_query
+func HttpBuildQuery(params map[string]interface{}, parentKey string) (param_str string) {
+	//fmt.Println("parentKey ", parentKey)
+	params_arr := make([]string, 0)
+	for k, v := range params {
+		if vals, ok := v.(map[string]interface{}); ok {
+			if parentKey != "" {
+				k = fmt.Sprintf("%s[%s]", parentKey, k)
+			}
+			params_arr = append(params_arr, HttpBuildQuery(vals, k))
+		} else {
+			if parentKey != "" {
+				params_arr = append(params_arr, fmt.Sprintf("%s[%s]=%s", parentKey, k, gconv.String(v)))
+			} else {
+				params_arr = append(params_arr, fmt.Sprintf("%s=%s", k, gconv.String(v)))
+			}
+		}
+	}
+	param_str = strings.Join(params_arr, "&")
+	return param_str
+}
+
+// 随机ip
+func GenIpaddr() string {
+	rand.Seed(time.Now().Unix())
+	ip := fmt.Sprintf("%d.%d.%d.%d", rand.Intn(255), rand.Intn(255), rand.Intn(255), rand.Intn(255))
+	return ip
 }
