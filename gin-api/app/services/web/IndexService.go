@@ -72,10 +72,10 @@ func ValidateSearch(c *gin.Context, searchInput string, keySuffix string) (int, 
   - @param {int} id
   - @return {*}
 */
-func QueryData(id int, searchInput string) interface{} {
+func QueryData(c *gin.Context, id int, searchInput string) interface{} {
 	switch id {
 	case 1: // 商品条形码
-		return QueryBarCode(searchInput)
+		return QueryBarCode(c, searchInput)
 	case 2: // IP信息查询
 		fmt.Println(2)
 	case 3: // 全国天气查询

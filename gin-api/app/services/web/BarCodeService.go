@@ -1,16 +1,17 @@
 package service_web
 
 import (
-	"encoding/json"
 	"fmt"
 	"gin-api/app/common/common"
-	"gin-api/app/common/db"
 	curl "gin-api/app/common/http"
-	. "gin-api/app/models/web"
+
+	// . "gin-api/app/models/web"
+
+	"github.com/gin-gonic/gin"
 )
 
 // 查询商品条形码
-func QueryBarCode(searchInput string) interface{} {
+func QueryBarCode(c *gin.Context, searchInput string) interface{} {
 	// 调用商品条形码接口
 	// m := make(map[string]interface{})
 	params := map[string]interface{}{
@@ -28,24 +29,39 @@ func QueryBarCode(searchInput string) interface{} {
 
 	url := "https://bff.gds.org.cn/gds/searching-api/ProductService/ProductListByGTIN?" + queryParams
 	jsonString, _ := curl.GetWithHeader(url, header)
-	jsonParse := make(map[string]interface{})
-	err := json.Unmarshal([]byte(jsonString), &jsonParse)
+
+	// ************************************************************
+
+	// fmt.Println(jsonString)
+
+	// barCodeForm := BarCode{}
+	err := c.BindJSON(&jsonString)
 	if err != nil {
-		return map[string]interface{}{}
-		// return make([]int, 0)
+		fmt.Println(err)
 	}
 
-	Code, CodeExist := jsonParse["Code"].(float64)
-	if Code != 1 || !CodeExist {
-		return map[string]interface{}{}
-	}
+	fmt.Println(jsonString)
 
-	// 查询数据
-	barCode := []BarCode{}
-	db.DB.Where("bar_code = ?", searchInput).Take(&barCode)
+	// ************************************************************
 
-	fmt.Println(jsonParse["Data"])
-	fmt.Println(barCode)
+	// jsonParse := make(map[string]interface{})
+	// err := json.Unmarshal([]byte(jsonString), &jsonParse)
+	// if err != nil {
+	// 	return map[string]interface{}{}
+	// 	// return make([]int, 0)
+	// }
+
+	// Code, CodeExist := jsonParse["Code"].(float64)
+	// if Code != 1 || !CodeExist {
+	// 	return map[string]interface{}{}
+	// }
+
+	// // 查询数据
+	// barCode := []BarCode{}
+	// db.DB.Where("bar_code = ?", searchInput).Take(&barCode)
+
+	// fmt.Println(jsonParse["Data"])
+	// fmt.Println(barCode)
 
 	return map[string]interface{}{}
 }
