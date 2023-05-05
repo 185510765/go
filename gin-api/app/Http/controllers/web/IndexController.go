@@ -59,7 +59,7 @@ func Search(c *gin.Context) {
 	}
 
 	// 查询操作
-	QueryData(c, int_id, searchInput)
+	QueryData(int_id, searchInput)
 
 	c.HTML(http.StatusOK, "search.html", gin.H{
 		"info":   info,

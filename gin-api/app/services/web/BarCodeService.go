@@ -3,15 +3,25 @@ package service_web
 import (
 	"fmt"
 	"gin-api/app/common/common"
+	db "gin-api/app/common/db"
 	curl "gin-api/app/common/http"
 
-	// . "gin-api/app/models/web"
+	. "gin-api/app/models/web"
 
-	"github.com/gin-gonic/gin"
+	"github.com/tidwall/gjson"
 )
 
-// 查询商品条形码
-func QueryBarCode(c *gin.Context, searchInput string) interface{} {
+/*
+  - 查询商品条形码
+    1、查询商品接口，如果有则使用此数据，没有则查询数据数据，数据库数据没有则返回空
+    2、接口有数据，数据库没有数据则插入，数据库有数据则对比数据是否一致，不一致则更新数据库数据
+    3、图片每次查询接口则下载，等比缩小，并同步到数据库
+    4、记录每个接口总的查询次数，每个用户总的查询次数，用户每个时段的查询次数。
+  - @param {*gin.Context} c
+  - @param {string} searchInput
+  - @return {*}
+*/
+func QueryBarCode(searchInput string) interface{} {
 	// 调用商品条形码接口
 	// m := make(map[string]interface{})
 	params := map[string]interface{}{
@@ -26,42 +36,26 @@ func QueryBarCode(c *gin.Context, searchInput string) interface{} {
 		"CLIENT-IP":       ip,
 		"X-FORWARDED-FOR": ip,
 	}
-
 	url := "https://bff.gds.org.cn/gds/searching-api/ProductService/ProductListByGTIN?" + queryParams
 	jsonString, _ := curl.GetWithHeader(url, header)
 
-	// ************************************************************
+	code := gjson.Get(jsonString, "Code")
+	// data := gjson.Get(jsonString, "Data")
+	items := gjson.Get(jsonString, "Data.Items").Array()
 
-	// fmt.Println(jsonString)
-
-	// barCodeForm := BarCode{}
-	err := c.BindJSON(&jsonString)
-	if err != nil {
-		fmt.Println(err)
+	var product interface{}
+	if code.Int() == 1 && len(items) > 0 {
+		product = items[0]
 	}
 
-	fmt.Println(jsonString)
+	// 查询接口为空则查询数据库
+	if product == nil {
+		product = []BarCode{}
+		db.DB.Where("bar_code = ?", searchInput).Take(&product)
+		fmt.Println(product)
+	}
 
-	// ************************************************************
-
-	// jsonParse := make(map[string]interface{})
-	// err := json.Unmarshal([]byte(jsonString), &jsonParse)
-	// if err != nil {
-	// 	return map[string]interface{}{}
-	// 	// return make([]int, 0)
-	// }
-
-	// Code, CodeExist := jsonParse["Code"].(float64)
-	// if Code != 1 || !CodeExist {
-	// 	return map[string]interface{}{}
-	// }
-
-	// // 查询数据
-	// barCode := []BarCode{}
-	// db.DB.Where("bar_code = ?", searchInput).Take(&barCode)
-
-	// fmt.Println(jsonParse["Data"])
-	// fmt.Println(barCode)
+	fmt.Println(product)
 
 	return map[string]interface{}{}
 }
