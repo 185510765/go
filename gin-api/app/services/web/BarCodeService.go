@@ -1,7 +1,6 @@
 package service_web
 
 import (
-	"encoding/json"
 	"fmt"
 	"gin-api/app/common/common"
 	db "gin-api/app/common/db"
@@ -27,42 +26,7 @@ func QueryBarCode(searchInput string) interface{} {
 	// 通过接口获取商品信息
 	product := getProductInfo(searchInput)
 
-	// 查询接口为空则查询数据库
-	result := make(map[string]interface{})
-	if product != nil {
-		productParse := make(map[string]interface{})
-		if err := json.Unmarshal([]byte(fmt.Sprint(product)), &productParse); err != nil {
-			return gin.H{}
-		}
-
-		result = map[string]interface{}{
-			"BarCode":   searchInput,
-			"Name":      productParse["description"],
-			"ShortName": productParse["keyword"],
-			"Image":     "",
-			"Price":     "",
-		}
-	} else {
-		barCode := BarCode{}
-		db.DB.Where("bar_code = ?", searchInput).First(&barCode)
-		fmt.Println(barCode)
-
-		result = gin.H{}
-	}
-
-	// if product == nil {
-	// 	// product = BarCode{BarCode: searchInput}
-	// 	// db.DB.First(&product)
-
-	// 	barCode := BarCode{}
-	// 	db.DB.Where("bar_code = ?", searchInput).First(&barCode)
-	// 	fmt.Println(barCode)
-	// }
-
-	fmt.Println(result)
-	fmt.Println(product)
-
-	return result
+	return product
 }
 
 // 通过接口获取商品信息

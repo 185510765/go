@@ -29,16 +29,17 @@ func GetOneList(id int) (interface{}, string) {
 	db.DB.First(&info)
 
 	info.Img = "/public/static/web/img/" + info.Img
-	// infoFormat, _ := json.Marshal(info)
-
-	// a, _ := info.CreatedAt.MarshalJSON()
-	// fmt.Println(string(a))
 
 	return info, info.SearchInput
 }
 
-// 校验查询 查询限制（根据ip），限制查询频率（5秒）、24小时总的查询次数（100次）
-func ValidateSearch(c *gin.Context, searchInput string, keySuffix string) (int, string) {
+// 查询校验 查询限制（根据ip），限制查询频率（5秒）、24小时总的查询次数（100次）
+func ValidateSearch(searchInput string, keySuffix string, tips string) (int, string) {
+	// 输入是否为空
+	if searchInput == "" {
+		return 0, tips + "不能为空"
+	}
+
 	// 24小时总查询次数
 	var numKey = "userIpNum:" + keySuffix
 	num, _ := cache.RedisClient.Get(numKey).Result()
@@ -51,7 +52,7 @@ func ValidateSearch(c *gin.Context, searchInput string, keySuffix string) (int, 
 	var timeKey = "userIpTime:" + keySuffix
 	res, _ := cache.RedisClient.SetNX(timeKey, 1, 5*time.Second).Result()
 	if !res {
-		return 0, "查询太过频繁"
+		return 0, "查询太过频繁，请稍后在试"
 	}
 
 	// 校验正常 可以正常查询 写入redis
@@ -84,7 +85,7 @@ func QueryData(id int, searchInput string) interface{} {
 		fmt.Println("default")
 	}
 
-	return map[string]interface{}{}
+	return gin.H{}
 }
 
 // IP信息查询

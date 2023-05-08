@@ -27,9 +27,10 @@
                     <el-button type="primary" class="search-btn" @click="searchBtn()">搜 索</el-button>
                 </form>
 
-                {{ .info }} <br>
                 {{ .status }} <br>
-                {{ .msg }}
+                {{ .msg }} <br>
+                {{ .searchRes.BarCode }}
+                {{ .searchRes.Name }}
             </div>
         </div>
 

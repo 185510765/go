@@ -36,19 +36,11 @@ func Search(c *gin.Context) {
 	info, tips := GetOneList(int_id)
 
 	searchInput := c.Query("searchInput")
-	if searchInput == "" {
-		c.HTML(http.StatusOK, "search.html", gin.H{
-			"info":   info,
-			"status": 0,
-			"msg":    tips + "不能为空",
-		})
-		return
-	}
 
-	// 查询限制（根据ip），限制查询频率（5秒）、24小时总的查询次数（100次），每个类型限制时间不共用
+	// 查询校验 查询限制（根据ip），限制查询频率（5秒）、24小时总的查询次数（100次），每个类型限制时间不共用
 	ip := c.ClientIP()
 	var keySuffix string = id + ":" + ip
-	status, msg := ValidateSearch(c, searchInput, keySuffix)
+	status, msg := ValidateSearch(searchInput, keySuffix, tips)
 	if status == 0 {
 		c.HTML(http.StatusOK, "search.html", gin.H{
 			"info":   info,
@@ -59,12 +51,13 @@ func Search(c *gin.Context) {
 	}
 
 	// 查询操作
-	QueryData(int_id, searchInput)
+	searchRes := QueryData(int_id, searchInput)
 
 	c.HTML(http.StatusOK, "search.html", gin.H{
-		"info":   info,
-		"status": status,
-		"msg":    msg,
+		"info":      info,
+		"status":    status,
+		"msg":       msg,
+		"searchRes": searchRes,
 	})
 }
 
