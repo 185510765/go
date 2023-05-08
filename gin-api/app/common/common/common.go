@@ -3,11 +3,13 @@ package common
 import (
 	"bytes"
 	"crypto/md5"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
 	"net/http"
 	"net/url"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -181,4 +183,108 @@ func GenIpaddr() string {
 	rand.Seed(time.Now().Unix())
 	ip := fmt.Sprintf("%d.%d.%d.%d", rand.Intn(255), rand.Intn(255), rand.Intn(255), rand.Intn(255))
 	return ip
+}
+
+// interface 转 string
+func GetInterfaceToString(value interface{}) string {
+	// interface 转 string
+	var key string
+	if value == nil {
+		return key
+	}
+
+	switch value.(type) {
+	case float64:
+		ft := value.(float64)
+		key = strconv.FormatFloat(ft, 'f', -1, 64)
+	case float32:
+		ft := value.(float32)
+		key = strconv.FormatFloat(float64(ft), 'f', -1, 64)
+	case int:
+		it := value.(int)
+		key = strconv.Itoa(it)
+	case uint:
+		it := value.(uint)
+		key = strconv.Itoa(int(it))
+	case int8:
+		it := value.(int8)
+		key = strconv.Itoa(int(it))
+	case uint8:
+		it := value.(uint8)
+		key = strconv.Itoa(int(it))
+	case int16:
+		it := value.(int16)
+		key = strconv.Itoa(int(it))
+	case uint16:
+		it := value.(uint16)
+		key = strconv.Itoa(int(it))
+	case int32:
+		it := value.(int32)
+		key = strconv.Itoa(int(it))
+	case uint32:
+		it := value.(uint32)
+		key = strconv.Itoa(int(it))
+	case int64:
+		it := value.(int64)
+		key = strconv.FormatInt(it, 10)
+	case uint64:
+		it := value.(uint64)
+		key = strconv.FormatUint(it, 10)
+	case string:
+		key = value.(string)
+	case time.Time:
+		t, _ := value.(time.Time)
+		key = t.String()
+		// 2022-11-23 11:29:07 +0800 CST  这类格式把尾巴去掉
+		key = strings.Replace(key, " +0800 CST", "", 1)
+		key = strings.Replace(key, " +0000 UTC", "", 1)
+	case []byte:
+		key = string(value.([]byte))
+	default:
+		newValue, _ := json.Marshal(value)
+		key = string(newValue)
+	}
+
+	return key
+}
+
+// 去除价格中的中文、斜杠/、钱符号
+func GetPrice(price string) string {
+	value := "0.00"
+
+	// 测试
+	price = "/¥1.5元"
+
+	if price != "" {
+		reg := regexp.MustCompile("[\u4e00-\u9fa5]") // 中文
+		result := reg.ReplaceAllString(price, "")
+		// fmt.Println(result)
+
+		reg1 := regexp.MustCompile("/")
+		result1 := reg1.ReplaceAllString(result, "")
+		// fmt.Println(result1)
+
+		reg2 := regexp.MustCompile("¥")
+		result2 := reg2.ReplaceAllString(result1, "")
+		// fmt.Println(result2)
+
+		value = result2
+	}
+
+	return value
+
+	// $value = '0.00';
+
+	// if (isset($price) && $price && $price != 'NULL') {
+	//     $price = preg_replace('/[\x{4e00}-\x{9fa5}]/u', '', $price);
+	//     $price = str_replace('/', '', $price);
+	//     $price = str_replace('¥', '', $price);
+
+	//     // 是否是金额
+	//     if (preg_match('/^\d+(\.\d{1,2})?$/', $price)) {
+	//         $value = $price;
+	//     }
+	// }
+
+	// return $value;
 }
