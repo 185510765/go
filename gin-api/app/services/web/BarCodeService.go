@@ -77,14 +77,16 @@ func getProductInfo(searchInput string) interface{} {
 	var result map[string]interface{}
 	if len(product) > 0 {
 		result = gin.H{
-			"BarCode":   searchInput,
-			"Name":      product["description"],
-			"ShortName": product["keyword"],
-			// "Image":          "",
+			"BarCode":        searchInput,
+			"Name":           product["description"],
+			"ShortName":      product["keyword"],
+			"Image":          "",
 			"Brand":          product["brandcn"],
 			"Supplier":       product["firm_name"],
 			"Classification": product["gpcname"],
 			"Status":         product["gtinstatus"],
+			"Price":          "",
+			"Specification":  "",
 		}
 
 		if len(productExtend) > 0 {
@@ -96,15 +98,22 @@ func getProductInfo(searchInput string) interface{} {
 	} else {
 		barCode := BarCode{}
 		db.DB.Where("bar_code = ?", searchInput).First(&barCode)
-		fmt.Println(barCode)
 
-		result = gin.H{}
+		result = gin.H{
+			"BarCode":        barCode.BarCode,
+			"Name":           barCode.Name,
+			"ShortName":      barCode.ShortName,
+			"Image":          barCode.Image,
+			"Brand":          barCode.Brand,
+			"Supplier":       barCode.Supplier,
+			"Classification": barCode.Classification,
+			"Status":         barCode.Status,
+			"Price":          barCode.Price,
+			"Specification":  barCode.Specification,
+		}
 	}
 
-	fmt.Println(result)
-	fmt.Println("-----------------------------------------------------------------------------------------")
-
-	return product
+	return result
 }
 
 // 获取商品名称、品牌、供应商、商品分类接口

@@ -252,9 +252,6 @@ func GetInterfaceToString(value interface{}) string {
 func GetPrice(price string) string {
 	value := "0.00"
 
-	// 测试
-	price = "/¥1.5元"
-
 	if price != "" {
 		reg := regexp.MustCompile("[\u4e00-\u9fa5]") // 中文
 		result := reg.ReplaceAllString(price, "")
@@ -272,19 +269,4 @@ func GetPrice(price string) string {
 	}
 
 	return value
-
-	// $value = '0.00';
-
-	// if (isset($price) && $price && $price != 'NULL') {
-	//     $price = preg_replace('/[\x{4e00}-\x{9fa5}]/u', '', $price);
-	//     $price = str_replace('/', '', $price);
-	//     $price = str_replace('¥', '', $price);
-
-	//     // 是否是金额
-	//     if (preg_match('/^\d+(\.\d{1,2})?$/', $price)) {
-	//         $value = $price;
-	//     }
-	// }
-
-	// return $value;
 }
