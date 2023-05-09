@@ -24,13 +24,32 @@
                 <form ref="searchBox" class="search-box" action="/api_list/search/{{ .info.Id }}" method="get">
                     <el-input v-model="searchInput" name="searchInput" placeholder="请输入{{ .info.SearchInput }}"
                         class="search-input" clearable size="large"></el-input>
-                    <el-button type="primary" class="search-btn" @click="searchBtn()">搜 索</el-button>
+                    <el-button type="primary" class="search-btn" @click="searchBtn()" :loading="searchBtnLoading">搜
+                        索</el-button>
                 </form>
 
-                {{ .status }} <br>
-                {{ .msg }} <br>
-                {{ .searchRes.BarCode }}
-                {{ .searchRes.Name }}
+                {{ if eq .status 1 }}
+                <el-row class="content" :gutter="50">
+                    <el-col :span="12">
+                        <el-descriptions title="商品信息" border size="large">
+                            {{range $i, $v := .searchRes}}
+                            <el-descriptions-item label="{{ $i }}">{{ $v }}</el-descriptions-item>
+                            {{end}}
+                        </el-descriptions>
+                    </el-col>
+                    <el-col :span="12">2</el-col>
+                </el-row>
+                {{ else }}
+                <div style="margin-top: 50px;">
+                    {{ .msg }}
+                </div>
+                {{ end }}
+
+
+                {{ .info }}
+                {{ .status }}
+                {{ .msg }}
+                {{ .searchRes }}
             </div>
         </div>
 
@@ -53,6 +72,7 @@
         data() {
             return {
                 searchInput: '',
+                searchBtnLoading: false
             };
         },
         mounted() {
@@ -64,6 +84,7 @@
                     return false;
                 }
 
+                this.searchBtnLoading = true
                 var searchBox = this.$refs['searchBox'];
                 searchBox.submit();
             },

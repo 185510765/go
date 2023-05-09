@@ -1,6 +1,7 @@
 package controller_web
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -52,6 +53,19 @@ func Search(c *gin.Context) {
 
 	// 查询操作
 	searchRes := QueryData(int_id, searchInput)
+
+	if searchRes["Name"] == "" || searchRes["Name"] == nil {
+		c.HTML(http.StatusOK, "search.html", gin.H{
+			"info":   info,
+			"status": 0,
+			"msg":    "没有查询到数据",
+		})
+		return
+	}
+
+	// 处理返回数据
+	searchRes = InitRes(searchRes)
+	fmt.Println(searchRes)
 
 	c.HTML(http.StatusOK, "search.html", gin.H{
 		"info":      info,

@@ -22,7 +22,7 @@ import (
   - @param {string} searchInput
   - @return {*}
 */
-func QueryBarCode(searchInput string) interface{} {
+func QueryBarCode(searchInput string) map[string]any {
 	// 通过接口获取商品信息
 	product := getProductInfo(searchInput)
 
@@ -30,7 +30,7 @@ func QueryBarCode(searchInput string) interface{} {
 }
 
 // 通过接口获取商品信息
-func getProductInfo(searchInput string) interface{} {
+func getProductInfo(searchInput string) map[string]any {
 	// 获取商品名称、品牌、供应商、商品分类、
 	product := getProductBaseInfo(searchInput)
 
@@ -38,7 +38,8 @@ func getProductInfo(searchInput string) interface{} {
 	productExtend := getProductExtendInfo(searchInput)
 
 	// 拼接数据
-	var result map[string]interface{}
+	// var result map[string]any
+	result := gin.H{}
 	if len(product) > 0 {
 		result = gin.H{
 			"BarCode":        searchInput,
@@ -81,9 +82,9 @@ func getProductInfo(searchInput string) interface{} {
 }
 
 // 获取商品名称、品牌、供应商、商品分类接口
-func getProductBaseInfo(searchInput string) map[string]interface{} {
+func getProductBaseInfo(searchInput string) map[string]any {
 	// 调用商品条形码接口
-	// params := map[string]interface{}{
+	// params := map[string]any{}
 	params := gin.H{
 		"PageSize":   "30",
 		"PageIndex":  "1",
@@ -102,16 +103,17 @@ func getProductBaseInfo(searchInput string) map[string]interface{} {
 	code := gjson.Get(productString, "Code")
 	items := gjson.Get(productString, "Data.Items").Array()
 
-	var product map[string]interface{}
+	// var product map[string]any
+	product := gin.H{}
 	if code.Int() == 1 && len(items) > 0 {
-		product = items[0].Value().(map[string]interface{})
+		product = items[0].Value().(map[string]any)
 	}
 
 	return product
 }
 
 // 获取商品价格、规格接口
-func getProductExtendInfo(searchInput string) map[string]interface{} {
+func getProductExtendInfo(searchInput string) map[string]any {
 	params := gin.H{
 		"barcode":    searchInput,
 		"app_id":     "ohnvf8eponbjhjwv",
@@ -123,11 +125,36 @@ func getProductExtendInfo(searchInput string) map[string]interface{} {
 
 	code := gjson.Get(productExtendString, "code")
 
-	var productExtend map[string]interface{}
+	// var productExtend map[string]any
+	productExtend := gin.H{}
 	if code.Int() == 1 {
-		data := gjson.Get(productExtendString, "data").Value().(map[string]interface{})
+		data := gjson.Get(productExtendString, "data").Value().(map[string]any)
 		productExtend = data
 	}
 
 	return productExtend
+}
+
+// 处理返回数据
+func InitRes(searchRes map[string]any) map[string]any {
+	resFieldMap := gin.H{
+		"BarCode":        "商品条形码",
+		"Name":           "商品名称",
+		"ShortName":      "简称",
+		"Image":          "图片",
+		"Brand":          "品牌",
+		"Supplier":       "供应商",
+		"Classification": "商品分类",
+		"Status":         "条码状态",
+		"Price":          "价格",
+		"Specification":  "规格",
+	}
+
+	result := gin.H{}
+	for key, value := range searchRes {
+		keyName := resFieldMap[key]
+		result[fmt.Sprint(keyName)] = value
+	}
+
+	return result
 }

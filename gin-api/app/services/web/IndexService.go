@@ -73,7 +73,7 @@ func ValidateSearch(searchInput string, keySuffix string, tips string) (int, str
   - @param {int} id
   - @return {*}
 */
-func QueryData(id int, searchInput string) interface{} {
+func QueryData(id int, searchInput string) map[string]interface{} {
 	switch id {
 	case 1: // 商品条形码
 		return QueryBarCode(searchInput)
