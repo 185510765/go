@@ -44,9 +44,10 @@ func Search(c *gin.Context) {
 	status, msg := ValidateSearch(searchInput, keySuffix, tips)
 	if status == 0 {
 		c.HTML(http.StatusOK, "search.html", gin.H{
-			"info":   info,
-			"status": 0,
-			"msg":    msg,
+			"searchInput": searchInput,
+			"info":        info,
+			"status":      0,
+			"msg":         msg,
 		})
 		return
 	}
@@ -56,22 +57,26 @@ func Search(c *gin.Context) {
 
 	if searchRes["Name"] == "" || searchRes["Name"] == nil {
 		c.HTML(http.StatusOK, "search.html", gin.H{
-			"info":   info,
-			"status": 0,
-			"msg":    "没有查询到数据",
+			"searchInput": searchInput,
+			"info":        info,
+			"status":      0,
+			"msg":         "没有查询到数据",
 		})
 		return
 	}
 
 	// 处理返回数据
-	searchRes = InitRes(searchRes)
+	searchInitRes := InitRes(searchRes)
 	fmt.Println(searchRes)
+	fmt.Println(searchInitRes)
 
 	c.HTML(http.StatusOK, "search.html", gin.H{
-		"info":      info,
-		"status":    status,
-		"msg":       msg,
-		"searchRes": searchRes,
+		"searchInput":   searchInput,
+		"info":          info,
+		"status":        status,
+		"msg":           msg,
+		"searchRes":     searchRes,
+		"searchInitRes": searchInitRes,
 	})
 }
 

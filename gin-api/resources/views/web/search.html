@@ -22,8 +22,8 @@
         <div class="container">
             <div class="container-center">
                 <form ref="searchBox" class="search-box" action="/api_list/search/{{ .info.Id }}" method="get">
-                    <el-input v-model="searchInput" name="searchInput" placeholder="请输入{{ .info.SearchInput }}"
-                        class="search-input" clearable size="large"></el-input>
+                    <el-input ref="input" v-model="searchInput" name="searchInput"
+                        placeholder="请输入{{ .info.SearchInput }}" class="search-input" clearable size="large"></el-input>
                     <el-button type="primary" class="search-btn" @click="searchBtn()" :loading="searchBtnLoading">搜
                         索</el-button>
                 </form>
@@ -32,7 +32,7 @@
                 <el-row class="content" :gutter="50">
                     <el-col :span="12">
                         <el-descriptions title="商品信息" border size="large">
-                            {{range $i, $v := .searchRes}}
+                            {{range $i, $v := .searchInitRes}}
                             <el-descriptions-item label="{{ $i }}">{{ $v }}</el-descriptions-item>
                             {{end}}
                         </el-descriptions>
@@ -59,6 +59,8 @@
 </body>
 
 <script>
+    var searchInput = {{ .searchInput }};
+
     const { createApp } = Vue;
     const { ElMessage } = ElementPlus;
     // const config = {
@@ -71,11 +73,14 @@
         delimiters: ["${", "}"],
         data() {
             return {
-                searchInput: '',
+                searchInput: searchInput,
                 searchBtnLoading: false
             };
         },
         mounted() {
+            this.$nextTick(x => {
+                this.$refs.input.focus()
+            })
         },
         methods: {
             searchBtn() {

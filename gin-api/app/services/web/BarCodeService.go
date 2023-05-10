@@ -51,14 +51,14 @@ func getProductInfo(searchInput string) map[string]any {
 			"Classification": product["gpcname"],
 			"Status":         product["gtinstatus"],
 			"Price":          "",
-			"Specification":  "",
+			"Specification":  product["specification"],
 		}
 
 		if len(productExtend) > 0 {
 			price := common.GetPrice(fmt.Sprint(productExtend["price"]))
-
 			result["Price"] = price
-			result["Specification"] = productExtend["standard"]
+
+			// result["Specification"] = productExtend["standard"]
 		}
 	} else {
 		barCode := BarCode{}
@@ -152,6 +152,18 @@ func InitRes(searchRes map[string]any) map[string]any {
 
 	result := gin.H{}
 	for key, value := range searchRes {
+		if key == "Status" {
+			if fmt.Sprint(value) == "1" {
+				value = "有效"
+			} else {
+				value = "无效"
+			}
+		}
+
+		if key == "Price" {
+
+		}
+
 		keyName := resFieldMap[key]
 		result[fmt.Sprint(keyName)] = value
 	}
