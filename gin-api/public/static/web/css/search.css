@@ -49,3 +49,16 @@
 .content {
     margin-top: 50px;
 }
+
+.json-title {
+    font-size: 16px;
+    font-weight: 700;
+    text-align: left;
+    height: 18px;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.json-content {
+    text-align: left;
+}

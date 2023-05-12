@@ -1,7 +1,7 @@
 package controller_web
 
 import (
-	"fmt"
+	"encoding/json"
 	"net/http"
 	"strconv"
 
@@ -36,12 +36,12 @@ func Search(c *gin.Context) {
 	int_id, _ := strconv.Atoi(id)
 	info, tips := GetOneList(int_id)
 
-	searchInput := c.Query("searchInput")
+	searchInput, inputIsExist := c.GetQuery("searchInput")
 
 	// 查询校验 查询限制（根据ip），限制查询频率（5秒）、24小时总的查询次数（100次），每个类型限制时间不共用
 	ip := c.ClientIP()
 	var keySuffix string = id + ":" + ip
-	status, msg := ValidateSearch(searchInput, keySuffix, tips)
+	status, msg := ValidateSearch(searchInput, inputIsExist, keySuffix, tips)
 	if status == 0 {
 		c.HTML(http.StatusOK, "search.html", gin.H{
 			"searchInput": searchInput,
@@ -67,16 +67,16 @@ func Search(c *gin.Context) {
 
 	// 处理返回数据
 	searchInitRes := InitRes(searchRes)
-	fmt.Println(searchRes)
-	fmt.Println(searchInitRes)
+	searchResJsonString, _ := json.Marshal(searchRes)
 
 	c.HTML(http.StatusOK, "search.html", gin.H{
-		"searchInput":   searchInput,
-		"info":          info,
-		"status":        status,
-		"msg":           msg,
-		"searchRes":     searchRes,
-		"searchInitRes": searchInitRes,
+		"searchInput":         searchInput,
+		"info":                info,
+		"status":              status,
+		"msg":                 msg,
+		"searchRes":           searchRes,                   // 英文key
+		"searchInitRes":       searchInitRes,               // 中文key
+		"searchResJsonString": string(searchResJsonString), // json 字符串
 	})
 }
 

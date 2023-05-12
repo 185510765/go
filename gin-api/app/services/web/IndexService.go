@@ -34,7 +34,12 @@ func GetOneList(id int) (interface{}, string) {
 }
 
 // 查询校验 查询限制（根据ip），限制查询频率（5秒）、24小时总的查询次数（100次）
-func ValidateSearch(searchInput string, keySuffix string, tips string) (int, string) {
+func ValidateSearch(searchInput string, inputIsExist bool, keySuffix string, tips string) (int, string) {
+	// 参数是否存在
+	if !inputIsExist {
+		return 0, ""
+	}
+
 	// 输入是否为空
 	if searchInput == "" {
 		return 0, tips + "不能为空"
