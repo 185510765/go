@@ -23,21 +23,18 @@ import (
   - @return {*}
 */
 func QueryBarCode(searchInput string) map[string]any {
-	// 通过接口获取商品信息
-	product := getProductInfo(searchInput)
-
-	return product
-}
-
-// 通过接口获取商品信息
-func getProductInfo(searchInput string) map[string]any {
 	// 获取商品名称、品牌、供应商、商品分类、
 	product := getProductBaseInfo(searchInput)
 
 	// 获取商品扩展信息 价格、规格
 	productExtend := getProductExtendInfo(searchInput)
 
-	// 拼接数据
+	// 拼接数据 处理数据逻辑
+	return getFinalyData(searchInput, product, productExtend)
+}
+
+// 拼接数据 处理数据逻辑
+func getFinalyData(searchInput string, product map[string]any, productExtend map[string]any) map[string]any {
 	// var result map[string]any
 	result := gin.H{}
 	if len(product) > 0 {
@@ -57,8 +54,6 @@ func getProductInfo(searchInput string) map[string]any {
 		if len(productExtend) > 0 {
 			price := common.GetPrice(fmt.Sprint(productExtend["price"]))
 			result["Price"] = price
-
-			// result["Specification"] = productExtend["standard"]
 		}
 	} else {
 		barCode := BarCode{}
