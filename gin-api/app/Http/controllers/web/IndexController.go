@@ -55,7 +55,7 @@ func Search(c *gin.Context) {
 	// 查询操作
 	searchRes := QueryData(int_id, searchInput)
 
-	if searchRes["Name"] == "" || searchRes["Name"] == nil {
+	if searchRes["name"] == "" || searchRes["name"] == nil {
 		c.HTML(http.StatusOK, "search.html", gin.H{
 			"searchInput": searchInput,
 			"info":        info,

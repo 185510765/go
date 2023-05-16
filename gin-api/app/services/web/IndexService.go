@@ -14,7 +14,7 @@ import (
 // 查询api列表数据
 func GetApiList() interface{} {
 	list := []List{}
-	db.DB.Select("id,name,img").Where("is_show = ?", 1).Order("sort desc").Find(&list)
+	db.Model.Select("id,name,img").Where("is_show = ?", 1).Order("sort desc").Find(&list)
 
 	for index, value := range list {
 		list[index].Img = "/public/static/web/img/" + value.Img
@@ -26,7 +26,7 @@ func GetApiList() interface{} {
 // 获取一条list数据
 func GetOneList(id int) (interface{}, string) {
 	info := List{Id: id}
-	db.DB.First(&info)
+	db.Model.First(&info)
 
 	info.Img = "/public/static/web/img/" + info.Img
 

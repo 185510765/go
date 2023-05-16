@@ -1,15 +1,20 @@
 package service_web
 
 import (
+	"encoding/json"
+	"errors"
 	"fmt"
 	"gin-api/app/common/common"
 	db "gin-api/app/common/db"
 	curl "gin-api/app/common/http"
+	"strconv"
+	"time"
 
 	. "gin-api/app/models/web"
 
 	"github.com/gin-gonic/gin"
 	"github.com/tidwall/gjson"
+	"gorm.io/gorm"
 )
 
 /*
@@ -23,10 +28,10 @@ import (
   - @return {*}
 */
 func QueryBarCode(searchInput string) map[string]any {
-	// 获取商品名称、品牌、供应商、商品分类、
+	// 获取商品名称、品牌、供应商、商品分类、规格
 	product := getProductBaseInfo(searchInput)
 
-	// 获取商品扩展信息 价格、规格
+	// 获取商品扩展信息 价格
 	productExtend := getProductExtendInfo(searchInput)
 
 	// 拼接数据 处理数据逻辑
@@ -36,44 +41,83 @@ func QueryBarCode(searchInput string) map[string]any {
 // 拼接数据 处理数据逻辑
 func getFinalyData(searchInput string, product map[string]any, productExtend map[string]any) map[string]any {
 	// var result map[string]any
-	result := gin.H{}
+	// result := gin.H{}
+	resultInterface := map[string]any{}
+	resultModel := map[string]any{}
+
+	// 接口返回数据
 	if len(product) > 0 {
-		result = gin.H{
-			"BarCode":        searchInput,
-			"Name":           product["description"],
-			"ShortName":      product["keyword"],
-			"Image":          "",
-			"Brand":          product["brandcn"],
-			"Supplier":       product["firm_name"],
-			"Classification": product["gpcname"],
-			"Status":         product["gtinstatus"],
-			"Price":          "",
-			"Specification":  product["specification"],
+		resultInterface = map[string]any{
+			"bar_code":       searchInput,
+			"name":           product["description"],
+			"short_name":     product["keyword"],
+			"image":          "",
+			"brand":          product["brandcn"],
+			"supplier":       product["firm_name"],
+			"classification": product["gpcname"],
+			"status":         product["gtinstatus"],
+			"specification":  product["specification"],
 		}
 
 		if len(productExtend) > 0 {
 			price := common.GetPrice(fmt.Sprint(productExtend["price"]))
-			result["Price"] = price
-		}
-	} else {
-		barCode := BarCode{}
-		db.DB.Where("bar_code = ?", searchInput).First(&barCode)
-
-		result = gin.H{
-			"BarCode":        barCode.BarCode,
-			"Name":           barCode.Name,
-			"ShortName":      barCode.ShortName,
-			"Image":          barCode.Image,
-			"Brand":          barCode.Brand,
-			"Supplier":       barCode.Supplier,
-			"Classification": barCode.Classification,
-			"Status":         barCode.Status,
-			"Price":          barCode.Price,
-			"Specification":  barCode.Specification,
+			resultInterface["price"] = price
 		}
 	}
 
-	return result
+	// 数据库返回数据
+	barCode := BarCode{}
+	barCodeRes := db.Model.Where("bar_code = ?", searchInput).First(&barCode)
+	if errors.Is(barCodeRes.Error, gorm.ErrRecordNotFound) {
+		// 新增数据
+		if len(product) > 0 {
+			int8_status, _ := strconv.Atoi(fmt.Sprint(product["gtinstatus"]))
+			float64_price, _ := strconv.ParseFloat(fmt.Sprint(resultInterface["price"]), 64)
+
+			db.Model.Create(&BarCode{
+				BarCode:        fmt.Sprint(resultInterface["bar_code"]),
+				Name:           fmt.Sprint(resultInterface["name"]),
+				ShortName:      fmt.Sprint(resultInterface["short_name"]),
+				Image:          fmt.Sprint(resultInterface["image"]),
+				Brand:          fmt.Sprint(resultInterface["brand"]),
+				Supplier:       fmt.Sprint(resultInterface["supplier"]),
+				Classification: fmt.Sprint(resultInterface["classification"]),
+				Status:         int8(int8_status),
+				Specification:  fmt.Sprint(resultInterface["specification"]),
+				Price:          float64_price,
+			})
+		}
+
+		return resultInterface
+	}
+
+	// 判断返回数据
+	if len(product) == 0 {
+		return resultModel
+	}
+
+	// 接口和数据库查询都有数据，做逻辑处理，对比如果不一致则更新数据库中数据
+	barCodeMap := map[string]any{}
+	barCodeString, _ := json.Marshal(barCode)
+	barCodeErr := json.Unmarshal([]byte(barCodeString), &barCodeMap)
+	if barCodeErr != nil {
+		resultModel = map[string]any{}
+	}
+
+	resultModel = barCodeMap
+
+	isEqual := common.CompareTwoMapInterface(resultInterface, resultModel)
+	if !isEqual {
+		cTime := time.Now().Format("2006-01-02 15:04:05")
+		resultInterface["updated_at"] = cTime
+		db.Model.Table("bar_codes").Where("bar_code = ?", barCode.BarCode).Updates(resultInterface)
+	}
+
+	fmt.Println(resultInterface)
+	fmt.Println(resultModel)
+	fmt.Println(isEqual)
+
+	return resultInterface
 }
 
 // 获取商品名称、品牌、供应商、商品分类接口
@@ -133,21 +177,21 @@ func getProductExtendInfo(searchInput string) map[string]any {
 // 处理返回数据
 func InitRes(searchRes map[string]any) map[string]any {
 	resFieldMap := gin.H{
-		"BarCode":        "商品条形码",
-		"Name":           "商品名称",
-		"ShortName":      "简称",
-		"Image":          "图片",
-		"Brand":          "品牌",
-		"Supplier":       "供应商",
-		"Classification": "商品分类",
-		"Status":         "条码状态",
-		"Price":          "价格",
-		"Specification":  "规格",
+		"bar_code":       "商品条形码",
+		"name":           "商品名称",
+		"short_name":     "简称",
+		"image":          "图片",
+		"brand":          "品牌",
+		"supplier":       "供应商",
+		"classification": "商品分类",
+		"status":         "条码状态",
+		"price":          "价格",
+		"specification":  "规格",
 	}
 
 	result := gin.H{}
 	for key, value := range searchRes {
-		if key == "Status" {
+		if key == "status" {
 			if fmt.Sprint(value) == "1" {
 				value = "有效"
 			} else {
