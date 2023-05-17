@@ -7,6 +7,7 @@ import (
 	"gin-api/app/common/common"
 	db "gin-api/app/common/db"
 	curl "gin-api/app/common/http"
+	"net"
 	"strconv"
 	"time"
 
@@ -41,81 +42,53 @@ func QueryBarCode(searchInput string) map[string]any {
 // 拼接数据 处理数据逻辑
 func getFinalyData(searchInput string, product map[string]any, productExtend map[string]any) map[string]any {
 	// var result map[string]any
-	// result := gin.H{}
 	resultInterface := map[string]any{}
 	resultModel := map[string]any{}
 
-	// 接口返回数据
-	if len(product) > 0 {
-		resultInterface = map[string]any{
-			"bar_code":       searchInput,
-			"name":           product["description"],
-			"short_name":     product["keyword"],
-			"image":          "",
-			"brand":          product["brandcn"],
-			"supplier":       product["firm_name"],
-			"classification": product["gpcname"],
-			"status":         product["gtinstatus"],
-			"specification":  product["specification"],
-		}
+	productLen := len(product)
 
-		if len(productExtend) > 0 {
-			price := common.GetPrice(fmt.Sprint(productExtend["price"]))
-			resultInterface["price"] = price
-		}
+	// 接口返回数据
+	if productLen > 0 {
+		resultInterface = getResInterfaceMap(searchInput, product, productExtend)
 	}
 
 	// 数据库返回数据
 	barCode := BarCode{}
-	barCodeRes := db.Model.Where("bar_code = ?", searchInput).First(&barCode)
-	if errors.Is(barCodeRes.Error, gorm.ErrRecordNotFound) {
-		// 新增数据
-		if len(product) > 0 {
-			int8_status, _ := strconv.Atoi(fmt.Sprint(product["gtinstatus"]))
-			float64_price, _ := strconv.ParseFloat(fmt.Sprint(resultInterface["price"]), 64)
+	barCodeModel := db.Model.Where("bar_code = ?", searchInput).First(&barCode)
+	barCodeModelEmptyStatus := 1
+	if errors.Is(barCodeModel.Error, gorm.ErrRecordNotFound) {
+		barCodeModelEmptyStatus = 0
 
-			db.Model.Create(&BarCode{
-				BarCode:        fmt.Sprint(resultInterface["bar_code"]),
-				Name:           fmt.Sprint(resultInterface["name"]),
-				ShortName:      fmt.Sprint(resultInterface["short_name"]),
-				Image:          fmt.Sprint(resultInterface["image"]),
-				Brand:          fmt.Sprint(resultInterface["brand"]),
-				Supplier:       fmt.Sprint(resultInterface["supplier"]),
-				Classification: fmt.Sprint(resultInterface["classification"]),
-				Status:         int8(int8_status),
-				Specification:  fmt.Sprint(resultInterface["specification"]),
-				Price:          float64_price,
-			})
+		// 新增商品条码数据
+		if productLen > 0 {
+			addNewBarCode(resultInterface)
 		}
-
-		return resultInterface
 	}
 
 	// 判断返回数据
-	if len(product) == 0 {
+	if productLen == 0 && barCodeModelEmptyStatus == 0 { // 都为空
+		// 记录未查到的商品条形码
+		recordSearchNoResultCode(searchInput)
+
+		return map[string]any{}
+	} else if productLen > 0 && barCodeModelEmptyStatus == 0 { // 接口有值 数据库没值
+		return resultInterface
+	} else if productLen == 0 && barCodeModelEmptyStatus == 1 { // 接口没值 数据库有值
+		barCodeMap := map[string]any{}
+		barCodeString, _ := json.Marshal(barCode)
+		_ = json.Unmarshal([]byte(barCodeString), &barCodeMap)
+
+		resultModel = barCodeMap
 		return resultModel
 	}
 
 	// 接口和数据库查询都有数据，做逻辑处理，对比如果不一致则更新数据库中数据
-	barCodeMap := map[string]any{}
-	barCodeString, _ := json.Marshal(barCode)
-	barCodeErr := json.Unmarshal([]byte(barCodeString), &barCodeMap)
-	if barCodeErr != nil {
-		resultModel = map[string]any{}
-	}
-
-	resultModel = barCodeMap
-
 	isEqual := common.CompareTwoMapInterface(resultInterface, resultModel)
 	if !isEqual {
 		cTime := time.Now().Format("2006-01-02 15:04:05")
 		resultInterface["updated_at"] = cTime
-		db.Model.Table("bar_codes").Where("bar_code = ?", barCode.BarCode).Updates(resultInterface)
+		db.Model.Table("bar_code").Where("bar_code = ?", barCode.BarCode).Updates(resultInterface)
 	}
-
-	fmt.Println(resultInterface)
-	fmt.Println(resultModel)
-	fmt.Println(isEqual)
 
 	return resultInterface
 }
@@ -208,4 +181,64 @@ func InitRes(searchRes map[string]any) map[string]any {
 	}
 
 	return result
+}
+
+// 新增商品条码数据
+func addNewBarCode(resultInterface map[string]any) {
+	int8_status, _ := strconv.Atoi(fmt.Sprint(resultInterface["status"]))
+	float64_price, _ := strconv.ParseFloat(fmt.Sprint(resultInterface["price"]), 64)
+
+	db.Model.Create(&BarCode{
+		BarCode:        fmt.Sprint(resultInterface["bar_code"]),
+		Name:           fmt.Sprint(resultInterface["name"]),
+		ShortName:      fmt.Sprint(resultInterface["short_name"]),
+		Image:          fmt.Sprint(resultInterface["image"]),
+		Brand:          fmt.Sprint(resultInterface["brand"]),
+		Supplier:       fmt.Sprint(resultInterface["supplier"]),
+		Classification: fmt.Sprint(resultInterface["classification"]),
+		Status:         int8(int8_status),
+		Specification:  fmt.Sprint(resultInterface["specification"]),
+		Price:          float64_price,
+	})
+}
+
+// 拼接商品接口返回数据
+func getResInterfaceMap(searchInput string, product map[string]any, productExtend map[string]any) map[string]any {
+	resultInterface := map[string]any{
+		"bar_code":       searchInput,
+		"name":           product["description"],
+		"short_name":     product["keyword"],
+		"image":          "",
+		"brand":          product["brandcn"],
+		"supplier":       product["firm_name"],
+		"classification": product["gpcname"],
+		"status":         product["gtinstatus"],
+		"specification":  product["specification"],
+	}
+
+	if len(productExtend) > 0 {
+		price := common.GetPrice(fmt.Sprint(productExtend["price"]))
+		resultInterface["price"] = price
+	}
+
+	return resultInterface
+}
+
+// 记录未查到的商品条形码
+func recordSearchNoResultCode(searchInput string) {
+	barCodeSearchNoResult := BarCodeSearchNoResult{}
+	barCodeSearchNoResultModel := db.Model.Where("bar_code = ?", searchInput).First(&barCodeSearchNoResult)
+	if errors.Is(barCodeSearchNoResultModel.Error, gorm.ErrRecordNotFound) {
+		ipStr := common.GetIp()
+		ip := net.ParseIP(ipStr)
+		ipInt := common.IpToInt(ip)
+
+		db.Model.Create(&BarCodeSearchNoResult{
+			BarCode:  searchInput,
+			UserId:   0,
+			IpString: fmt.Sprint(ip),
+			IpInt:    ipInt,
+			Status:   0,
+		})
+	}
 }

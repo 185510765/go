@@ -3,6 +3,7 @@ package db
 import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/schema"
 )
 
 var Model *gorm.DB
@@ -10,7 +11,11 @@ var err error
 
 func init() {
 	dsn := "root:@tcp(127.0.0.1:3306)/api?charset=utf8&parseTime=True&loc=Local"
-	Model, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	Model, err = gorm.Open(mysql.Open(dsn), &gorm.Config{
+		NamingStrategy: schema.NamingStrategy{
+			SingularTable: true, // 使用单数表名
+		},
+	})
 	if err != nil {
 		panic(err)
 		// fmt.Println(err)

@@ -3,6 +3,7 @@ package service_web
 import (
 	"fmt"
 	"gin-api/app/common/cache"
+	"gin-api/app/common/common"
 	db "gin-api/app/common/db"
 	. "gin-api/app/models/web"
 	"strconv"
@@ -65,7 +66,11 @@ func ValidateSearch(searchInput string, inputIsExist bool, keySuffix string, tip
 	if keyExist == 1 {
 		cache.RedisClient.Incr(numKey).Result()
 	} else {
-		cache.RedisClient.Set(numKey, 1, 86400*time.Second)
+		_, todayEndUnix := common.GetTodayStartTimeAndEndTime()
+		cTimeUnix := time.Now().Unix()
+		todaySurplusTimeUnix := todayEndUnix - cTimeUnix
+
+		cache.RedisClient.Set(numKey, 1, time.Duration(todaySurplusTimeUnix)*time.Second)
 	}
 
 	return 1, ""

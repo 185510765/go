@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"math/rand"
+	"net"
 	"net/http"
 	"net/url"
 	"regexp"
@@ -293,4 +294,76 @@ func CompareTwoMapInterface(data1 map[string]interface{}, data2 map[string]inter
 	dataStr2, _ := json.Marshal(dataSlice2)
 
 	return string(dataStr1) == string(dataStr2)
+}
+
+// 获取昨天开始时间戳和结束时间戳
+func GetYesterdayStartTimeAndEndTime() (int64, int64) {
+	NowTime := time.Now()
+	var startTime time.Time
+	//NowTime := time.Date(2022, 9, 15, 0, 0, 0, 0, time.Local)
+	if NowTime.Hour() == 0 && NowTime.Minute() == 0 && NowTime.Second() == 0 {
+		startTime = time.Unix(NowTime.Unix()-86399, 0) //当天的最后一秒
+	} else {
+		startTime = time.Unix(NowTime.Unix()-86400, 0)
+	}
+	currentYear := startTime.Year()
+	currentMonth := startTime.Month()
+	currentDay := startTime.Day()
+	yesterdayStartTime := time.Date(currentYear, currentMonth, currentDay, 0, 0, 0, 0, time.Local).Unix()
+	yesterdayEndTime := time.Date(currentYear, currentMonth, currentDay, 23, 59, 59, 0, time.Local).Unix()
+	//fmt.Println(yesterdayStartTime, yesterdayEndTime)
+	return yesterdayStartTime, yesterdayEndTime
+}
+
+// 获取今天开始时间戳和结束时间戳
+func GetTodayStartTimeAndEndTime() (int64, int64) {
+	currentYear := time.Now().Year()
+	currentMonth := time.Now().Month()
+	currentDay := time.Now().Day()
+	todayStartTime := time.Date(currentYear, currentMonth, currentDay, 0, 0, 0, 0, time.Local).Unix()
+	todayEndTime := time.Date(currentYear, currentMonth, currentDay, 23, 59, 59, 0, time.Local).Unix()
+	return todayStartTime, todayEndTime
+}
+
+// GetIp 获取本地IP地址 利用udp
+func GetIp() string {
+	conn, err := net.Dial("udp", "8.8.8.8:53")
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+	localAddr := conn.LocalAddr().(*net.UDPAddr)
+	// 192.168.1.20:61085
+	ip := strings.Split(localAddr.String(), ":")[0]
+
+	return ip
+}
+
+// 地址转整形
+func IpToInt(ip net.IP) uint32 {
+	ip = ip.To4()
+	return uint32(ip[0])<<24 | uint32(ip[1])<<16 | uint32(ip[2])<<8 | uint32(ip[3])
+
+}
+
+// 获取Mac地址
+func GetMacAddr() string {
+	interfaces, err := net.Interfaces()
+	if err != nil {
+		panic("Poor soul, here is what you got: " + err.Error())
+	}
+	if len(interfaces) == 0 {
+		return ""
+	}
+
+	maxIndexInterface := interfaces[0]
+	for _, inter := range interfaces {
+		if inter.HardwareAddr == nil {
+			continue
+		}
+		if inter.Flags&net.FlagUp == 1 {
+			maxIndexInterface = inter
+		}
+	}
+	return maxIndexInterface.HardwareAddr.String()
 }
