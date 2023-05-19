@@ -6,6 +6,11 @@
     /* background: #F6F6F6; */
 }
 
+.nav li:nth-child(2) a {
+    color: #409EFF !important;
+    font-weight: bold;
+}
+
 .container-center {
     background: #fff;
     min-height: 700px;

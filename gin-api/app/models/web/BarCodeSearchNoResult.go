@@ -6,6 +6,7 @@ import (
 
 type BarCodeSearchNoResult struct {
 	Id        uint       `json:"id" gorm:"id"`
+	ListId    uint       `json:"list_id" gorm:"list_id"`
 	BarCode   string     `json:"bar_code" gorm:"bar_code"`
 	UserId    uint       `json:"user_id" gorm:"user_id"`
 	IpString  string     `json:"ip_string" gorm:"ip_string"`

@@ -235,6 +235,7 @@ func recordSearchNoResultCode(searchInput string) {
 
 		db.Model.Create(&BarCodeSearchNoResult{
 			BarCode:  searchInput,
+			ListId:   1,
 			UserId:   0,
 			IpString: fmt.Sprint(ip),
 			IpInt:    ipInt,

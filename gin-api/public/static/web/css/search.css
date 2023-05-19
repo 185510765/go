@@ -2,9 +2,13 @@
     background: #F6F6F6;
 }
 
-
 .container {
     /* background: #F6F6F6; */
+}
+
+.nav li:nth-child(2) a {
+    color: #409EFF !important;
+    font-weight: bold;
 }
 
 .container-center {
@@ -23,7 +27,6 @@
 /* ************************************************* */
 .search-box {
     margin-top: 30px;
-
 }
 
 .search-input {
