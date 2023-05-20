@@ -1,0 +1,61 @@
+/* 头部 */
+.header {
+    height: 60px;
+    line-height: 60px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+    background: #fff;
+}
+
+.header-center {
+    height: 60px;
+    line-height: 60px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.logo {
+    float: left;
+    font-size: 36px;
+    color: #409EFF;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all .5s;
+}
+
+/* .logo:hover {
+    transform: scale(1.2);
+} */
+
+.nav {
+    display: inline-block;
+    margin-left: 100px;
+}
+
+.nav li {
+    list-style: none;
+    float: left;
+}
+
+.nav li a {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 16px;
+    color: #000;
+    padding: 0 20px;
+}
+
+.user-box {
+    float: right;
+}
+
+/* 尾部 */
+.footer {
+    height: 120px !important;
+    background: #333333;
+}
+
+.footer-center {
+    width: 90%;
+    height: 120px;
+    margin: 0 auto;
+}

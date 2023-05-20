@@ -1,0 +1,15 @@
+#app {
+    background: #F6F6F6;
+}
+
+.register-container {
+    min-height: 610px;
+}
+
+.register-box {
+    display: block;
+    width: 600px;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 100px;
+}

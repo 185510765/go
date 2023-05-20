@@ -33,23 +33,9 @@
                                 <el-button @click="toDocPage({{ $item.Id }})" type="success"
                                     style="font-size:16px;color: #29c287;" text bg>Api文档</el-button>
                             </div>
-                            <!-- <p class="card-item-free">免费</p> -->
                         </el-card>
                     </el-col>
                     {{end}}
-
-                    <!-- <el-col :span="4" v-for="(item, index) in cardList" :key="index">
-                        <el-card shadow="hover" class="card-item">
-                            <img :src="item.imgUrl" class="card-item-img">
-                            <p class="card-item-title">${ item.title }</p>
-                            <div style="margin-top: 15px;">
-                                <el-button @click="toSearchPage(item.id)" type="success"
-                                    style="font-size:16px;color: #29c287;" text bg>查询</el-button>
-                                <el-button @click="toDocPage(item.id)" type="success"
-                                    style="font-size:16px;color: #29c287;" text bg>Api文档</el-button>
-                            </div>
-                        </el-card>
-                    </el-col> -->
                 </el-row>
             </div>
         </div>
@@ -71,9 +57,7 @@
         delimiters: ["${", "}"],
         data() {
             return {
-                // cardList: [
-                //     { id: '1', toPageUrl: 'barcode', imgUrl: './public/static/web/img/barcode.jpg', title: '商品条形码' }
-                // ],
+
             };
         },
         mounted() {

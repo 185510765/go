@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {{block "title" .}}
+    <!-- <title>Document</title> -->
+    {{end}}
+
+    <link rel="stylesheet" href="/public/static/common/css/normalize.css">
+    <link rel="stylesheet" href="/public/static/web/css/layout.css">
+
+    <script src="/public/static/vue@3.2.47/vue.global.js"></script>
+    <link rel="stylesheet" href="/public/static/element-plus@2.2.34/element-plus.css">
+    <script src="/public/static/element-plus@2.2.34/element-plus.js"></script>
+    <script src="/public/static/element-plus@2.2.34/zh-cn.js"></script>
+
+    {{block "import" .}}
+
+    {{end}}
+
+</head>
+
+<body>
+    <div id="app">
+        <el-container>
+            <el-header class="header">
+                <div class="header-center">
+                    <a href="/api_list" class="logo">logo</a>
+
+                    <ul class="nav">
+                        <li><a href="javascript:void(0)">主页</a></li>
+                        <li><a href="/api_list">API列表</a></li>
+                        <li><a href="javascript:void(0)">留言板</a></li>
+                    </ul>
+
+                    <div class="user-box">
+                        <el-button type="primary" tag="a" href="/register" style="text-decoration: none;">注册</el-button>
+                        <el-button type="primary" tag="a" href="/login" style="text-decoration: none;"
+                            plain>登录</el-button>
+                    </div>
+                </div>
+            </el-header>
+
+
+            {{block "main" .}}
+            <el-main>
+
+            </el-main>
+            {{end}}
+
+            <el-footer class="footer">
+                <div class="footer-center">尾部</div>
+            </el-footer>
+        </el-container>
+    </div>
+</body>
+
+{{block "script" .}}
+<!-- <script>
+    const { createApp } = Vue;
+    const config = {
+        locale: ElementPlusLocaleZhCn,
+        autoInsertSpace: true,
+        size: "default",
+    };
+
+    const app = {
+        delimiters: ["${", "}"],
+        data() {
+            return {};
+        },
+        mounted() { },
+        methods: {},
+    };
+    Vue.createApp(app).use(ElementPlus, config).mount("#app");
+</script> -->
+{{end}}
+
+
+
+</html>

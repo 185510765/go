@@ -21,6 +21,14 @@ func Index(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", gin.H{})
 }
 
+// 注册
+func Register(c *gin.Context) {
+	c.HTML(http.StatusOK, "register.html", gin.H{})
+}
+
+// 登录
+func Login(c *gin.Context) {}
+
 // api列表页面
 func ApiList(c *gin.Context) {
 	list := GetApiList()
