@@ -14,6 +14,7 @@ func Web() {
 
 	// 加载模板
 	// router.LoadHTMLGlob("resources/views/web/*.html")
+	// router.LoadHTMLFiles("./resources/views/web/api_list.html", "./resources/views/web/search.html", "./resources/views/web/register.html", "./resources/views/web/templates/layout.html")
 
 	// 加载./resources/views目录下所有html文件
 	var files []string

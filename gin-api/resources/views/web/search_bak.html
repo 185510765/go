@@ -1,0 +1,88 @@
+{{template "layout.html"}}
+
+{{ define "title" }}
+查询-{{ .info.Name }}
+{{ end }}
+
+{{ define "import" }}
+<link rel="stylesheet" href="/public/static/web/css/search.css">
+<script src="/public/static/web/js/search.js"></script>
+{{ end }}
+
+{{ define "main" }}
+<div class="container">
+    <div class="container-center">
+        <form ref="searchBox" class="search-box" action="/api_list/search/{{ .info.Id }}" method="get">
+            <el-input ref="input" v-model.trim="searchInput" name="searchInput" placeholder="请输入{{ .info.SearchInput }}"
+                class="search-input" clearable size="large"></el-input>
+            <el-button type="primary" class="search-btn" @click="searchBtn()" :loading="searchBtnLoading">搜
+                索</el-button>
+        </form>
+
+        {{ if eq .status 1 }}
+        <el-row class="content" :gutter="50">
+            <el-col :span="14">
+                <el-descriptions title="商品信息" border size="large">
+                    {{range $i, $v := .searchInitRes}}
+                    <el-descriptions-item label="{{ $i }}">{{ $v }}</el-descriptions-item>
+                    {{end}}
+                </el-descriptions>
+            </el-col>
+            <el-col :span="10">
+                <p class="json-title">json数据</p>
+                <el-input v-model="textarea" :rows="16" type="textarea" />
+            </el-col>
+        </el-row>
+        {{ else }}
+        <div style="margin-top: 50px;">
+            {{ .msg }}
+        </div>
+        {{ end }}
+
+    </div>
+</div>
+{{ end }}
+
+{{ define "script" }}
+<script>
+    var searchInput = {{ .searchInput }};
+    var textarea = {{ .searchResJsonString }};
+
+    const { createApp } = Vue;
+    const { ElMessage } = ElementPlus;
+    // const config = {
+    //     locale: ElementPlusLocaleZhCn,
+    //     autoInsertSpace: true,
+    //     size: "default",
+    // };
+
+    const app = {
+        delimiters: ["${", "}"],
+        data() {
+            return {
+                searchInput: searchInput,
+                textarea: textarea,
+                searchBtnLoading: false
+            };
+        },
+        mounted() {
+            this.$nextTick(x => {
+                this.$refs.input.focus()
+            })
+        },
+        methods: {
+            searchBtn() {
+                if (this.searchInput == '' || this.searchInput == null) {
+                    ElMessage.error('请输入商品条码');
+                    return false;
+                }
+
+                this.searchBtnLoading = true
+                var searchBox = this.$refs['searchBox'];
+                searchBox.submit();
+            },
+        },
+    };
+    Vue.createApp(app).use(ElementPlus, { locale: ElementPlusLocaleZhCn, autoInsertSpace: true, size: "default" }).mount("#app");
+</script>
+{{ end }}

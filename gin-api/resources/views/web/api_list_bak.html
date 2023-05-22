@@ -1,0 +1,70 @@
+{{template "layout.html"}}
+
+{{ define "title" }}
+test-index
+{{ end }}
+
+{{ define "import" }}
+<link rel="stylesheet" href="./public/static/web/css/api_list.css">
+<script src="./public/static/web/js/api_list.js"></script>
+{{ end }}
+
+{{ define "main" }}
+<div class="container">
+    <div class="container-center">
+        <el-row :gutter="20">
+            {{range $index, $item := .list}}
+            <el-col :span="4">
+                <el-card shadow="hover" class="card-item">
+                    <img src="{{ $item.Img }}" class="card-item-img">
+                    <p class="card-item-title">{{ $item.Name }}</p>
+                    <div style="margin-top: 15px;">
+                        <el-button @click="toSearchPage({{ $item.Id }})" type="success"
+                            style="font-size:16px;color: #29c287;" text bg>查询</el-button>
+                        <el-button @click="toDocPage({{ $item.Id }})" type="success"
+                            style="font-size:16px;color: #29c287;" text bg>Api文档</el-button>
+                    </div>
+                </el-card>
+            </el-col>
+            {{end}}
+        </el-row>
+    </div>
+</div>
+{{ end }}
+
+{{ define "script" }}
+<script>
+    const { createApp } = Vue;
+    const config = {
+        locale: ElementPlusLocaleZhCn,
+        autoInsertSpace: true,
+        size: "default",
+    };
+
+    const app = {
+        delimiters: ["${", "}"],
+        data() {
+            return {
+
+            };
+        },
+        mounted() {
+            this.init();
+        },
+        methods: {
+            init() { },
+
+            // 跳转api搜索页面
+            toSearchPage(id) {
+                window.location.href = "api_list/search/" + id;
+            },
+
+            // 跳转api文档页面
+            toDocPage(id) {
+                window.location.href = "api_list/doc/" + id;
+            },
+        },
+    };
+    Vue.createApp(app).use(ElementPlus, config).mount("#app");
+</script>
+{{ end }}

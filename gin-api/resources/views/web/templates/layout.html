@@ -6,9 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {{block "title" .}}
-    <!-- <title>Document</title> -->
-    {{end}}
+    <title>{{block "title" .}}{{end}}</title>
 
     <link rel="stylesheet" href="/public/static/common/css/normalize.css">
     <link rel="stylesheet" href="/public/static/web/css/layout.css">
@@ -45,12 +43,11 @@
                 </div>
             </el-header>
 
-
-            {{block "main" .}}
             <el-main>
+                {{block "main" .}}
 
+                {{end}}
             </el-main>
-            {{end}}
 
             <el-footer class="footer">
                 <div class="footer-center">尾部</div>
@@ -60,26 +57,7 @@
 </body>
 
 {{block "script" .}}
-<!-- <script>
-    const { createApp } = Vue;
-    const config = {
-        locale: ElementPlusLocaleZhCn,
-        autoInsertSpace: true,
-        size: "default",
-    };
 
-    const app = {
-        delimiters: ["${", "}"],
-        data() {
-            return {};
-        },
-        mounted() { },
-        methods: {},
-    };
-    Vue.createApp(app).use(ElementPlus, config).mount("#app");
-</script> -->
 {{end}}
-
-
 
 </html>
