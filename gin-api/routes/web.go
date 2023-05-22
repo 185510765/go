@@ -33,8 +33,6 @@ func Web() {
 	router.GET("/ping", Pong)
 	router.GET("/index", Index)
 
-	router.GET("/layout", Layout)
-
 	router.GET("/register", Register)
 	router.GET("/login", Login)
 

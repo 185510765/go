@@ -272,6 +272,21 @@ func GetPrice(price string) string {
 	return value
 }
 
+// 金额补0 5.00 5.50
+func PriceFillZero(price string) string {
+	priceLen := len(price)
+	if priceLen < 4 {
+		if priceLen == 1 {
+			return price + ".00"
+		}
+		if priceLen == 3 {
+			return price + "0"
+		}
+	}
+
+	return price
+}
+
 // 比较两个map是否相等
 func CompareTwoMapInterface(data1 map[string]interface{}, data2 map[string]interface{}) bool {
 	keySlice := make([]string, 0)

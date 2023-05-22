@@ -65,6 +65,12 @@ func getFinalyData(searchInput string, product map[string]any, productExtend map
 		}
 	}
 
+	barCodeMap := map[string]any{}
+	barCodeString, _ := json.Marshal(barCode)
+	_ = json.Unmarshal([]byte(barCodeString), &barCodeMap)
+	barCodeMap["price"] = common.PriceFillZero(fmt.Sprint(barCodeMap["price"]))
+	resultModel = barCodeMap
+
 	// 判断返回数据
 	if productLen == 0 && barCodeModelEmptyStatus == 0 { // 都为空
 		// 记录未查到的商品条形码
@@ -74,11 +80,6 @@ func getFinalyData(searchInput string, product map[string]any, productExtend map
 	} else if productLen > 0 && barCodeModelEmptyStatus == 0 { // 接口有值 数据库没值
 		return resultInterface
 	} else if productLen == 0 && barCodeModelEmptyStatus == 1 { // 接口没值 数据库有值
-		barCodeMap := map[string]any{}
-		barCodeString, _ := json.Marshal(barCode)
-		_ = json.Unmarshal([]byte(barCodeString), &barCodeMap)
-
-		resultModel = barCodeMap
 		return resultModel
 	}
 
