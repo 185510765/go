@@ -33,15 +33,20 @@ func Web() {
 	router.GET("/ping", Pong)
 	router.GET("/index", Index)
 
-	router.GET("/register", Register)
-	router.GET("/login", Login)
-
 	// api列表 页面
 	api_list := router.Group("/api_list")
 	{
 		api_list.GET("", ApiList)
 		api_list.GET("/search/:id", Search)
 		api_list.GET("/doc/:id", Doc)
+	}
+
+	// 注册登录 验证码
+	user := router.Group("/user")
+	{
+		user.POST("/getEmailCaptcha", GetEmailCaptcha)
+		user.POST("/register", Register)
+		user.POST("/login", Login)
 	}
 
 	router.Run("127.0.0.1:8080")

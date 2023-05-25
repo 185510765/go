@@ -1,0 +1,12 @@
+.sendCaptchaBtn {
+    color: #fff !important;
+    background: var(--el-button-bg-color) !important;
+    border-color: var(--el-button-border-color) !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.sendCaptchaBtn:hover {
+    background: var(--el-button-hover-bg-color) !important;
+    border-color: var(--el-button-hover-border-color) !important;
+}

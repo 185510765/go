@@ -3,10 +3,30 @@
 <link rel="stylesheet" href="/public/static/common/css/normalize.css">
 <link rel="stylesheet" href="/public/static/web/css/header.css">
 <link rel="stylesheet" href="/public/static/web/css/footer.css">
+<link rel="stylesheet" href="/public/static/web/css/dialog.css">
+
+<!-- <script src="https://unpkg.com/@element-plus/icons-vue@2.0.6/dist/index.iife.min.js"></script> -->
+<!-- <script src="http://cdn.jsdelivr.net/npm/@element-plus/icons-vue"></script> -->
 
 <script src="/public/static/vue@3.2.47/vue.global.js"></script>
 <link rel="stylesheet" href="/public/static/element-plus@2.2.34/element-plus.css">
 <script src="/public/static/element-plus@2.2.34/element-plus.js"></script>
 <script src="/public/static/element-plus@2.2.34/zh-cn.js"></script>
+
+<script src="/public/static/common/js/jquery.min.js"></script>
+<script src="/public/static/common/js/common.js"></script>
+<script src="/public/static/common/js/rules.js"></script>
+
+<script>
+    const { createApp } = Vue;
+    const { ElMessage } = ElementPlus;
+    const config = {
+        locale: ElementPlusLocaleZhCn,
+        autoInsertSpace: true,
+        size: "default",
+    };
+
+    // const { User, Lock, Message, CircleCheck } = ElementPlusIconsVue
+</script>
 
 {{end}}

@@ -15,11 +15,11 @@
 </head>
 
 <body>
-    <div id="app">
+    <div>
         <!-- 头部 -->
         {{ template "header" }}
 
-        <div class="container">
+        <div id="app" class="container">
             <div class="container-center">
                 <form ref="searchBox" class="search-box" action="/api_list/search/{{ .info.Id }}" method="get">
                     <el-input ref="input" v-model.trim="searchInput" name="searchInput"
@@ -47,26 +47,20 @@
                     {{ .msg }}
                 </div>
                 {{ end }}
-
             </div>
+
+            <!-- 尾部 -->
+            {{ template "footer" }}
         </div>
 
-        <!-- 尾部 -->
-        {{ template "footer" }}
+        <!-- 弹窗 -->
+        {{ template "dialog" }}
     </div>
 </body>
 
 <script>
     var searchInput = {{ .searchInput }};
     var textarea = {{ .searchResJsonString }};
-
-    const { createApp } = Vue;
-    const { ElMessage } = ElementPlus;
-    // const config = {
-    //     locale: ElementPlusLocaleZhCn,
-    //     autoInsertSpace: true,
-    //     size: "default",
-    // };
 
     const app = {
         delimiters: ["${", "}"],
@@ -78,7 +72,7 @@
             };
         },
         mounted() {
-            this.$nextTick(x => {
+            this.$nextTick(() => {
                 this.$refs.input.focus()
             })
         },
@@ -95,7 +89,10 @@
             },
         },
     };
-    Vue.createApp(app).use(ElementPlus, { locale: ElementPlusLocaleZhCn, autoInsertSpace: true, size: "default" }).mount("#app");
+    Vue.createApp(app).use(ElementPlus, config).mount("#app");
 </script>
+
+<!-- 弹窗dialog -->
+{{ template "script" }}
 
 </html>

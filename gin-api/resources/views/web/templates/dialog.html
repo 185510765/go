@@ -1,0 +1,67 @@
+{{define "dialog"}}
+
+<div id="dialog">
+
+    <!-- 登录dialog -->
+    <el-dialog v-model="login.visible" title="登录" width="600px">
+        <el-form :model="login.form" :rules="login.formRules">
+            <el-form-item label="Promotion name" :label-width="formLabelWidth">
+                <el-input v-model="login.form.name" autocomplete="off" />
+            </el-form-item>
+        </el-form>
+        <template #footer>
+            <span class="dialog-footer">
+                <el-button @click="login.visible = false">Cancel</el-button>
+                <el-button type="primary" @click="login.visible = false">
+                    Confirm
+                </el-button>
+            </span>
+        </template>
+    </el-dialog>
+
+    <!-- 注册dialog -->
+    <el-dialog v-model="register.visible" title="注册" width="600px" center :align-center="true"
+        :close-on-click-modal="false">
+        <template #header>
+            <el-icon>
+            </el-icon>
+            <span style="font-size: 24px;">注 册</span>
+        </template>
+        <el-form ref="register" :model="register.form" :rules="register.formRules" label-width="100px">
+            <el-form-item label="用户名：" prop="username">
+                <el-input v-model.trim="register.form.username" placeholder="请输入用户名" size="large" />
+            </el-form-item>
+            <el-form-item label="密码：" prop="password">
+                <el-input v-model.trim="register.form.password" type="password" show-password placeholder="请输入密码"
+                    size="large" />
+            </el-form-item>
+            <el-form-item label="确认密码：" prop="confirm_password">
+                <el-input v-model.trim="register.form.confirm_password" type="password" show-password
+                    placeholder="请再次输入密码" size="large" />
+            </el-form-item>
+            <el-form-item label="邮箱：" prop="email">
+                <el-input class="email" v-model.trim="register.form.email" placeholder="请输入邮箱" size="large" />
+                <template #append>
+                    <el-button id="sendCaptchaBtn" :loading="countdownBtn.loading" size="large" type="primary"
+                        class="sendCaptchaBtn" :disabled="countdownBtn.isDisabled" @click="GetEmailCaptchaBtn()">${
+                        countdownBtn.name
+                        }</el-button>
+                </template>
+                </el-input>
+            </el-form-item>
+            <el-form-item label="验证码：" prop="captcha">
+                <el-input v-model.trim="register.form.captcha" placeholder="请输入验证码" size="large" />
+            </el-form-item>
+        </el-form>
+        <el-button type="primary" style="width: 100%;margin-top: 10px;" size="large"
+            @click="registerBtn()">注册</el-button>
+        <p>
+            <el-button type="text" style="float: right;margin-top: 5px; margin-bottom: 15px;">去登录</el-button>
+        </p>
+    </el-dialog>
+
+</div>
+
+
+
+{{end}}
