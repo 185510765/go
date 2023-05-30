@@ -32,12 +32,11 @@ func GetEmailCaptcha(c *gin.Context) {
 	app_name := fmt.Sprint(appConfig["app_name"])
 	domain := fmt.Sprint(appConfig["domain"])
 
-	title := app_name + "注册验证码"
-	body := "您好！欢迎注册" + app_name + "！</p>" +
+	subject := app_name + "注册验证码"
+	body := "<p>您好！欢迎注册" + app_name + "</p>" +
 		"<p>您的验证码是：{activeCode}，10分钟内有效，如果您未注册，请忽略此消息~</p>" +
 		"<p>官网网址：" + domain + "</p>"
-
-	if err := common.SendMail(servername, from, password, to, title, body); err != nil {
+	if err := common.SendMail(servername, from, password, to, subject, body, "html"); err != nil {
 		response.FailWithMessage(err.Error(), c)
 		return
 	}

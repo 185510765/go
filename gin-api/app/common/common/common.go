@@ -387,7 +387,7 @@ func GetMacAddr() string {
 }
 
 // 发送邮件
-func SendMail(servername, fromStr, password, toStr, title, body string) error {
+func SendMail(servername, fromStr, password, toStr, subject, body, mailtype string) error {
 	from := mail.Address{Name: "", Address: fromStr}
 	to := mail.Address{Name: "", Address: toStr}
 
@@ -395,14 +395,23 @@ func SendMail(servername, fromStr, password, toStr, title, body string) error {
 	headers := make(map[string]string)
 	headers["From"] = from.String()
 	headers["To"] = to.String()
-	headers["Subject"] = title
+	headers["Subject"] = subject
+
+	var contentType string
+	if mailtype == "html" {
+		contentType = "Content-Type: text/" + mailtype + "; charset=UTF-8"
+	} else {
+		contentType = "Content-Type: text/plain" + "; charset=UTF-8"
+	}
 
 	// Setup message
 	message := ""
 	for k, v := range headers {
 		message += fmt.Sprintf("%s: %s\r\n", k, v)
 	}
-	message += "\r\n" + body
+	message += contentType + "\r\n" + body
+
+	// message_bak := "From: " + from.String() + "\r\n" + "To: " + to.String() + "\r\n" + "Subject: " + subject + "\r\n" + contentType + "\r\n\r\n" + body + "\r\n"
 
 	host, _, _ := net.SplitHostPort(servername)
 	auth := smtp.PlainAuth("", from.Address, password, host)
