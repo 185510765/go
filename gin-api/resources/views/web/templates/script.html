@@ -97,7 +97,7 @@
                 //     return;
                 // }
 
-                this.countdownBtn.loading = true;
+                // this.countdownBtn.loading = true;
                 let _this = this;
                 $.ajax({
                     type: "post",
@@ -108,7 +108,9 @@
                     dataType: "json",
                     success: function (res) {
                         _this.countdownBtn.loading = false;
-                        console.log(res);
+                        response(res, (data) => {
+                            console.log(data);
+                        });
                     }
                 });
             },

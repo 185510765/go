@@ -3,12 +3,15 @@ package common
 import (
 	"bytes"
 	"crypto/md5"
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
 	"net"
 	"net/http"
+	"net/mail"
+	"net/smtp"
 	"net/url"
 	"regexp"
 	"strconv"
@@ -381,4 +384,70 @@ func GetMacAddr() string {
 		}
 	}
 	return maxIndexInterface.HardwareAddr.String()
+}
+
+// 发送邮件
+func SendMail(servername, fromStr, password, toStr, title, body string) error {
+	from := mail.Address{Name: "", Address: fromStr}
+	to := mail.Address{Name: "", Address: toStr}
+
+	// Setup headers
+	headers := make(map[string]string)
+	headers["From"] = from.String()
+	headers["To"] = to.String()
+	headers["Subject"] = title
+
+	// Setup message
+	message := ""
+	for k, v := range headers {
+		message += fmt.Sprintf("%s: %s\r\n", k, v)
+	}
+	message += "\r\n" + body
+
+	host, _, _ := net.SplitHostPort(servername)
+	auth := smtp.PlainAuth("", from.Address, password, host)
+
+	// TLS config
+	tlsconfig := &tls.Config{
+		InsecureSkipVerify: true,
+		ServerName:         host,
+	}
+
+	// Here is the key, you need to call tls.Dial instead of smtp.Dial
+	// for smtp servers running on 465 that require an ssl connection
+	// from the very beginning (no starttls)
+	conn, err := tls.Dial("tcp", servername, tlsconfig)
+	if err != nil {
+		return err
+	}
+	d, err := smtp.NewClient(conn, host)
+	if err != nil {
+		return err
+	}
+	// Auth
+	if err = d.Auth(auth); err != nil {
+		return err
+	}
+	// To && From
+	if err = d.Mail(from.Address); err != nil {
+		return err
+	}
+	if err = d.Rcpt(to.Address); err != nil {
+		return err
+	}
+	// Data
+	w, err := d.Data()
+	if err != nil {
+		return err
+	}
+	_, err = w.Write([]byte(message))
+	if err != nil {
+		return err
+	}
+	err = w.Close()
+	if err != nil {
+		return err
+	}
+
+	return d.Quit()
 }

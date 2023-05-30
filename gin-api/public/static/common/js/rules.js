@@ -6,9 +6,46 @@ function message(message, type, callback) {
     message: message,
     type: type,
     onClose: () => {
-      callback;
+      if (callback) {
+        callback();
+      }
     },
   });
+}
+
+function baseConfirm(content, title, callback1, callback2) {
+  Vue.prototype
+    .$confirm(content, title || "温馨提示", {
+      confirmButtonText: "确定",
+      cancelButtonText: "取消",
+      closeOnClickModal: false,
+      type: "warning",
+    })
+    .then(() => {
+      if (callback1) {
+        callback1();
+      }
+    })
+    .catch(() => {
+      if (callback2) {
+        callback2();
+      }
+    });
+}
+
+// ajax 返回操作封装
+function response(res, callback) {
+  const { code, msg, data } = res;
+  if (code == 1) {
+    // if (callback && data) {
+    if (callback) {
+      callback(data);
+    }
+  } else {
+    message(msg, "error");
+    // layer.msg(msg);
+    // baseMessage(msg, 'error');
+  }
 }
 
 //验证用户名  element 验证器=====================================================================================================
