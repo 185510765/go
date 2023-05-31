@@ -88,16 +88,16 @@
         methods: {
             // 发送邮件验证码
             GetEmailCaptchaBtn() {
-                // if (this.register.form.email == '') {
-                //     message('请输入邮箱', 'error');
-                //     return;
-                // }
-                // if (!checkEmail(this.register.form.email)) {
-                //     message('请输入正确的邮箱', 'error');
-                //     return;
-                // }
+                if (this.register.form.email == '') {
+                    message('请输入邮箱', 'error');
+                    return;
+                }
+                if (!checkEmail(this.register.form.email)) {
+                    message('请输入正确的邮箱', 'error');
+                    return;
+                }
 
-                // this.countdownBtn.loading = true;
+                this.countdownBtn.loading = true;
                 let _this = this;
                 $.ajax({
                     type: "post",
@@ -109,7 +109,8 @@
                     success: function (res) {
                         _this.countdownBtn.loading = false;
                         response(res, (data) => {
-                            console.log(data);
+                            message('邮件发送成功', 'success');
+                            _this.countDownSecond();
                         });
                     }
                 });
@@ -117,15 +118,15 @@
 
             // 邮箱验证码倒计时
             countDownSecond() {
-                this.buttonName = '(60秒)后重新发送';
-                this.isDisabled = true;
+                this.countdownBtn.name = '(60秒)后重新发送';
+                this.countdownBtn.isDisabled = true;
                 const interval = setInterval(() => {
-                    this.buttonName = '(' + this.time + '秒)后重新发送';
-                    --this.time;
-                    if (this.time < 0) {
-                        this.buttonName = '重新发送';
-                        this.time = 59;
-                        this.isDisabled = false;
+                    this.countdownBtn.name = '(' + this.countdownBtn.time + '秒)后重新发送';
+                    --this.countdownBtn.time;
+                    if (this.countdownBtn.time < 0) {
+                        this.countdownBtn.name = '重新发送';
+                        this.countdownBtn.time = 59;
+                        this.countdownBtn.isDisabled = false;
                         clearInterval(interval);
                     }
                 }, 1000);

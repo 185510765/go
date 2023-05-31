@@ -12,8 +12,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type IndexService struct{}
+
 // 查询api列表数据
-func GetApiList() interface{} {
+func (indexService *IndexService) GetApiList() interface{} {
 	list := []List{}
 	db.Model.Select("id,name,img").Where("is_show = ?", 1).Order("sort desc").Find(&list)
 
@@ -25,7 +27,7 @@ func GetApiList() interface{} {
 }
 
 // 获取一条list数据
-func GetOneList(id int) (interface{}, string) {
+func (indexService *IndexService) GetOneList(id int) (interface{}, string) {
 	info := List{Id: id}
 	db.Model.First(&info)
 
@@ -35,7 +37,7 @@ func GetOneList(id int) (interface{}, string) {
 }
 
 // 查询校验 查询限制（根据ip），限制查询频率（5秒）、24小时总的查询次数（100次）
-func ValidateSearch(searchInput string, inputIsExist bool, keySuffix string, tips string) (int, string) {
+func (indexService *IndexService) ValidateSearch(searchInput string, inputIsExist bool, keySuffix string, tips string) (int, string) {
 	// 参数是否存在
 	if !inputIsExist {
 		return 0, ""
@@ -83,10 +85,12 @@ func ValidateSearch(searchInput string, inputIsExist bool, keySuffix string, tip
   - @param {int} id
   - @return {*}
 */
-func QueryData(id int, searchInput string) map[string]interface{} {
+func (indexService *IndexService) QueryData(id int, searchInput string) map[string]interface{} {
+	var barCodeService BarCodeService
+
 	switch id {
 	case 1: // 商品条形码
-		return QueryBarCode(searchInput)
+		return barCodeService.QueryBarCode(searchInput)
 	case 2: // IP信息查询
 		fmt.Println(2)
 	case 3: // 全国天气查询
@@ -99,11 +103,13 @@ func QueryData(id int, searchInput string) map[string]interface{} {
 }
 
 // IP信息查询
-func QueryIp(searchInput string) {
+func (indexService *IndexService) QueryIp(searchInput string) {
 
 }
 
 // 全国天气查询
-func QueryWeather(searchInput string) {
+func (indexService *IndexService) QueryWeather(searchInput string) {
 
 }
+
+// *******************************************************************************************************

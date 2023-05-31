@@ -10,6 +10,9 @@ import (
 	. "gin-api/app/services/web"
 )
 
+var indexService IndexService
+var barCodeService BarCodeService
+
 func Pong(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"msg": "pong",
@@ -31,7 +34,7 @@ func Login(c *gin.Context) {}
 
 // api列表页面
 func ApiList(c *gin.Context) {
-	list := GetApiList()
+	list := indexService.GetApiList()
 
 	c.HTML(http.StatusOK, "api_list.html", gin.H{
 		"list": list,
@@ -42,14 +45,14 @@ func ApiList(c *gin.Context) {
 func Search(c *gin.Context) {
 	id := c.Param("id")
 	int_id, _ := strconv.Atoi(id)
-	info, tips := GetOneList(int_id)
+	info, tips := indexService.GetOneList(int_id)
 
 	searchInput, inputIsExist := c.GetQuery("searchInput")
 
 	// 查询校验 查询限制（根据ip），限制查询频率（5秒）、24小时总的查询次数（100次），每个类型限制时间不共用
 	ip := c.ClientIP()
 	var keySuffix string = id + ":" + ip
-	status, msg := ValidateSearch(searchInput, inputIsExist, keySuffix, tips)
+	status, msg := indexService.ValidateSearch(searchInput, inputIsExist, keySuffix, tips)
 	if status == 0 {
 		c.HTML(http.StatusOK, "search.html", gin.H{
 			"searchInput": searchInput,
@@ -61,7 +64,7 @@ func Search(c *gin.Context) {
 	}
 
 	// 查询操作
-	searchRes := QueryData(int_id, searchInput)
+	searchRes := indexService.QueryData(int_id, searchInput)
 
 	if searchRes["name"] == "" || searchRes["name"] == nil {
 		c.HTML(http.StatusOK, "search.html", gin.H{
@@ -74,7 +77,7 @@ func Search(c *gin.Context) {
 	}
 
 	// 处理返回数据
-	searchInitRes := InitRes(searchRes)
+	searchInitRes := barCodeService.InitRes(searchRes)
 	searchResJsonString, _ := json.Marshal(searchRes)
 
 	c.HTML(http.StatusOK, "search.html", gin.H{
@@ -92,7 +95,7 @@ func Search(c *gin.Context) {
 func Doc(c *gin.Context) {
 	id := c.Param("id")
 	int_id, _ := strconv.Atoi(id)
-	info, tips := GetOneList(int_id)
+	info, tips := indexService.GetOneList(int_id)
 
 	c.HTML(http.StatusOK, "doc.html", gin.H{
 		"info": info,

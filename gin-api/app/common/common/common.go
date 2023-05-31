@@ -460,3 +460,23 @@ func SendMail(servername, fromStr, password, toStr, subject, body, mailtype stri
 
 	return d.Quit()
 }
+
+// 生成随机码
+func RandomCode(codeType string, n int) string {
+	var letterBytes string
+
+	switch codeType {
+	case "int":
+		letterBytes = "0123456789"
+	case "string":
+		letterBytes = "abcdefghijklmnopqrstuvwxyz"
+	default:
+		letterBytes = "0123456789abcdefghijklmnopqrstuvwxyz"
+	}
+
+	b := make([]byte, n)
+	for i := range b {
+		b[i] = letterBytes[rand.Intn(len(letterBytes))]
+	}
+	return string(b)
+}

@@ -18,6 +18,8 @@ import (
 	"gorm.io/gorm"
 )
 
+type BarCodeService struct{}
+
 /*
   - 查询商品条形码
     1、查询商品接口，如果有则使用此数据，没有则查询数据数据，数据库数据没有则返回空
@@ -28,7 +30,7 @@ import (
   - @param {string} searchInput
   - @return {*}
 */
-func QueryBarCode(searchInput string) map[string]any {
+func (barCodeService *BarCodeService) QueryBarCode(searchInput string) map[string]any {
 	// 获取商品名称、品牌、供应商、商品分类、规格
 	product := getProductBaseInfo(searchInput)
 
@@ -38,6 +40,44 @@ func QueryBarCode(searchInput string) map[string]any {
 	// 拼接数据 处理数据逻辑
 	return getFinalyData(searchInput, product, productExtend)
 }
+
+// 处理返回数据
+func (barCodeService *BarCodeService) InitRes(searchRes map[string]any) map[string]any {
+	resFieldMap := gin.H{
+		"bar_code":       "商品条形码",
+		"name":           "商品名称",
+		"short_name":     "简称",
+		"image":          "图片",
+		"brand":          "品牌",
+		"supplier":       "供应商",
+		"classification": "商品分类",
+		"status":         "条码状态",
+		"price":          "价格",
+		"specification":  "规格",
+	}
+
+	result := gin.H{}
+	for key, value := range searchRes {
+		if key == "status" {
+			if fmt.Sprint(value) == "1" {
+				value = "有效"
+			} else {
+				value = "无效"
+			}
+		}
+
+		if key == "Price" {
+
+		}
+
+		keyName := resFieldMap[key]
+		result[fmt.Sprint(keyName)] = value
+	}
+
+	return result
+}
+
+// ************************************************************************************************************************
 
 // 拼接数据 处理数据逻辑
 func getFinalyData(searchInput string, product map[string]any, productExtend map[string]any) map[string]any {
@@ -146,42 +186,6 @@ func getProductExtendInfo(searchInput string) map[string]any {
 	}
 
 	return productExtend
-}
-
-// 处理返回数据
-func InitRes(searchRes map[string]any) map[string]any {
-	resFieldMap := gin.H{
-		"bar_code":       "商品条形码",
-		"name":           "商品名称",
-		"short_name":     "简称",
-		"image":          "图片",
-		"brand":          "品牌",
-		"supplier":       "供应商",
-		"classification": "商品分类",
-		"status":         "条码状态",
-		"price":          "价格",
-		"specification":  "规格",
-	}
-
-	result := gin.H{}
-	for key, value := range searchRes {
-		if key == "status" {
-			if fmt.Sprint(value) == "1" {
-				value = "有效"
-			} else {
-				value = "无效"
-			}
-		}
-
-		if key == "Price" {
-
-		}
-
-		keyName := resFieldMap[key]
-		result[fmt.Sprint(keyName)] = value
-	}
-
-	return result
 }
 
 // 新增商品条码数据
