@@ -2,10 +2,13 @@ package service_web
 
 import (
 	"fmt"
+	"gin-api/app/common/cache"
 	"gin-api/app/common/common"
-	db "gin-api/app/common/db"
 	"gin-api/app/common/validate"
-	. "gin-api/app/models/web"
+	"strconv"
+	"time"
+
+	// . "gin-api/app/models/web"
 	"gin-api/config"
 )
 
@@ -42,10 +45,10 @@ func (userService *UserService) GetEmailCaptcha(email string) int {
 	// 生成随机验证码
 	code := common.RandomCode("int", 6)
 
-	db.Model.Create(&EmailCode{
-		Email: email,
-		Code:  code,
-	})
+	// 验证码存redis
+	redisRegCodeKey := "userRegCode:" + email
+	expireInt, _ := strconv.Atoi(register_email_code_expire)
+	cache.RedisClient.Set(redisRegCodeKey, code, time.Duration(expireInt*60)*time.Second)
 
 	subject := app_name + "注册验证码"
 	body := "<p>您好！欢迎注册" + app_name + "</p>" +

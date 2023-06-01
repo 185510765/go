@@ -28,16 +28,6 @@ func GetEmailCaptcha(c *gin.Context) {
 	}
 
 	response.Ok(c)
-
-	// response.OkWithData([]interface{}{
-	// 	gin.H{
-	// 		"email":        email,
-	// 		"emailIsExist": "",
-	// 	},
-	// 	gin.H{
-	// 		"code": 2,
-	// 		"msg":  "2",
-	// 	}}, c)
 }
 
 // 注册
