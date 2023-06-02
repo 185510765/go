@@ -43,9 +43,8 @@
                 <el-input class="email" v-model.trim="register.form.email" placeholder="请输入邮箱" size="large" />
                 <template #append>
                     <el-button id="sendCaptchaBtn" :loading="countdownBtn.loading" size="large" type="primary"
-                        class="sendCaptchaBtn" :disabled="countdownBtn.isDisabled" @click="GetEmailCaptchaBtn()">${
-                        countdownBtn.name
-                        }</el-button>
+                        class="sendCaptchaBtn" :disabled="countdownBtn.isDisabled" @click="GetEmailCaptchaBtn()">
+                        ${ countdownBtn.name }</el-button>
                 </template>
                 </el-input>
             </el-form-item>

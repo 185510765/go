@@ -26,7 +26,7 @@
         delimiters: ["${", "}"],
         data() {
             var checkConfirmPwd = (rule, value, callback) => {
-                if (value !== this.register.confirm_password) {
+                if (value !== this.register.form.password) {
                     callback(new Error('两次输入的密码不一致'));
                 } else {
                     callback();
@@ -137,6 +137,21 @@
                 this.$refs['register'].validate(async (valid) => {
                     if (valid) {
                         this.register.btnLoading = true;
+
+                        let _this = this;
+                        $.ajax({
+                            type: "post",
+                            url: "/user/register",
+                            data: this.register.form,
+                            dataType: "json",
+                            success: function (res) {
+                                // _this.register.btnLoading = false;
+                                // response(res, (data) => {
+                                //     message('邮件发送成功', 'success');
+                                //     _this.countDownSecond();
+                                // });
+                            }
+                        });
                     } else {
                         return false;
                     }

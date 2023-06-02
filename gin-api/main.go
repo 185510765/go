@@ -1,6 +1,7 @@
 package main
 
 import (
+	"gin-api/app/common/validator"
 	config "gin-api/config"
 	routes "gin-api/routes"
 )
@@ -17,6 +18,9 @@ func main() {
 	config.Log()
 	config.App()
 	config.Database()
+
+	// 验证器
+	validator.Init()
 
 	// 路由
 	routes.Web()

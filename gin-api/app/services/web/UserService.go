@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"gin-api/app/common/cache"
 	"gin-api/app/common/common"
-	"gin-api/app/common/validate"
+	"gin-api/app/common/rules"
 	"strconv"
 	"time"
 
@@ -20,7 +20,7 @@ func (userService *UserService) ValidateEmail(email string) (int, string) {
 		return 0, "邮箱不能为空"
 	}
 
-	isEmail := validate.IsEmail(email)
+	isEmail := rules.IsEmail(email)
 	if !isEmail {
 		return 0, "邮箱格式不正确"
 	}
@@ -59,6 +59,12 @@ func (userService *UserService) GetEmailCaptcha(email string) int {
 	}
 
 	return 1
+}
+
+// 校验注册数据
+func (userService *UserService) ValidateRegister() (int, string) {
+
+	return 1, ""
 }
 
 // **********************************************************************************************************************
