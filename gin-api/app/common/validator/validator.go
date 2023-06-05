@@ -10,6 +10,7 @@ package validator
 import (
 	"fmt"
 	"reflect"
+	"strings"
 
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/locales/zh"
@@ -52,7 +53,24 @@ func Translate(err error) string {
 		result[err.Field()] = append(result[err.Field()], err.Translate(trans))
 	}
 
-	return fmt.Sprint(errors[0].Translate(trans)) // 多条验证 返回第一条
+	// 报错信息 用中文替换掉 Password
+	errorMsg := fmt.Sprint(errors[0].Translate(trans))
+	transMsg := FieldEnTransCn(errorMsg)
+
+	return transMsg
+}
+
+// 需要替换的字段
+func FieldEnTransCn(errorMsg string) string {
+	fieldMap := map[string]string{
+		"Password": "密码",
+	}
+
+	for k, v := range fieldMap {
+		errorMsg = strings.ReplaceAll(errorMsg, k, v)
+	}
+
+	return errorMsg
 }
 
 // // Translate 翻译错误信息 返回多条

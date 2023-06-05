@@ -14,17 +14,14 @@ var userService UserService
 
 // 发送邮件验证码
 func GetEmailCaptcha(c *gin.Context) {
-	email := c.DefaultPostForm("email", "")
-
-	// 校验邮箱
-	status, msg := userService.ValidateEmail(email)
-	if status == 0 {
-		response.FailWithMessage(msg, c)
+	var params EmailParams
+	if err := c.ShouldBind(&params); err != nil {
+		response.FailWithMessage(validator.Translate(err), c)
 		return
 	}
 
 	// 发送
-	resCode := userService.GetEmailCaptcha(email)
+	resCode := userService.GetEmailCaptcha(params.Email)
 	if resCode == 0 {
 		response.FailWithMessage("邮件发送失败", c)
 		return
@@ -41,38 +38,17 @@ func Register(c *gin.Context) {
 		return
 	}
 
-	response.OkWithData(gin.H{
-		"username":         regParams.Username,
-		"password":         regParams.Password,
-		"confirm_password": regParams.ConfirmPassword,
-		"email":            regParams.Email,
-		"captcha":          regParams.Captcha,
-	}, c)
-	return
-
-	// ******************************************************
-
-	username := c.PostForm("username")
-	password := c.PostForm("password")
-	confirm_password := c.PostForm("confirm_password")
-	email := c.PostForm("email")
-	captcha := c.PostForm("captcha")
-
-	// 校验数据
-	status, msg := userService.ValidateRegister()
+	// 校验
+	status, msg := userService.ValidateRegister(regParams)
 	if status == 0 {
 		response.FailWithMessage(msg, c)
 		return
 	}
 
-	response.OkWithData(
-		gin.H{
-			"username":         username,
-			"password":         password,
-			"confirm_password": confirm_password,
-			"email":            email,
-			"captcha":          captcha,
-		}, c)
+	// 校验成功后操作
+	userService.RegisterToDo(regParams)
+
+	response.Ok(c)
 }
 
 // 登录

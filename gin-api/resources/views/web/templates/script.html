@@ -145,11 +145,14 @@
                             data: this.register.form,
                             dataType: "json",
                             success: function (res) {
-                                // _this.register.btnLoading = false;
-                                // response(res, (data) => {
-                                //     message('邮件发送成功', 'success');
-                                //     _this.countDownSecond();
-                                // });
+                                _this.register.btnLoading = false;
+                                response(res, (data) => {
+                                    message('注册成功', 'success');
+
+                                    setTimeout(() => {
+                                        _this.register.visible = false
+                                    }, 1000);
+                                });
                             }
                         });
                     } else {
