@@ -36,8 +36,8 @@ type EmailParams struct {
 
 type RegisterParams struct {
 	Username        string `form:"username" json:"username" gorm:"username" binding:"required,min=5,max=50" label:"用户名"`
-	Password        string `form:"password" json:"password" gorm:"password" binding:"required,min=6,max=32" label:"密码"`
-	ConfirmPassword string `form:"confirm_password" json:"confirm_password" gorm:"confirm_password" binding:"required,gte=6,lte=32,eqfield=Password" label:"确认密码"`
+	Password        string `form:"password" json:"password" gorm:"password" binding:"required" label:"密码"`
+	ConfirmPassword string `form:"confirm_password" json:"confirm_password" gorm:"confirm_password" binding:"required" label:"确认密码"`
 	Email           string `form:"email" json:"email" gorm:"email" binding:"required,email" label:"邮箱"`
 	Captcha         string `form:"captcha" json:"captcha" gorm:"captcha" binding:"required" label:"验证码"`
 }

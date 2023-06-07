@@ -1,11 +1,11 @@
 package controller_web
 
 import (
+	"gin-api/app/common/encry"
 	"gin-api/app/common/response"
 	"gin-api/app/common/validator"
-	. "gin-api/app/services/web"
-
 	. "gin-api/app/models/web"
+	. "gin-api/app/services/web"
 
 	"github.com/gin-gonic/gin"
 )
@@ -38,8 +38,12 @@ func Register(c *gin.Context) {
 		return
 	}
 
+	// rsa 解密
+	rsaDecPwd, _ := encry.RsaDecrypt(regParams.Password)
+	rsaDecConPwd, _ := encry.RsaDecrypt(regParams.ConfirmPassword)
+
 	// 校验
-	status, msg := userService.ValidateRegister(regParams)
+	status, msg := userService.ValidateRegister(regParams, rsaDecPwd, rsaDecConPwd)
 	if status == 0 {
 		response.FailWithMessage(msg, c)
 		return

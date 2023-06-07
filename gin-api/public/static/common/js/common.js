@@ -304,6 +304,23 @@ function encryptionRsa(value) {
   return rsa.encrypt(value); //前端rsa加密后的
 }
 
+function rsaEncrypt(value) {
+  var publicKey = `-----BEGIN PUBLIC KEY-----
+  MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnztEUyVbxNRPy290MHT9
+  JauCLa5IEDe0vETIloy8iQSTt6mgzNKU7iv7OldaL05xjUHvT/7WuLc3s5ewIp3m
+  5NuQOVJHpT/AsK68cRKmwDPSLfl6s7hnvp7a+ci1tUongzZQuPtDCR9RKqHRL/Bs
+  xBwCg05GKHeOKuMNEnKslyJKm8oSIh3iZ9BCjCj+OC1oafb5DI9KdwxFCL5lAXcl
+  /kQaagK++pyZzBvdUvhvB+f9V5lNwkoB36C/aH43thlDIn7NcmkD7z5/Qn7f+jLV
+  ayeFEXF5CHnyZmjalp0ZPMVaq14UfS1u/jMGiwXSrz0x9u+MSB5NuUjHlowFU7YH
+  gQIDAQAB
+  -----END PUBLIC KEY-----
+  `;
+
+  var encrypt = new JSEncrypt();
+  encrypt.setPublicKey(publicKey);
+  return encrypt.encrypt(value);
+}
+
 /**
  * 去除空格 两边 和 字符串中间空格
  * @param string  string  字符串内容

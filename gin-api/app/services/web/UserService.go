@@ -2,7 +2,6 @@ package service_web
 
 import (
 	"errors"
-	"fmt"
 	"gin-api/app/common/cache"
 	"gin-api/app/common/common"
 	"gin-api/app/common/db"
@@ -23,31 +22,19 @@ var localTime LocalTime
 
 // 发送邮件验证码
 func (userService *UserService) GetEmailCaptcha(email string) int {
-	// 配置
-	emailConfig := config.EmailConfig()
-	servername := fmt.Sprint(emailConfig["servername"])
-	from := fmt.Sprint(emailConfig["from"])
-	password := fmt.Sprint(emailConfig["password"])
-	to := email
-
-	appConfig := config.App()
-	app_name := fmt.Sprint(appConfig["app_name"])
-	domain := fmt.Sprint(appConfig["domain"])
-	register_email_code_expire := fmt.Sprint(appConfig["register_email_code_expire"])
-
 	// 生成随机验证码
 	code := common.RandomCode("int", 6)
 
 	// 验证码存redis
-	redisUserRegKey := "userRegCode:" + email
-	expireInt, _ := strconv.Atoi(register_email_code_expire)
+	redisUserRegKey := config.USER_REG_CODE + email
+	expireInt, _ := strconv.Atoi(config.USER_REG_CODE_EXPIRE)
 	cache.RedisClient.Set(redisUserRegKey, code, time.Duration(expireInt*60)*time.Second)
 
-	subject := app_name + "注册验证码"
-	body := "<p>您好！欢迎注册" + app_name + "</p>" +
-		"<p>您的验证码是：<strong>" + code + "</strong>， " + register_email_code_expire + "分钟内有效，如果您未注册，请忽略此消息~</p>" +
-		"<p>官网网址：" + domain + "</p>"
-	if err := common.SendMail(servername, from, password, to, subject, body, "html"); err != nil {
+	subject := config.APP_NAME + "注册验证码"
+	body := "<p>您好！欢迎注册" + config.APP_NAME + "</p>" +
+		"<p>您的验证码是：<strong>" + code + "</strong>， " + config.USER_REG_CODE_EXPIRE + "分钟内有效，如果您未注册，请忽略此消息~</p>" +
+		"<p>官网网址：" + config.DOMAIN + "</p>"
+	if err := common.SendMail(config.SERVER_NAME, config.FROM, config.PASSWORD, email, subject, body, "html"); err != nil {
 		return 0
 	}
 
@@ -55,9 +42,9 @@ func (userService *UserService) GetEmailCaptcha(email string) int {
 }
 
 // 校验注册数据
-func (userService *UserService) ValidateRegister(regParams RegisterParams) (int, string) {
+func (userService *UserService) ValidateRegister(regParams RegisterParams, rsaDecPwd string, rsaDecConPwd string) (int, string) {
 	// 判断验证码
-	redisUserRegKey := "userRegCode:" + regParams.Email
+	redisUserRegKey := config.USER_REG_CODE + regParams.Email
 	code, _ := cache.RedisClient.Get(redisUserRegKey).Result()
 	if code == "" || code != regParams.Captcha {
 		return 0, "验证码不正确或已过期"
@@ -68,7 +55,17 @@ func (userService *UserService) ValidateRegister(regParams RegisterParams) (int,
 	userRes := db.Model.Where("username = ?", regParams.Username).First(&user)
 	if !errors.Is(userRes.Error, gorm.ErrRecordNotFound) {
 		return 0, "用户名已存在，请更换用户名"
+	}
 
+	// 密码
+	pwdLen := len(rsaDecPwd)
+	if pwdLen < 6 || pwdLen > 32 {
+		return 0, "密码长度在6至32位之间"
+	}
+
+	// 确认密码
+	if rsaDecPwd != rsaDecConPwd {
+		return 0, "确认密码和密码不一致"
 	}
 
 	// 邮箱唯一
@@ -83,7 +80,7 @@ func (userService *UserService) ValidateRegister(regParams RegisterParams) (int,
 // 校验成功后操作
 func (userService *UserService) RegisterToDo(regParams RegisterParams) {
 	// 清除redis
-	redisUserRegKey := "userRegCode:" + regParams.Email
+	redisUserRegKey := config.USER_REG_CODE + regParams.Email
 	cache.RedisClient.Del(redisUserRegKey).Result()
 
 	// 添加用户
