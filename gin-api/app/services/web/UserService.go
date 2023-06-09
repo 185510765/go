@@ -78,17 +78,21 @@ func (userService *UserService) ValidateRegister(regParams RegisterParams, rsaDe
 }
 
 // 校验成功后操作
-func (userService *UserService) RegisterToDo(regParams RegisterParams) {
+func (userService *UserService) RegisterToDo(regParams RegisterParams, rsaDecPwd string) {
 	// 清除redis
 	redisUserRegKey := config.USER_REG_CODE + regParams.Email
 	cache.RedisClient.Del(redisUserRegKey).Result()
 
 	// 添加用户
+	salt := common.RandomCode("all", 8)                  // 盐值
+	password := common.PasswordEncrypte(rsaDecPwd, salt) // 密码
+
 	location, _ := time.LoadLocation("Asia/Shanghai")
 	cTime := time.Now().In(location)
 	db.Model.Create(&User{
 		Username:     regParams.Username,
-		Password:     regParams.Password,
+		Salt:         salt,
+		Password:     password,
 		Email:        regParams.Email,
 		RegisterTime: &cTime,
 	})

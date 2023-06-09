@@ -3,9 +3,11 @@ package common
 import (
 	"bytes"
 	"crypto/md5"
+	"crypto/sha1"
 	"crypto/tls"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"math/rand"
 	"net"
@@ -479,4 +481,19 @@ func RandomCode(codeType string, n int) string {
 		b[i] = letterBytes[rand.Intn(len(letterBytes))]
 	}
 	return string(b)
+}
+
+// 密码加密方法
+func PasswordEncrypte(password string, salt string) string {
+	// return sha1(md5(password) + salt)
+
+	m := md5.New()
+	io.WriteString(m, password)
+	md5Pwd := fmt.Sprintf("%x", m.Sum(nil))
+	// fmt.Println(md5Pwd)
+
+	s := sha1.New()
+	io.WriteString(s, md5Pwd+salt)
+
+	return fmt.Sprintf("%x", s.Sum(nil))
 }

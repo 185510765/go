@@ -50,7 +50,7 @@ func Register(c *gin.Context) {
 	}
 
 	// 校验成功后操作
-	userService.RegisterToDo(regParams)
+	userService.RegisterToDo(regParams, rsaDecPwd)
 
 	response.Ok(c)
 }
